@@ -1132,65 +1132,59 @@
             if(spinner) spinner.style.display = 'inline-block';
             if(textLogin) textLogin.innerText = "Memproses...";
                  
-        fetch(SCRIPT_URL, {
-    method: 'POST',
-    redirect: 'follow',
-    body: JSON.stringify({ aksi: "login", username: username, password: password })
-})
-.then(res => res.json())
-.then(data => {
-    // Tombol dikembalikan seperti semula setelah merespons
-    if(btn) {
-        btn.disabled = false;
-        btn.classList.remove('btn-disabled');
-    }
-    if(spinner) spinner.style.display = 'none';
-    if(textLogin) textLogin.innerText = "MASUK KE SISTEM";
-        
-    // Cek apakah balasan server sukses
-    if(data.status === "sukses") {
-        
-        namaLogin = data.nama;
-        localStorage.setItem('sesi_username', username);
-        localStorage.setItem('sesi_password', password);
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                redirect: 'follow',
+                body: JSON.stringify({ aksi: "login", username: username, password: password })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(btn) {
+                    btn.disabled = false;
+                    btn.classList.remove('btn-disabled');
+                }
+                if(spinner) spinner.style.display = 'none';
+                if(textLogin) textLogin.innerText = "Login";
+                    
+                if(data.status === "sukses") {
+                    namaLogin = data.nama;
+                    localStorage.setItem('sesi_username', username);
+                    localStorage.setItem('sesi_password', password);
 
-        // Sembunyikan halaman login
-        document.getElementById('view-login').style.display = 'none';
-            
-        // Buka halaman sesuai role (admin / karyawan)
-        if(data.role === "admin") {
-            document.getElementById('view-admin').style.display = 'block';
-            if (typeof muatDataAdmin === "function") muatDataAdmin();
-        } else {
-            if (typeof initPeriodeKaryawan === "function") initPeriodeKaryawan();
-            document.getElementById('view-dashboard').style.display = 'block';
-            document.getElementById('nama-user').innerText = namaLogin;
-            
-            isDataLoaded = false;
-            if (typeof kunciTombolKerja === "function") kunciTombolKerja(true);
-            
-            let statusLog = document.getElementById('status-log');
-            if (statusLog) statusLog.innerHTML = "⏳ Menghubungkan & sinkronisasi data dari server...";
+                    document.getElementById('view-login').style.display = 'none';
+                        
+                    if(data.role === "admin") {
+                        document.getElementById('view-admin').style.display = 'block';
+                        if (typeof muatDataAdmin === "function") muatDataAdmin();
+                    } else {
+                        if (typeof initPeriodeKaryawan === "function") initPeriodeKaryawan();
+                        document.getElementById('view-dashboard').style.display = 'block';
+                        document.getElementById('nama-user').innerText = namaLogin;
+                        
+                        isDataLoaded = false;
+                        if (typeof kunciTombolKerja === "function") kunciTombolKerja(true);
+                        
+                        let statusLog = document.getElementById('status-log');
+                        if (statusLog) statusLog.innerHTML = "⏳ Menghubungkan & sinkronisasi data dari server...";
 
-            if (typeof sinkronisasiFullServer === "function") sinkronisasiFullServer();
-            if (typeof sinkronisasiWaktuServer === "function") sinkronisasiWaktuServer();
+                        if (typeof sinkronisasiFullServer === "function") sinkronisasiFullServer();
+                        if (typeof sinkronisasiWaktuServer === "function") sinkronisasiWaktuServer();
+                    }
+                } else {
+                    tampilkanPesan("Username atau Password salah! Periksa kembali data Anda.", "info");
+                }
+            })
+            .catch(err => {
+                if(btn) {
+                    btn.disabled = false;
+                    btn.classList.remove('btn-disabled');
+                }
+                if(spinner) spinner.style.display = 'none';
+                if(textLogin) textLogin.innerText = "Login";
+                tampilkanPesan("Gagal terhubung ke server. Pastikan koneksi internet aktif.", "info");
+                console.error("Error Fetch:", err);
+            });
         }
-    } else {
-        // Jika gagal karena password salah
-        tampilkanPesan("Username atau Password salah! Periksa kembali data Anda.", "info");
-    }
-})
-.catch(err => {
-    // Jika gagal terhubung ke internet / server
-    if(btn) {
-        btn.disabled = false;
-        btn.classList.remove('btn-disabled');
-    }
-    if(spinner) spinner.style.display = 'none';
-    if(textLogin) textLogin.innerText = "MASUK KE SISTEM";
-    tampilkanPesan("Gagal terhubung ke server. Pastikan koneksi internet aktif.", "info");
-    console.error("Error Fetch:", err);
-});
         function sinkronisasiFullServer() {
             fetch(SCRIPT_URL, { 
                 method: 'POST', 
