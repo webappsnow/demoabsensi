@@ -1132,47 +1132,24 @@
             if(spinner) spinner.style.display = 'inline-block';
             if(textLogin) textLogin.innerText = "Memproses...";
                  
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                redirect: 'follow',
-                body: JSON.stringify({ aksi: "login", username: username, password: password })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if(btn) {
-                    btn.disabled = false;
-                    btn.classList.remove('btn-disabled');
-                }
-                if(spinner) spinner.style.display = 'none';
-                if(textLogin) textLogin.innerText = "MASUK KE SISTEM";
-                     
-                if(data.status === "sukses") {
-                    namaLogin = data.nama;
-
-                    localStorage.setItem('sesi_username', username);
-                    localStorage.setItem('sesi_password', password);
-
-                    document.getElementById('view-login').style.display = 'none';
-                        
-                    if(data.role === "admin") {
-                        document.getElementById('view-admin').style.display = 'block';
-                        muatDataAdmin();
-                    } else {
-                        initPeriodeKaryawan();
-                        document.getElementById('view-dashboard').style.display = 'block';
-                        document.getElementById('nama-user').innerText = namaLogin;
-                        
-                        isDataLoaded = false;
-                        kunciTombolKerja(true);
-                        document.getElementById('status-log').innerHTML = "⏳ Menghubungkan & sinkronisasi data dari server...";
-
-                        sinkronisasiFullServer();
-                        sinkronisasiWaktuServer();
-                    }
-                } else {
-                    tampilkanPesan("Username atau Password salah! Periksa kembali data Anda.", "info");
-                }
-            })
+          fetch(SCRIPT_URL, {
+    method: 'POST',
+    redirect: 'follow',
+    body: JSON.stringify({ aksi: "login", username: username, password: password })
+})
+.then(res => res.json())
+.then(data => {
+    // --- TAMBAHKAN BARIS INI UNTUK MELIHAT BALASAN SERVER ---
+    console.log("Balasan Server:", data);
+    alert("Server membalas: " + JSON.stringify(data));
+    // ---------------------------------------------------------
+    
+    if(data.status === "sukses") {
+        // ... sisa kode sukses Anda
+    } else {
+        tampilkanPesan("Username atau Password salah! Periksa kembali data Anda.", "info");
+    }
+})
             .catch(err => {
                 if(btn) {
                     btn.disabled = false;
