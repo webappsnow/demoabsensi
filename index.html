@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sistem Absensi Karyawan - UFO Kebonsari</title>
+    <title>Sistem Absensi Karyawan</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2563eb">
     
@@ -569,7 +569,7 @@
     <div class="logo-container">
         <img src="logo.png" class="logo-toko" alt="Logo UFO">
     </div>
-    <h2>UFO KEBONSARI</h2>
+    <h2>Toko Maju Jaya</h2>
     <div class="sub-title">Sistem Absensi Digital Karyawan</div>
      
     <div class="input-group">
@@ -583,7 +583,7 @@
     </div>
      
     <button class="btn-primary" id="btn-login" onclick="prosesLogin()">
-        <span id="text-login">MASUK KE SISTEM</span>
+        <span id="text-login">Login</span>
         <div class="spinner" id="login-spinner"></div>
     </button>
 </div>
@@ -657,7 +657,7 @@
         </div>
     </div>
 
-    <button class="btn-logout" onclick="logout()">KELUAR DARI SISTEM</button>
+    <button class="btn-logout" onclick="logout()">Logout</button>
 </div>
 
 <!-- VIEW MAP FULLSCREEN (MUNCUL SATU LAYAR KETIKA KLIK CHECK-IN / CHECK-OUT) -->
@@ -786,6 +786,25 @@
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzWGgEbgvoYjjrIUddHxb-QXKy0QyoHXrozQJ2951XSKK4F13-d2VvW25MEs0cfKqpnA/exec";
+    const SCRIPT_URL_PUSAT = "https://script.google.com/macros/s/AKfycbzsu-6dxTTR7k6tXcR9Wdeav8Hz7HWSOxt7lG5mLNe59O7zuyzKAFCTSQ8m3BglR3GbiA/exec;
+    const TOKO_ID = "A00002"; 
+
+    window.addEventListener("DOMContentLoaded", () => {
+        fetch(`${SCRIPT_URL_PUSAT}?kode=${TOKO_ID}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "AKTIF") {
+                    document.getElementById("appContainer").style.display = "block";
+                    if (typeof initApp === 'function') initApp();
+                } else {
+                    document.getElementById("appContainer").remove();
+                    document.getElementById("errorContainer").style.display = "flex";
+                }
+            })
+            .catch(() => {
+                document.body.innerHTML = "<h2 style='text-align:center; color:red; margin-top:20%; font-family:sans-serif;'>Gagal terhubung ke server pusat.</h2>";
+            });
+    });   
 
 const TOKO_LAT = -8.020496288923635;
 const TOKO_LNG = 112.61885029434528;
