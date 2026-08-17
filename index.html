@@ -45,11 +45,24 @@
         body { 
             background: var(--background); 
             color: var(--text-main);
-            padding: 16px;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 16px;
+        }
+
+        #appContainer {
+            width: 100%;
+            max-width: 410px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
         }
 
         .box { 
@@ -61,12 +74,11 @@
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
             text-align: center;
-            position: relative;
         }
 
         .box-admin { 
             max-width: 1000px !important; 
-            padding: 28px 24px;
+            padding: 28px 24px; 
         }
 
         .logo-container {
@@ -557,8 +569,7 @@
 <body>
 
     <!-- KONTEN UTAMA APLIKASI (DIBUNGKUS APPCONTAINER UNTUK PROTEKSI LISENSI) -->
-  <div id="appContainer" style="display: none; width: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0;">
-    <div style="width: 100%; max-width: 410px; display: flex; justify-content: center; align-items: center; margin: auto;">
+    <div id="appContainer" style="display: none;">
 
             <!-- VIEW LOGIN -->
             <div id="view-login" class="box">
@@ -765,7 +776,6 @@
                 </div>
             </div>
 
-        </div>
     </div>
 
     <!-- LAYAR PESAN JIKA LISENSI TIDAK AKTIF -->
@@ -799,7 +809,7 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.status === "AKTIF") {
-                        document.getElementById("appContainer").style.display = "block";
+                        document.getElementById("appContainer").style.display = "flex";
                         if (typeof initApp === 'function') initApp();
                     } else {
                         document.getElementById("appContainer").remove();
@@ -1298,7 +1308,7 @@
             if(!tabelBody) return;
              
             tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 30px;'>Memuat data laporan...</td></tr>";
-                  
+                 
             fetch(SCRIPT_URL, { method: 'POST', redirect: 'follow', body: JSON.stringify({ aksi: "get_laporan" }) })
             .then(res => res.json())
             .then(data => {
