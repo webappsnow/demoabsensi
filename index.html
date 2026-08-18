@@ -103,6 +103,7 @@
             font-size: 11px;
             color: #94a3b8;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .sidebar-menu {
@@ -197,6 +198,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .logo-toko {
@@ -219,6 +221,7 @@
             margin-top: 4px;
             margin-bottom: 24px;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .time-wrapper {
@@ -236,6 +239,7 @@
             color: var(--text-main);
             font-variant-numeric: tabular-nums;
             line-height: 1;
+            white-space: nowrap;
         }
 
         .tanggal-digital {
@@ -244,6 +248,7 @@
             margin-top: 8px;
             font-weight: 600;
             text-transform: capitalize;
+            white-space: nowrap;
         }
 
         #periode-karyawan-text {
@@ -255,6 +260,7 @@
             margin-bottom: 20px !important;
             box-shadow: none !important;
             text-align: center !important;
+            white-space: nowrap;
         }
 
         .stat-box {
@@ -282,16 +288,18 @@
             border: 1px solid var(--border-color);
             text-align: center;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .stat-item span:last-child {
             font-weight: 800;
-            font-size: 18px;
+            font-size: 16px;
             color: var(--text-main);
             text-transform: none;
+            white-space: nowrap;
         }
 
-        /* --- STATUS BAR MENARIK (GAYA CHIP ELEGAN) --- */
+        /* --- STATUS BAR ANTI-KEPOTONG --- */
         #status-log {
             font-size: 13px !important;
             color: var(--text-main) !important;
@@ -306,6 +314,9 @@
             align-items: center;
             gap: 12px;
             box-shadow: var(--shadow-sm);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         #view-map-fullscreen {
@@ -329,6 +340,7 @@
             font-size: 16px;
             font-weight: 700;
             color: var(--text-main);
+            white-space: nowrap;
         }
 
         #info-jarak-peta {
@@ -371,6 +383,7 @@
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--text-main);
+            white-space: nowrap;
         }
 
         input, select { 
@@ -403,15 +416,15 @@
             gap: 12px;
         }
 
-        /* --- TOMBOL KOKOH & MENONJOL (EFEK ELEVASI & SHADOW) --- */
+        /* --- TOMBOL KOKOH & KONSISTEN (ANTI-KEPOTONG) --- */
         .absen-card {
             border-radius: var(--radius-md);
-            padding: 14px 20px;
+            padding: 14px 16px;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 8px;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: var(--shadow-md);
@@ -419,6 +432,7 @@
             border: 1px solid var(--border-color);
             background: #ffffff;
             height: 52px;
+            white-space: nowrap;
         }
 
         .absen-card:hover {
@@ -433,8 +447,8 @@
         }
 
         .absen-icon {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -445,8 +459,8 @@
         }
 
         .absen-icon svg {
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             stroke-width: 2.2;
             fill: none;
             stroke: currentColor;
@@ -458,12 +472,14 @@
             color: var(--text-main); 
             font-weight: 700; 
             font-size: 13px; 
+            white-space: nowrap;
         }
 
         .info-jam-absen { 
             color: var(--text-muted); 
             font-weight: 600; 
             font-size: 12px; 
+            white-space: nowrap;
             margin-left: auto;
         }
 
@@ -487,6 +503,7 @@
             align-items: center;
             gap: 10px;
             box-shadow: var(--shadow-md);
+            white-space: nowrap;
         }
 
         button:active {
@@ -505,7 +522,6 @@
             box-shadow: 0 6px 12px -2px rgba(15, 23, 42, 0.2);
         }
 
-        /* --- TOMBOL KELUAR SISTEM DIBUAT KOKOH & MENONJOL --- */
         .btn-logout { 
             background: #ffffff !important; 
             color: var(--danger) !important; 
@@ -527,6 +543,7 @@
             height: 44px;
             margin-top: 10px;
             box-shadow: none;
+            white-space: nowrap;
         }
 
         #kamera { 
@@ -550,7 +567,7 @@
         }
 
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th, td { padding: 16px 20px; font-size: 13px; }
+        th, td { padding: 16px 20px; font-size: 13px; white-space: nowrap; }
         th { background: #f8fafc; color: var(--text-muted); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-color); }
         td { border-bottom: 1px solid var(--border-color); vertical-align: middle; color: var(--text-main); }
         tr:last-child td { border-bottom: none; }
@@ -561,6 +578,7 @@
             border-radius: 20px;
             font-size: 11px;
             font-weight: 700;
+            white-space: nowrap;
         }
         .badge-in { background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-color); }
         .badge-out { background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-color); }
@@ -576,6 +594,7 @@
             font-weight: 700;
             text-decoration: none;
             border: 1px solid var(--border-color);
+            white-space: nowrap;
         }
 
         .spinner {
@@ -586,6 +605,7 @@
             height: 16px;
             animation: spin 0.6s linear infinite;
             display: none;
+            flex-shrink: 0;
         }
 
         @keyframes spin {
@@ -654,7 +674,7 @@
                     Portal Kehadiran
                 </button>
             </div>
-            <div style="padding: 20px; border-top: 1px solid #1e293b; font-size: 11px; color: #64748b; text-align: center;">
+            <div style="padding: 20px; border-top: 1px solid #1e293b; font-size: 11px; color: #64748b; text-align: center; white-space: nowrap;">
                 Enterprise v2.6.0
             </div>
         </aside>
@@ -662,8 +682,8 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <header class="corporate-header">
-                <div style="font-size: 14px; font-weight: 700; color: var(--text-main);">Human Resources Portal</div>
-                <div style="font-size: 11px; font-weight: 700; color: var(--text-main); background: #f1f5f9; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <div style="font-size: 14px; font-weight: 700; color: var(--text-main); white-space: nowrap;">Human Resources Portal</div>
+                <div style="font-size: 11px; font-weight: 700; color: var(--text-main); background: #f1f5f9; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border-color); white-space: nowrap;">
                     Active System
                 </div>
             </header>
@@ -702,8 +722,8 @@
                                 <img src="logo.png" class="logo-toko" alt="Logo Toko">
                             </div>
                             <div>
-                                <h2 style="font-size: 18px;">Halo, <span id="nama-user" style="color: var(--text-main);"></span></h2>
-                                <div style="font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 2px;">Dashboard Kehadiran Karyawan</div>
+                                <h2 style="font-size: 18px; white-space: nowrap;">Halo, <span id="nama-user" style="color: var(--text-main);"></span></h2>
+                                <div style="font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 2px; white-space: nowrap;">Dashboard Kehadiran Karyawan</div>
                             </div>
                         </div>
                     </div>
@@ -735,14 +755,14 @@
                     </div>
 
                     <div id="status-log">
-                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #059669; display: inline-block; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);"></div>
-                        <span id="status-log-text">Sinkronisasi data absensi...</span>
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #059669; display: inline-block; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15); flex-shrink: 0;"></div>
+                        <span id="status-log-text" style="overflow: hidden; text-overflow: ellipsis;">Sinkronisasi data absensi...</span>
                     </div>
                  
                     <div class="btn-grid">
                         <div class="absen-card-group">
                             <button class="absen-card" id="btn-checkin" onclick="bukaPetaFullscreen('Check In')">
-                                <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px; overflow: hidden;">
                                     <div class="absen-icon">
                                         <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
                                     </div>
@@ -752,7 +772,7 @@
                             </button>
 
                             <button class="absen-card" id="btn-checkout" onclick="bukaPetaFullscreen('Check Out')">
-                                <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px; overflow: hidden;">
                                     <div class="absen-icon">
                                         <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
                                     </div>
@@ -763,7 +783,7 @@
                         </div>
 
                         <button class="absen-card card-off" id="btn-off" onclick="prosesAbsenOff()">
-                            <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="display: flex; align-items: center; gap: 8px; overflow: hidden;">
                                 <div class="absen-icon">
                                     <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
                                 </div>
@@ -780,7 +800,7 @@
                 <!-- VIEW MAP FULLSCREEN -->
                 <div id="view-map-fullscreen">
                     <div class="map-header">
-                        <button onclick="tutupPetaFullscreen()" style="width: auto; height: 40px; padding: 0 14px; background: #f8fafc; color: var(--text-muted); border-radius: 6px; box-shadow: none; border: 1px solid var(--border-color); font-weight: 600;">← Kembali</button>
+                        <button onclick="tutupPetaFullscreen()" style="width: auto; height: 40px; padding: 0 14px; background: #f8fafc; color: var(--text-muted); border-radius: 6px; box-shadow: none; border: 1px solid var(--border-color); font-weight: 600; white-space: nowrap;">← Kembali</button>
                         <h3 id="judul-map-fullscreen">Verifikasi Lokasi</h3>
                         <div style="width: 80px;"></div>
                     </div>
@@ -788,8 +808,8 @@
                     <div id="info-jarak-peta">
                         <div style="background: #f1f5f9; color: #475569; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">⏳</div>
                         <div>
-                            <div style="color: var(--text-main); font-size: 13px; font-weight: 700;">Memeriksa lokasi GPS...</div>
-                            <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 2px;">Menghitung jarak ke titik kantor.</div>
+                            <div style="color: var(--text-main); font-size: 13px; font-weight: 700; white-space: nowrap;">Memeriksa lokasi GPS...</div>
+                            <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 2px; white-space: nowrap;">Menghitung jarak ke titik kantor.</div>
                         </div>
                     </div>
 
@@ -823,47 +843,47 @@
                 <div id="view-admin" class="box box-admin" style="display:none;">
                     <div class="admin-header" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 24px; text-align: left;">
                         <div>
-                            <h2 style="font-size: 20px; color: var(--text-main);">Panel Administrator HRIS</h2>
-                            <div style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Rekapitulasi Kehadiran & Laporan Karyawan</div>
+                            <h2 style="font-size: 20px; color: var(--text-main); white-space: nowrap;">Panel Administrator HRIS</h2>
+                            <div style="color: var(--text-muted); font-size: 12px; margin-top: 4px; white-space: nowrap;">Rekapitulasi Kehadiran & Laporan Karyawan</div>
                         </div>
                         <div style="display: flex; gap: 12px;">
-                            <button onclick="downloadCSV()" style="width: auto; height: 44px; background: var(--success); color: white; padding: 0 16px; font-size: 12px; border-radius: 6px; border-color: var(--success); font-weight: 700;">
+                            <button onclick="downloadCSV()" style="width: auto; height: 44px; background: var(--success); color: white; padding: 0 16px; font-size: 12px; border-radius: 6px; border-color: var(--success); font-weight: 700; white-space: nowrap;">
                                 📥 Unduh Laporan (CSV)
                             </button>
-                            <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; height: 44px; padding: 0 16px; font-size: 12px; font-weight: 700;">
+                            <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; height: 44px; padding: 0 16px; font-size: 12px; font-weight: 700; white-space: nowrap;">
                                 Keluar Sistem
                             </button>
                         </div>
                     </div>
 
                     <div style="background: #f8fafc; padding: 24px; border-radius: var(--radius-md); margin-bottom: 24px; border: 1px solid var(--border-color); text-align: left;">
-                        <label style="font-weight: 700; display: block; margin-bottom: 8px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 8px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">
                             Filter Karyawan:
                         </label>
                         <select id="filter-nama-admin" onchange="filterLaporanAdmin()" style="width: 100%; max-width: 360px;">
                             <option value="SEMUA">-- Tampilkan Semua Karyawan --</option>
                         </select>
                         
-                        <div id="periode-admin-text" style="display: none; margin-top: 14px; font-size: 12px; color: var(--text-main); font-weight: 700; background: #f1f5f9; padding: 8px 14px; border-radius: 6px; display: inline-block; border: 1px solid var(--border-color);">
+                        <div id="periode-admin-text" style="display: none; margin-top: 14px; font-size: 12px; color: var(--text-main); font-weight: 700; background: #f1f5f9; padding: 8px 14px; border-radius: 6px; display: inline-block; border: 1px solid var(--border-color); white-space: nowrap;">
                             Periode: -
                         </div>
                         
                         <div id="stat-karyawan-admin" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 18px;">
                             <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                                <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Hadir</div>
-                                <strong id="admin-stat-masuk" style="font-size: 20px; font-weight: 800; color: var(--success);">0</strong>
+                                <div style="font-size: 11px; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Hadir</div>
+                                <strong id="admin-stat-masuk" style="font-size: 20px; font-weight: 800; color: var(--success); white-space: nowrap;">0</strong>
                             </div>
                             <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                                <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Terlambat</div>
-                                <strong id="admin-stat-terlambat" style="font-size: 20px; font-weight: 800; color: var(--danger);">0</strong>
+                                <div style="font-size: 11px; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Terlambat</div>
+                                <strong id="admin-stat-terlambat" style="font-size: 20px; font-weight: 800; color: var(--danger); white-space: nowrap;">0</strong>
                             </div>
                             <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                                <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">OFF</div>
-                                <strong id="admin-stat-off" style="font-size: 20px; font-weight: 800; color: var(--danger);">0</strong>
+                                <div style="font-size: 11px; font-weight: 600; color: var(--text-muted); white-space: nowrap;">OFF</div>
+                                <strong id="admin-stat-off" style="font-size: 20px; font-weight: 800; color: var(--danger); white-space: nowrap;">0</strong>
                             </div>
                             <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                                <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">PS</div>
-                                <strong id="admin-stat-ps" style="font-size: 20px; font-weight: 800; color: var(--warning);">0</strong>
+                                <div style="font-size: 11px; font-weight: 600; color: var(--text-muted); white-space: nowrap;">PS</div>
+                                <strong id="admin-stat-ps" style="font-size: 20px; font-weight: 800; color: var(--warning); white-space: nowrap;">0</strong>
                             </div>
                         </div>
                     </div>
@@ -881,7 +901,7 @@
                             </thead>
                             <tbody id="isi-tabel">
                                 <tr>
-                                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 40px; font-style: italic;">Sedang memuat data laporan...</td>
+                                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 40px; font-style: italic; white-space: nowrap;">Sedang memuat data laporan...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -895,7 +915,7 @@
     <!-- LAYAR PESAN JIKA LISENSI TIDAK AKTIF -->
     <div id="errorContainer" style="display: none; min-height: 100vh; align-items: center; justify-content: center; text-align: center; font-family: sans-serif; background: #0f172a; color: white; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
         <div style="background: #1e293b; border: 1px solid #334155; padding: 32px; border-radius: 16px; max-width: 420px; width: 100%; margin: auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);">
-            <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #ef4444;">Akses Tidak Aktif</h2>
+            <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #ef4444; white-space: nowrap;">Akses Tidak Aktif</h2>
             <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;">Layanan absen untuk toko ini sedang ditangguhkan atau masa aktifnya habis. Silakan hubungi Administrator IT.</p>
         </div>
     </div>
@@ -903,7 +923,7 @@
     <!-- MODAL NOTIFIKASI -->
     <div id="modal-notif" class="modal-overlay" style="display:none;">
         <div class="modal-box" id="modal-box">
-            <h3 id="modal-title" style="margin-top:0; font-size: 16px; font-weight: 700; color: var(--text-main);">INFORMASI</h3>
+            <h3 id="modal-title" style="margin-top:0; font-size: 16px; font-weight: 700; color: var(--text-main); white-space: nowrap;">INFORMASI</h3>
             <div id="modal-pesan" style="font-size: 13px; color: var(--text-muted); margin: 12px 0 24px 0; line-height: 1.6;">Pesan di sini</div>
             <button class="btn-primary" id="btn-modal-tutup" onclick="tutupModal()">TUTUP</button>
         </div>
@@ -1518,11 +1538,11 @@
 
                     tr.innerHTML = `
                         <td style="padding: 16px 20px; font-weight: 500; font-size: 13px; white-space: nowrap;">${kolomWaktu || '-'}</td>
-                        <td style="padding: 16px 20px; font-weight: 600; font-size: 13px;">${kolomNama || '-'}</td>
+                        <td style="padding: 16px 20px; font-weight: 600; font-size: 13px; white-space: nowrap;">${kolomNama || '-'}</td>
                         <td style="padding: 16px 20px; text-align: center;"><span class="badge ${statusBadgeClass}">${kolomStatus || '-'}</span></td>
-                        <td style="padding: 16px 20px; font-family: monospace; font-size: 12px; color: var(--text-muted);">${koordinat}</td>
+                        <td style="padding: 16px 20px; font-family: monospace; font-size: 12px; color: var(--text-muted); white-space: nowrap;">${koordinat}</td>
                         <td style="padding: 16px 20px; text-align: center;">
-                            ${row[5] && row[5] !== '-' ? `<a href="${row[5]}" target="_blank" class="btn-lihat">Lihat Foto</a>` : '<span style="color: #cbd5e1; font-size: 12px;">Tanpa Foto</span>'}
+                            ${row[5] && row[5] !== '-' ? `<a href="${row[5]}" target="_blank" class="btn-lihat">Lihat Foto</a>` : '<span style="color: #cbd5e1; font-size: 12px; white-space: nowrap;">Tanpa Foto</span>'}
                         </td>
                     `;
                     tabelBody.appendChild(tr);
@@ -1654,7 +1674,7 @@
                 btnCheckIn.disabled = true; btnCheckIn.classList.add('btn-disabled');
                 btnOff.disabled = true; btnOff.classList.add('btn-disabled');
                 btnCheckOut.disabled = false; btnCheckOut.classList.remove('btn-disabled');
-                setStatusLogText("Status: Sedang bekerja. Klik <b>Check Out</b> saat pulang.");
+                setStatusLogText("Status: Sedang bekerja. Klik Check Out saat pulang.");
                 return;
             }
 
@@ -1662,7 +1682,7 @@
                 btnCheckIn.disabled = false; btnCheckIn.classList.remove('btn-disabled');
                 btnOff.disabled = false; btnOff.classList.remove('btn-disabled');
                 btnCheckOut.disabled = true; btnCheckOut.classList.add('btn-disabled');
-                setStatusLogText("Silakan lakukan <b>Check In</b> atau ambil <b>OFF</b>.");
+                setStatusLogText("Silakan lakukan Check In atau ambil OFF.");
             }
         }
 
@@ -1708,8 +1728,8 @@
             document.getElementById('modal-pesan').innerHTML = `
                 <p style="margin-bottom: 12px; font-weight: 500;">Apakah Anda yakin ingin mengambil hari OFF (Libur) hari ini?</p>
                 <div style="display: flex; gap: 12px; margin-top: 18px;">
-                    <button onclick="eksekusiAbsenOff()" style="background: var(--text-main); color: white; border: none; padding: 12px; border-radius: 8px; flex: 1; font-weight: 700; cursor: pointer;">YA, LIBUR</button>
-                    <button onclick="tutupModal()" style="background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; flex: 1; font-weight: 700; cursor: pointer;">BATAL</button>
+                    <button onclick="eksekusiAbsenOff()" style="background: var(--text-main); color: white; border: none; padding: 12px; border-radius: 8px; flex: 1; font-weight: 700; cursor: pointer; white-space: nowrap;">YA, LIBUR</button>
+                    <button onclick="tutupModal()" style="background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; flex: 1; font-weight: 700; cursor: pointer; white-space: nowrap;">BATAL</button>
                 </div>
             `;
              
