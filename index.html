@@ -896,7 +896,15 @@
                                 Unduh Laporan (CSV)
                             </button>
                         </div>
-                        
+                        <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 14px 18px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                            <div>
+                                <div style="font-weight: 700; font-size: 13px; color: var(--text-main);">Mode Radius GPS (Pembatasan Jarak)</div>
+                                <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">ON: Radius aktif (Wajib dekat toko) | OFF: Bebas dari mana saja (Mode Demo)</div>
+                            </div>
+                            <button id="btn-toggle-radius" onclick="toggleRadiusMode()" style="width: auto; height: 38px; padding: 0 16px; background: var(--success); color: white; font-size: 12px; border-radius: 6px; font-weight: 700; box-shadow: none;">
+                                RADIUS: ON
+                            </button>
+                        </div>
                         <div id="periode-admin-text" style="display: none; margin-bottom: 16px; font-size: 12px; color: var(--text-main); font-weight: 700; background: #f1f5f9; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border-color);">
                             Periode: -
                         </div>
@@ -1053,6 +1061,7 @@
         let fsMarkerToko = null;
         let fsMarkerUser = null;
         let fsCircleRadius = null;
+        let isRadiusEnforced = true; // Status awal aktif
 
         function setStatusLogText(htmlText) {
             const statusLogText = document.getElementById('status-log-text');
@@ -1152,7 +1161,7 @@
             }
         }
 
-        function updateFullscreenMapPosition(userLat, userLng) {
+      function updateFullscreenMapPosition(userLat, userLng) {
             if (!fsMapInstance) return;
 
             if (!fsMarkerUser) {
@@ -1172,6 +1181,23 @@
             const infoJarak = document.getElementById('info-jarak-peta');
             const btnLanjut = document.getElementById('btn-lanjut-kamera');
 
+            // --- JIKA MODE DEMO (RADIUS OFF / DIMATIKAN) ---
+            if (typeof isRadiusEnforced !== 'undefined' && !isRadiusEnforced) {
+                isGpsValid = true;
+                infoJarak.style.borderColor = "#0284c7";
+                infoJarak.innerHTML = `
+                    <div style="background: #e0f2fe; color: #0369a1; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">ℹ️</div>
+                    <div>
+                        <div style="color: #0369a1; font-size: 13px; font-weight: 700;">Mode Demo (Radius OFF)</div>
+                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 2px;">Bebas absen dari mana saja. Jarak aktual: ${jarak}m</div>
+                    </div>
+                `;
+                btnLanjut.disabled = false;
+                btnLanjut.classList.remove('btn-disabled');
+                return;
+            }
+
+            // --- JIKA RADIUS NORMAL (ON) ---
             if (jarak <= RADIUS_MAKSIMAL) {
                 isGpsValid = true;
                 infoJarak.style.borderColor = "#059669";
@@ -1990,16 +2016,19 @@
             });
         }
 
-        function prosesAbsen() {
+     function prosesAbsen() {
             if(lat === 0 && lng === 0) { 
                 tampilkanPesan("Lokasi GPS belum terbaca...", "info"); 
                 return;
             }
 
-            var jarak = hitungJarak(lat, lng, TOKO_LAT, TOKO_LNG);
-            if (jarak > RADIUS_MAKSIMAL) {
-                tampilkanPesan("Anda berada di luar radius toko.", "info");
-                return;
+            // --- VALIDASI JARAK GPS BERDASARKAN STATUS TOMBOL ON/OFF RADIUS ---
+            if (typeof isRadiusEnforced === 'undefined' || isRadiusEnforced) {
+                var jarak = hitungJarak(lat, lng, TOKO_LAT, TOKO_LNG);
+                if (jarak > RADIUS_MAKSIMAL) {
+                    tampilkanPesan("Anda berada di luar radius toko.", "info");
+                    return;
+                }
             }
              
             const serverDate = new Date(Date.now() + serverTimeOffset);
@@ -2200,6 +2229,19 @@
             link.click();
             document.body.removeChild(link);
         };
+        function toggleRadiusMode() {
+            isRadiusEnforced = !isRadiusEnforced;
+            const btnToggle = document.getElementById('btn-toggle-radius');
+            if (isRadiusEnforced) {
+                btnToggle.innerText = "RADIUS: ON";
+                btnToggle.style.background = "var(--success)"; // Hijau
+                tampilkanPesan("Radius GPS diaktifkan kembali.", "sukses");
+            } else {
+                btnToggle.innerText = "RADIUS: OFF (DEMO)";
+                btnToggle.style.background = "var(--warning)"; // Kuning/Oranye
+                tampilkanPesan("Radius GPS dimatikan. Bebas absen dari mana saja!", "sukses");
+            }
+        }
     </script>
 </body>
 </html>
