@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sistem Absensi Karyawan</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#2563eb">
     
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,13 +17,13 @@
 
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
-            --primary-light: #e0e7ff;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --background: #f8fafc;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --background: #f1f5f9;
             --card-bg: #ffffff;
             --sidebar-bg: #0f172a;
             --text-main: #0f172a;
@@ -31,8 +31,8 @@
             --border-color: #e2e8f0;
             --radius-lg: 16px;
             --radius-md: 10px;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
         }
 
         * {
@@ -40,7 +40,7 @@
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
             margin: 0;
             padding: 0;
-            letter-spacing: -0.1px;
+            letter-spacing: -0.2px;
         }
 
         body { 
@@ -85,8 +85,8 @@
         }
 
         .sidebar-logo {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 8px;
             object-fit: cover;
         }
@@ -107,7 +107,7 @@
             padding: 20px 16px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             flex-grow: 1;
         }
 
@@ -125,6 +125,7 @@
             cursor: pointer;
             width: 100%;
             text-align: left;
+            transition: all 0.2s;
         }
 
         .sidebar-item:hover, .sidebar-item.active {
@@ -157,9 +158,9 @@
 
         #appContainer {
             width: 100%;
-            max-width: 900px;
+            max-width: 860px;
             margin: 0 auto;
-            padding: 32px 24px;
+            padding: 40px 24px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -170,7 +171,7 @@
         .box { 
             width: 100%;
             background: var(--card-bg); 
-            padding: 32px; 
+            padding: 36px; 
             border-radius: var(--radius-lg); 
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
@@ -179,17 +180,17 @@
 
         .box-admin { 
             max-width: 100% !important; 
-            padding: 32px; 
+            padding: 36px; 
         }
 
         .logo-container {
-            width: 56px;
-            height: 56px;
+            width: 52px;
+            height: 52px;
             margin-bottom: 20px;
             border-radius: 12px;
             padding: 2px;
             background: var(--primary-light);
-            border: 1px solid #c7d2fe;
+            border: 1px solid #bfdbfe;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -203,7 +204,7 @@
         }
 
         h2 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--text-main);
         }
@@ -220,13 +221,13 @@
             background: #f8fafc;
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
-            padding: 20px;
+            padding: 24px;
             margin-bottom: 20px;
             text-align: center;
         }
 
         .jam-digital {
-            font-size: 40px;
+            font-size: 42px;
             font-weight: 800;
             color: var(--primary);
             font-variant-numeric: tabular-nums;
@@ -241,18 +242,19 @@
             text-transform: capitalize;
         }
 
-        /* PERBAIKAN: Periode Karyawan diletakkan Center Sempurna */
+        /* PERBAIKAN: Periode Karyawan diletakkan Center Sempurna & Rapi */
         #periode-karyawan-text {
             background: var(--primary-light) !important;
-            border: 1px solid #c7d2fe !important;
+            border: 1px solid #bfdbfe !important;
             border-left: 4px solid var(--primary) !important;
             border-radius: var(--radius-md) !important;
-            padding: 14px 18px !important;
+            padding: 14px 20px !important;
             margin-bottom: 20px !important;
             box-shadow: none !important;
             text-align: center !important;
         }
 
+        /* PERBAIKAN: Statistik Lebih Rapi & Profesional */
         .stat-box {
             background: #ffffff !important;
             border: 1px solid var(--border-color) !important;
@@ -262,27 +264,29 @@
             box-shadow: none !important;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+            gap: 14px;
         }
 
         .stat-item {
             display: flex;
             flex-direction: column;
             gap: 6px;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
-            font-weight: 600;
+            font-weight: 700;
             background: #f8fafc;
-            padding: 12px;
+            padding: 14px 10px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
             text-align: center;
+            text-transform: uppercase;
         }
 
         .stat-item span:last-child {
             font-weight: 800;
             font-size: 18px;
             color: var(--text-main);
+            text-transform: none;
         }
 
         #status-log {
@@ -290,7 +294,7 @@
             color: var(--text-main) !important;
             background: #f8fafc !important;
             border: 1px solid var(--border-color) !important;
-            padding: 14px 18px !important;
+            padding: 16px 20px !important;
             border-radius: var(--radius-md) !important;
             margin-bottom: 20px !important;
             font-weight: 500 !important;
@@ -365,7 +369,7 @@
 
         input, select { 
             width: 100%; 
-            padding: 12px 16px; 
+            padding: 13px 16px; 
             border-radius: var(--radius-md); 
             border: 1px solid var(--border-color);
             background: #ffffff;
@@ -377,7 +381,7 @@
         input:focus, select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
         }
 
         .btn-grid {
@@ -407,6 +411,10 @@
             width: 100%;
             border: 1px solid var(--border-color);
             background: #ffffff;
+        }
+
+        .absen-card:hover {
+            border-color: var(--primary);
         }
 
         .absen-card:active {
@@ -450,7 +458,7 @@
             justify-content: flex-start;
             align-items: center;
             gap: 14px;
-            padding: 14px 18px;
+            padding: 16px 20px;
             width: 100% !important;
             margin: 0;
         }
@@ -460,7 +468,7 @@
 
         button { 
             width: 100%; 
-            padding: 13px 18px; 
+            padding: 14px 20px; 
             border-radius: var(--radius-md); 
             font-size: 13px; 
             font-weight: 700; 
@@ -549,8 +557,8 @@
         }
 
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th, td { padding: 14px 18px; font-size: 13px; }
-        th { background: #f8fafc; color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-color); }
+        th, td { padding: 16px 20px; font-size: 13px; }
+        th { background: #f8fafc; color: var(--text-muted); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-color); }
         td { border-bottom: 1px solid var(--border-color); vertical-align: middle; color: var(--text-main); }
         tr:last-child td { border-bottom: none; }
         
@@ -574,7 +582,7 @@
             font-size: 11px;
             font-weight: 700;
             text-decoration: none;
-            border: 1px solid #c7d2fe;
+            border: 1px solid #bfdbfe;
         }
 
         .spinner {
@@ -664,7 +672,7 @@
         <div class="main-content">
             <header class="corporate-header">
                 <div style="font-size: 14px; font-weight: 700; color: var(--text-main);">Human Resources Portal</div>
-                <div style="font-size: 11px; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 6px 14px; border-radius: 6px; border: 1px solid #c7d2fe;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 6px 14px; border-radius: 6px; border: 1px solid #bfdbfe;">
                     Active System
                 </div>
             </header>
@@ -718,11 +726,11 @@
 
                     <div class="stat-box">
                         <div class="stat-item">
-                            <span>Total Kehadiran</span>
+                            <span>Kehadiran</span>
                             <span id="total-masuk">0 hari</span>
                         </div>
                         <div class="stat-item">
-                            <span>Total OFF (Libur)</span>
+                            <span>OFF (Libur)</span>
                             <span id="total-off" style="color: var(--danger) !important;">0 hari</span>
                         </div>
                         <div class="stat-item">
@@ -730,7 +738,7 @@
                             <span id="total-ps" style="color: var(--warning) !important;">0 hari</span>
                         </div>
                         <div class="stat-item">
-                            <span>Total Terlambat</span>
+                            <span>Terlambat</span>
                             <span id="total-terlambat" style="color: var(--danger) !important;">0 Hari</span>
                         </div>
                     </div>
@@ -774,7 +782,6 @@
                         </div>
                     </div>
 
-                    <!-- Diubah menjadi Keluar Sistem sesuai permintaan -->
                     <button class="btn-logout" onclick="logout()">Keluar Sistem</button>
                 </div>
 
@@ -845,7 +852,7 @@
                             <option value="SEMUA">-- Tampilkan Semua Karyawan --</option>
                         </select>
                         
-                        <div id="periode-admin-text" style="display: none; margin-top: 14px; font-size: 12px; color: var(--primary); font-weight: 700; background: var(--primary-light); padding: 8px 14px; border-radius: 6px; display: inline-block; border: 1px solid #c7d2fe;">
+                        <div id="periode-admin-text" style="display: none; margin-top: 14px; font-size: 12px; color: var(--primary); font-weight: 700; background: var(--primary-light); padding: 8px 14px; border-radius: 6px; display: inline-block; border: 1px solid #bfdbfe;">
                             Periode: -
                         </div>
                         
@@ -986,8 +993,8 @@
                         .bindPopup("<b>Toko Maju Jaya</b><br>Lokasi Kantor").openPopup();
 
                     fsCircleRadius = L.circle([TOKO_LAT, TOKO_LNG], {
-                        color: '#4f46e5',
-                        fillColor: '#4f46e5',
+                        color: '#2563eb',
+                        fillColor: '#2563eb',
                         fillOpacity: 0.15,
                         radius: RADIUS_MAKSIMAL
                     }).addTo(fsMapInstance);
@@ -1051,7 +1058,7 @@
                 fsMarkerUser = L.marker([userLat, userLng], {
                     icon: L.divIcon({
                         className: 'user-marker',
-                        html: '<div style="background: #4f46e5; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 6px rgba(0,0,0,0.3);"></div>'
+                        html: '<div style="background: #2563eb; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 6px rgba(0,0,0,0.3);"></div>'
                     })
                 }).addTo(fsMapInstance).bindPopup("Lokasi Anda Saat Ini");
             } else {
@@ -1066,7 +1073,7 @@
 
             if (jarak <= RADIUS_MAKSIMAL) {
                 isGpsValid = true;
-                infoJarak.style.borderColor = "#10b981";
+                infoJarak.style.borderColor = "#059669";
                 infoJarak.innerHTML = `
                     <div style="background: #d1fae5; color: #065f46; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✓</div>
                     <div>
@@ -1520,11 +1527,11 @@
                     let koordinat = (row[3] && row[4]) ? `${parseFloat(row[3]).toFixed(5)}, ${parseFloat(row[4]).toFixed(5)}` : '-';
 
                     tr.innerHTML = `
-                        <td style="padding: 14px 18px; font-weight: 500; font-size: 13px; white-space: nowrap;">${kolomWaktu || '-'}</td>
-                        <td style="padding: 14px 18px; font-weight: 600; font-size: 13px;">${kolomNama || '-'}</td>
-                        <td style="padding: 14px 18px; text-align: center;"><span class="badge ${statusBadgeClass}">${kolomStatus || '-'}</span></td>
-                        <td style="padding: 14px 18px; font-family: monospace; font-size: 12px; color: var(--text-muted);">${koordinat}</td>
-                        <td style="padding: 14px 18px; text-align: center;">
+                        <td style="padding: 16px 20px; font-weight: 500; font-size: 13px; white-space: nowrap;">${kolomWaktu || '-'}</td>
+                        <td style="padding: 16px 20px; font-weight: 600; font-size: 13px;">${kolomNama || '-'}</td>
+                        <td style="padding: 16px 20px; text-align: center;"><span class="badge ${statusBadgeClass}">${kolomStatus || '-'}</span></td>
+                        <td style="padding: 16px 20px; font-family: monospace; font-size: 12px; color: var(--text-muted);">${koordinat}</td>
+                        <td style="padding: 16px 20px; text-align: center;">
                             ${row[5] && row[5] !== '-' ? `<a href="${row[5]}" target="_blank" class="btn-lihat">Lihat Foto</a>` : '<span style="color: #cbd5e1; font-size: 12px;">Tanpa Foto</span>'}
                         </td>
                     `;
