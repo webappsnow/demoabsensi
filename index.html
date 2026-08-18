@@ -1267,7 +1267,6 @@
             document.getElementById('view-kamera').style.display = 'block';
             document.getElementById('judul-kamera').innerText = "Kamera " + tipeAbsen;
             
-            // Reset state tampilan kamera
             document.getElementById('kamera').style.display = 'block';
             document.getElementById('canvas-preview').style.display = 'none';
             document.getElementById('btnAmbilFoto').style.display = 'flex';
@@ -1925,7 +1924,6 @@
             }
             const elKamera = document.getElementById('kamera');
 
-            // Dikunci otomatis menggunakan kamera depan
             navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
             .then(stream => {
                 streamKamera = stream;
@@ -1934,7 +1932,7 @@
                 var playPromise = elKamera.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(error => {
-                        console.log("Autoplay dicegah oleh browser, mencoba memutar ulang...", error);
+                        console.log("Autoplay dicegah oleh browser:", error);
                     });
                 }
             })
@@ -1948,7 +1946,6 @@
             const video = document.getElementById('kamera');
             const canvas = document.getElementById('canvas-preview');
             
-            // Atur ukuran canvas sesuai dengan video stream
             const maxWidth = 720;
             const scale = maxWidth / video.videoWidth;
             canvas.width = maxWidth;
@@ -1976,19 +1973,15 @@
             ctx.font = `${Math.round(canvas.height * 0.03)}px Arial`;
             ctx.fillText(gpsString, Math.round(canvas.width * 0.05), canvas.height - Math.round(boxHeight * 0.25));
 
-            // Simpan hasil render ke variabel global dengan kompresi ringan (0.4) agar cepat
             fotoDataUrl = canvas.toDataURL('image/jpeg', 0.4);
 
-            // Matikan stream kamera fisik agar berhenti/freeze
             if(streamKamera) {
                 streamKamera.getTracks().forEach(track => track.stop());
             }
 
-            // Tampilkan hasil foto statis (canvas) dan sembunyikan video live
             video.style.display = 'none';
             canvas.style.display = 'block';
 
-            // Ubah tombol kontrol
             document.getElementById('btnAmbilFoto').style.display = 'none';
             document.getElementById('panel-aksi-foto').style.display = 'flex';
             document.getElementById('btnKembaliDashboard').style.display = 'none';
@@ -2101,6 +2094,7 @@
         }
 
        function prosesAbsen() {
+            // HANYA CEK JARAK JIKA isRadiusEnforced BERSTATUS TRUE (ON)
             if (isRadiusEnforced) {
                 if(lat === 0 && lng === 0) { 
                     tampilkanPesan("Lokasi GPS belum terbaca...", "info"); 
