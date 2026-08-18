@@ -540,6 +540,7 @@
             border-radius: var(--radius-md); 
             background: #0f172a; 
             border: 1px solid var(--border-color);
+            transform: scaleX(-1);
         }
 
         .table-container {
@@ -847,17 +848,29 @@
                         <img src="logo.png" class="logo-toko" alt="Logo Toko">
                     </div>
                     <h2 id="judul-kamera">Verifikasi Wajah</h2>
-                    <div class="sub-title">Pastikan wajah Anda berada di dalam bingkai kamera</div>
+                    <div class="sub-title" id="kamera-subtitle">Posisikan wajah Anda, lalu tekan tombol ambil foto</div>
                      
                     <video id="kamera" autoplay playsinline></video>
+                    <canvas id="canvas-preview" style="display:none; width: 100%; height: 460px; object-fit: cover; border-radius: var(--radius-md); border: 1px solid var(--border-color); transform: scaleX(-1);"></canvas>
                      
-                    <button class="btn-kembali" id="btnGantiKamera" onclick="gantiKamera()">
-                        🔄 Putar Kamera (Depan / Belakang)
+                    <!-- Tombol Ambil Foto -->
+                    <button class="btn-primary" id="btnAmbilFoto" onclick="ambilFotoSelfie()" style="margin-top: 12px;">
+                        📸 AMBIL FOTO WAJAH
                     </button>
-                     
-                    <button class="btn-primary btn-absen-kirim" id="btnAbsen" onclick="prosesAbsen()" style="margin-top: 10px;">
-                        <span id="text-absen-kirim">Kirim Absensi Sekarang</span>
-                        <div class="spinner" id="absen-spinner"></div>
+
+                    <!-- Tombol Ulangi & Kirim (Tersembunyi Awalnya) -->
+                    <div id="panel-aksi-foto" style="display: none; gap: 12px; margin-top: 12px;">
+                        <button class="btn-kembali" onclick="ulangiFoto()" style="margin-top: 0; flex: 1;">
+                            🔄 Foto Ulang
+                        </button>
+                        <button class="btn-primary btn-absen-kirim" id="btnAbsen" onclick="prosesAbsen()" style="margin-top: 0; flex: 1;">
+                            <span id="text-absen-kirim">Kirim Absensi</span>
+                            <div class="spinner" id="absen-spinner"></div>
+                        </button>
+                    </div>
+
+                    <button class="btn-kembali" id="btnKembaliDashboard" onclick="kembaliKeDashboard()" style="margin-top: 10px;">
+                        Batal / Kembali
                     </button>
                 </div>
 
@@ -1056,12 +1069,12 @@
         let lat = 0, lng = 0, namaLogin = "", tipeAbsen = "";
         let totalHadir = 0, totalOff = 0, totalPs = 0, totalTerlambat = 0;
         let isGpsValid = false;
-        let modeKamera = "user";
         let gpsWatcher = null;
         let serverTimeOffset = 0; 
         let dataLaporanGlobal = [];
         let isDataLoaded = false; 
         let isEksekusiOffRunning = false;
+        let fotoDataUrl = "";
 
         let fsMapInstance = null;
         let fsMarkerToko = null;
@@ -1253,6 +1266,15 @@
             document.getElementById('view-map-fullscreen').style.display = 'none';
             document.getElementById('view-kamera').style.display = 'block';
             document.getElementById('judul-kamera').innerText = "Kamera " + tipeAbsen;
+            
+            // Reset state tampilan kamera
+            document.getElementById('kamera').style.display = 'block';
+            document.getElementById('canvas-preview').style.display = 'none';
+            document.getElementById('btnAmbilFoto').style.display = 'flex';
+            document.getElementById('panel-aksi-foto').style.display = 'none';
+            document.getElementById('btnKembaliDashboard').style.display = 'block';
+            document.getElementById('kamera-subtitle').innerText = "Posisikan wajah Anda, lalu tekan tombol ambil foto";
+
             jalankanKamera();
         }
 
@@ -1902,9 +1924,9 @@
                 streamKamera.getTracks().forEach(track => track.stop());
             }
             const elKamera = document.getElementById('kamera');
-            elKamera.style.transform = (modeKamera === "user") ? "scaleX(-1)" : "scaleX(1)";
 
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: modeKamera } })
+            // Dikunci otomatis menggunakan kamera depan
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
             .then(stream => {
                 streamKamera = stream;
                 elKamera.srcObject = stream;
@@ -1922,8 +1944,64 @@
             });
         }
 
-        function gantiKamera() {
-            modeKamera = (modeKamera === "user") ? "environment" : "user";
+        function ambilFotoSelfie() {
+            const video = document.getElementById('kamera');
+            const canvas = document.getElementById('canvas-preview');
+            
+            // Atur ukuran canvas sesuai dengan video stream
+            const maxWidth = 720;
+            const scale = maxWidth / video.videoWidth;
+            canvas.width = maxWidth;
+            canvas.height = video.videoHeight * scale;
+
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const serverDate = new Date(Date.now() + serverTimeOffset);
+            const waktuSekarang = serverDate.toLocaleTimeString('id-ID');
+            const latText = lat ? lat.toFixed(6) : "0.000000";
+            const lngText = lng ? lng.toFixed(6) : "0.000000";
+            const formatWaktu = serverDate.toLocaleDateString('id-ID') + ' ' + waktuSekarang + ' WIB';
+            const gpsString = `GPS: ${latText}, ${lngText}`;
+
+            const boxHeight = Math.round(canvas.height * 0.12);
+            ctx.fillStyle = "rgba(0, 0, 0, 0.6)"; 
+            ctx.fillRect(0, canvas.height - boxHeight, canvas.width, boxHeight);
+             
+            ctx.fillStyle = "#ffffff"; 
+            ctx.font = `bold ${Math.round(canvas.height * 0.035)}px Arial`;
+            ctx.fillText(formatWaktu, Math.round(canvas.width * 0.05), canvas.height - Math.round(boxHeight * 0.6));
+             
+            ctx.fillStyle = "#facc15"; 
+            ctx.font = `${Math.round(canvas.height * 0.03)}px Arial`;
+            ctx.fillText(gpsString, Math.round(canvas.width * 0.05), canvas.height - Math.round(boxHeight * 0.25));
+
+            // Simpan hasil render ke variabel global dengan kompresi ringan (0.4) agar cepat
+            fotoDataUrl = canvas.toDataURL('image/jpeg', 0.4);
+
+            // Matikan stream kamera fisik agar berhenti/freeze
+            if(streamKamera) {
+                streamKamera.getTracks().forEach(track => track.stop());
+            }
+
+            // Tampilkan hasil foto statis (canvas) dan sembunyikan video live
+            video.style.display = 'none';
+            canvas.style.display = 'block';
+
+            // Ubah tombol kontrol
+            document.getElementById('btnAmbilFoto').style.display = 'none';
+            document.getElementById('panel-aksi-foto').style.display = 'flex';
+            document.getElementById('btnKembaliDashboard').style.display = 'none';
+            document.getElementById('kamera-subtitle').innerText = "Periksa foto Anda. Jika sudah pas, klik Kirim Absensi.";
+        }
+
+        function ulangiFoto() {
+            document.getElementById('canvas-preview').style.display = 'none';
+            document.getElementById('kamera').style.display = 'block';
+            document.getElementById('panel-aksi-foto').style.display = 'none';
+            document.getElementById('btnAmbilFoto').style.display = 'flex';
+            document.getElementById('btnKembaliDashboard').style.display = 'block';
+            document.getElementById('kamera-subtitle').innerText = "Posisikan wajah Anda, lalu tekan tombol ambil foto";
             jalankanKamera();
         }
 
@@ -2023,7 +2101,6 @@
         }
 
        function prosesAbsen() {
-            // Jika mode radius aktif, pastikan GPS sudah terbaca & di dalam radius
             if (isRadiusEnforced) {
                 if(lat === 0 && lng === 0) { 
                     tampilkanPesan("Lokasi GPS belum terbaca...", "info"); 
@@ -2056,33 +2133,6 @@
                 }
             }
 
-            const video = document.getElementById('kamera');
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth; 
-            canvas.height = video.videoHeight;
-            const ctx = canvas.getContext('2d');
-             
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-             
-            const latText = lat ? lat.toFixed(6) : "0.000000";
-            const lngText = lng ? lng.toFixed(6) : "0.000000";
-            const formatWaktu = serverDate.toLocaleDateString('id-ID') + ' ' + waktuSekarang + ' WIB';
-            const gpsString = `GPS: ${latText}, ${lngText}`;
-             
-            const boxHeight = Math.round(canvas.height * 0.12);
-            ctx.fillStyle = "rgba(0, 0, 0, 0.6)"; 
-            ctx.fillRect(0, canvas.height - boxHeight, canvas.width, boxHeight);
-             
-            ctx.fillStyle = "#ffffff"; 
-            ctx.font = `bold ${Math.round(canvas.height * 0.035)}px Arial`;
-            ctx.fillText(formatWaktu, Math.round(canvas.width * 0.05), canvas.height - Math.round(boxHeight * 0.6));
-             
-            ctx.fillStyle = "#facc15"; 
-            ctx.font = `${Math.round(canvas.height * 0.03)}px Arial`;
-            ctx.fillText(gpsString, Math.round(canvas.width * 0.05), canvas.height - Math.round(boxHeight * 0.25));
-
-            const dataFoto = canvas.toDataURL('image/jpeg', 0.5);
-
             const btn = document.getElementById('btnAbsen');
             const spinner = document.getElementById('absen-spinner');
             const textKirim = document.getElementById('text-absen-kirim');
@@ -2092,19 +2142,19 @@
                 btn.classList.add('btn-disabled');
             }
             if(spinner) spinner.style.display = 'inline-block';
-            if(textKirim) textKirim.innerText = "Memproses...";
+            if(textKirim) textKirim.innerText = "Mengirim...";
               
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 redirect: 'follow',
                 body: JSON.stringify({ 
-                    aksi: "absen", nama: namaLogin, status: tipeAbsen, lat: lat, lng: lng, foto: dataFoto 
+                    aksi: "absen", nama: namaLogin, status: tipeAbsen, lat: lat, lng: lng, foto: fotoDataUrl 
                 })
             })
             .then(res => res.json())
             .then(data => {
                 if(spinner) spinner.style.display = 'none';
-                if(textKirim) textKirim.innerText = "Kirim Absensi Sekarang";
+                if(textKirim) textKirim.innerText = "Kirim Absensi";
                 if(btn) {
                     btn.disabled = false;
                     btn.classList.remove('btn-disabled');
@@ -2159,7 +2209,7 @@
             })
             .catch(err => {
                 if(spinner) spinner.style.display = 'none';
-                if(textKirim) textKirim.innerText = "Kirim Absensi Sekarang";
+                if(textKirim) textKirim.innerText = "Kirim Absensi";
                 if(btn) {
                     btn.disabled = false;
                     btn.classList.remove('btn-disabled');
