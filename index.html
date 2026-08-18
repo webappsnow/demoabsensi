@@ -290,24 +290,23 @@
             text-transform: none;
         }
 
-        /* --- STATUS BAR AMAN ANTI-POTONG --- */
+        /* --- STATUS BAR RAPI --- */
         #status-log {
             font-size: 13px !important;
             color: var(--text-main) !important;
             background: #f8fafc !important;
             border: 1px solid var(--border-color) !important;
-            padding: 16px 20px !important;
+            padding: 14px 18px !important;
             border-radius: var(--radius-md) !important;
             margin-bottom: 20px !important;
             font-weight: 600 !important;
             text-align: left !important;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 12px;
             box-shadow: var(--shadow-sm);
             word-break: break-word;
-            line-height: 1.5;
-            height: auto;
+            line-height: 1.4;
         }
 
         #view-map-fullscreen {
@@ -405,10 +404,10 @@
             gap: 12px;
         }
 
-        /* --- KARTU ABSENSI AMAN ANTI-POTONG --- */
+        /* --- KARTU ABSENSI PROPORSIONAL & FONT IDEAL --- */
         .absen-card {
             border-radius: var(--radius-md);
-            padding: 14px 16px;
+            padding: 0 16px;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -420,8 +419,7 @@
             width: 100%;
             border: 1px solid var(--border-color);
             background: #ffffff;
-            min-height: 56px;
-            height: auto;
+            height: 52px;
         }
 
         .absen-card:hover {
@@ -436,9 +434,9 @@
         }
 
         .absen-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -448,8 +446,8 @@
         }
 
         .absen-icon svg {
-            width: 15px;
-            height: 15px;
+            width: 14px;
+            height: 14px;
             stroke-width: 2.2;
             fill: none;
             stroke: currentColor;
@@ -461,7 +459,7 @@
             color: var(--text-main); 
             font-weight: 700; 
             font-size: 13px; 
-            line-height: 1.3;
+            white-space: nowrap;
         }
 
         .info-jam-absen { 
@@ -470,18 +468,19 @@
             font-size: 12px; 
             margin-left: auto;
             flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .card-off {
             width: 100% !important;
             margin: 0;
+            height: 52px;
         }
 
         button { 
             width: 100%; 
-            min-height: 52px;
-            height: auto;
-            padding: 14px 20px; 
+            height: 52px;
+            padding: 0 20px; 
             border-radius: var(--radius-md); 
             font-size: 13px; 
             font-weight: 700; 
@@ -529,8 +528,7 @@
             color: var(--text-muted);
             border: 1px solid var(--border-color);
             font-size: 12px;
-            min-height: 44px;
-            height: auto;
+            height: 44px;
             margin-top: 10px;
         }
 
@@ -667,33 +665,6 @@
             .absen-card-group { 
                 grid-template-columns: 1fr; 
             }
-            .absen-card {
-                padding: 12px 14px;
-                flex-direction: column;
-                align-items: flex-start;
-                height: auto;
-                gap: 6px;
-            }
-            .absen-card > div {
-                width: 100%;
-            }
-            .info-jam-absen {
-                margin-left: 38px !important;
-                font-size: 11px;
-            }
-            /* Tombol OFF khusus HP menjadi vertikal rapi ke bawah */
-            #btn-off {
-                flex-direction: column;
-                align-items: flex-start;
-                height: auto;
-                gap: 6px;
-            }
-            #btn-off > div {
-                width: 100%;
-            }
-            #btn-off .info-jam-absen {
-                margin-left: 38px !important;
-            }
         }
     </style>
 </head>
@@ -796,14 +767,14 @@
                     </div>
 
                     <div id="status-log">
-                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #059669; display: inline-block; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15); flex-shrink: 0; margin-top: 4px;"></div>
-                        <span id="status-log-text" style="flex: 1;">Sinkronisasi data absensi...</span>
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #059669; display: inline-block; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15); flex-shrink: 0;"></div>
+                        <span id="status-log-text">Sinkronisasi data absensi...</span>
                     </div>
                  
                     <div class="btn-grid">
                         <div class="absen-card-group">
                             <button class="absen-card" id="btn-checkin" onclick="bukaPetaFullscreen('Check In')">
-                                <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
                                     <div class="absen-icon">
                                         <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
                                     </div>
@@ -813,7 +784,7 @@
                             </button>
 
                             <button class="absen-card" id="btn-checkout" onclick="bukaPetaFullscreen('Check Out')">
-                                <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
                                     <div class="absen-icon">
                                         <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
                                     </div>
@@ -824,7 +795,7 @@
                         </div>
 
                         <button class="absen-card card-off" id="btn-off" onclick="prosesAbsenOff()">
-                            <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
                                 <div class="absen-icon">
                                     <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
                                 </div>
