@@ -861,7 +861,7 @@
                 </div>
 
                 <!-- VIEW ADMIN YANG DI-UPGRADE DAN DIRAPIKAN -->
-              <div id="view-admin" class="box box-admin" style="display:none;">
+                <div id="view-admin" class="box box-admin" style="display:none;">
                     <div class="admin-header" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 24px; text-align: left; flex-wrap: wrap; gap: 16px;">
                         <div>
                             <h2 style="font-size: 20px; color: var(--text-main);">Panel Administrator HRIS</h2>
@@ -998,6 +998,11 @@
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- LAYAR PESAN JIKA LISENSI TIDAK AKTIF -->
     <div id="errorContainer" style="display: none; min-height: 100vh; align-items: center; justify-content: center; text-align: center; background: #0f172a; color: white; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
         <div style="background: #1e293b; border: 1px solid #334155; padding: 32px; border-radius: 16px; max-width: 420px; width: 100%; margin: auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);">
@@ -2016,7 +2021,7 @@
             });
         }
 
-     function prosesAbsen() {
+       function prosesAbsen() {
             if(lat === 0 && lng === 0) { 
                 tampilkanPesan("Lokasi GPS belum terbaca...", "info"); 
                 return;
@@ -2144,7 +2149,7 @@
                         }
                         localStorage.removeItem(`waktuCheckIn_${namaLogin}`);
                     }
-               
+                
                     tampilkanStatistik();
                     tampilkanPesan("Absen " + tipeAbsen + " berhasil pada pukul " + waktuSekarang + "!" + infoDurasi, 'sukses');
                 } else {
