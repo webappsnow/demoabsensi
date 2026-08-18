@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sistem Absensi Karyawan</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#4f46e5">
+    <meta name="theme-color" content="#1e293b">
     
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,20 +17,20 @@
 
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
-            --primary-light: #e0e7ff;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --background: #f1f5f9;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --background: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
-            --radius-lg: 16px;
-            --radius-md: 10px;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
 
@@ -48,12 +48,11 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             overflow-x: hidden;
             margin: 0;
         }
 
-        /* --- HEADER KANTORAN (TOP BAR) --- */
+        /* --- TOP BAR ENTERPRISE --- */
         .corporate-header {
             width: 100%;
             background: #ffffff;
@@ -75,15 +74,15 @@
         }
 
         .corporate-logo {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
             object-fit: cover;
         }
 
         .corporate-title-text {
             font-size: 14px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--text-main);
             letter-spacing: -0.2px;
         }
@@ -91,44 +90,43 @@
         .corporate-subtitle {
             font-size: 11px;
             color: var(--text-muted);
-            font-weight: 600;
+            font-weight: 500;
         }
 
         #appContainer {
             width: 100%;
-            max-width: 460px;
+            max-width: 520px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: auto;
-            padding: 20px 16px;
+            padding: 24px 16px;
         }
 
+        /* --- KARTU/BOX KANTORAN --- */
         .box { 
             width: 100%;
-            max-width: 460px; 
             background: var(--card-bg); 
-            padding: 24px; 
+            padding: 32px; 
             border-radius: var(--radius-lg); 
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
-            text-align: center;
+            text-align: left;
         }
 
         .box-admin { 
-            max-width: 1100px !important; 
-            padding: 24px; 
+            max-width: 1200px !important; 
+            padding: 28px; 
         }
 
         .logo-container {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 12px auto;
-            border-radius: 14px;
+            width: 56px;
+            height: 56px;
+            margin-bottom: 20px;
+            border-radius: var(--radius-md);
             padding: 2px;
-            background: #ffffff;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
+            background: var(--primary-light);
+            border: 1px solid #bfdbfe;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -138,34 +136,35 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 6px;
         }
 
         h2 {
-            font-size: 18px;
-            font-weight: 800;
+            font-size: 20px;
+            font-weight: 700;
             color: var(--text-main);
             letter-spacing: -0.3px;
         }
 
         .sub-title {
             color: var(--text-muted);
-            font-size: 12px;
-            margin-top: 2px;
-            margin-bottom: 16px;
-            font-weight: 500;
+            font-size: 13px;
+            margin-top: 4px;
+            margin-bottom: 24px;
+            font-weight: 400;
         }
 
         .time-wrapper {
             background: #f8fafc;
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
-            padding: 12px;
-            margin-bottom: 14px;
+            padding: 16px;
+            margin-bottom: 16px;
+            text-align: center;
         }
 
         .jam-digital {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 800;
             color: var(--primary);
             font-variant-numeric: tabular-nums;
@@ -174,41 +173,41 @@
         }
 
         .tanggal-digital {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-muted);
-            margin-top: 4px;
+            margin-top: 6px;
             font-weight: 600;
             text-transform: capitalize;
         }
 
         #periode-karyawan-text {
-            background: #ffffff !important;
-            border: 1px solid var(--border-color) !important;
-            border-left: 3px solid var(--primary) !important;
+            background: var(--primary-light) !important;
+            border: 1px solid #bfdbfe !important;
+            border-left: 4px solid var(--primary) !important;
             border-radius: var(--radius-md) !important;
-            padding: 10px 12px !important;
-            margin-bottom: 12px !important;
-            box-shadow: var(--shadow-sm) !important;
-            text-align: center;
+            padding: 12px 16px !important;
+            margin-bottom: 16px !important;
+            box-shadow: none !important;
+            text-align: left;
         }
 
         .stat-box {
             background: #ffffff !important;
             border: 1px solid var(--border-color) !important;
             border-radius: var(--radius-md) !important;
-            padding: 14px !important;
-            margin-bottom: 14px !important;
-            box-shadow: var(--shadow-sm) !important;
+            padding: 16px !important;
+            margin-bottom: 16px !important;
+            box-shadow: none !important;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 10px;
         }
 
         .stat-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 12px;
+            font-size: 13px;
             color: var(--text-muted);
             font-weight: 500;
         }
@@ -219,16 +218,16 @@
         }
 
         #status-log {
-            font-size: 11px !important;
+            font-size: 12px !important;
             color: var(--text-main) !important;
             background: #f8fafc !important;
-            border: 1px dashed var(--border-color) !important;
-            padding: 10px !important;
+            border: 1px solid var(--border-color) !important;
+            padding: 12px 16px !important;
             border-radius: var(--radius-md) !important;
-            margin-bottom: 14px !important;
-            font-weight: 600 !important;
-            text-align: center !important;
-            line-height: 1.4 !important;
+            margin-bottom: 16px !important;
+            font-weight: 500 !important;
+            text-align: left !important;
+            line-height: 1.5 !important;
         }
 
         #view-map-fullscreen {
@@ -250,7 +249,7 @@
 
         .map-header h3 {
             font-size: 15px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--text-main);
         }
 
@@ -262,16 +261,16 @@
             z-index: 1000;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
-            padding: 12px 14px;
+            padding: 12px 16px;
             border-radius: var(--radius-md);
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 600;
             text-align: left;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         #fullscreen-map {
@@ -285,27 +284,24 @@
 
         .input-group {
             text-align: left;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .input-group label {
             display: block;
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 12px;
+            font-weight: 600;
             margin-bottom: 6px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: var(--text-main);
         }
 
         input, select { 
             width: 100%; 
-            padding: 11px 14px; 
+            padding: 10px 14px; 
             border-radius: var(--radius-md); 
             border: 1px solid var(--border-color);
-            background: #f8fafc;
+            background: #ffffff;
             font-size: 13px;
-            font-weight: 500;
             color: var(--text-main);
             transition: all 0.2s ease;
         }
@@ -313,8 +309,7 @@
         input:focus, select:focus {
             outline: none;
             border-color: var(--primary);
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         .btn-grid {
@@ -332,26 +327,27 @@
 
         .absen-card {
             border-radius: var(--radius-md);
-            padding: 10px 8px;
+            padding: 12px 10px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 3px;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: var(--shadow-sm);
             width: 100%;
+            border: 1px solid var(--border-color);
         }
 
         .absen-card:active {
-            transform: scale(0.97);
+            transform: scale(0.98);
         }
 
         .absen-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -368,71 +364,63 @@
         }
 
         .card-in {
-            background: #4f46e5 !important;
-            border: 1px solid #4338ca !important;
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+            background: #ffffff !important;
+            border-color: #cbd5e1 !important;
         }
-        .card-in .absen-icon { background: rgba(255, 255, 255, 0.25); color: #ffffff; }
-        .card-in .absen-title { color: #ffffff !important; }
-        .card-in .info-jam-absen { color: #4f46e5 !important; font-weight: 800 !important; }
+        .card-in .absen-icon { background: var(--primary-light); color: var(--primary); }
+        .card-in .absen-title { color: var(--text-main) !important; font-weight: 700; }
+        .card-in .info-jam-absen { color: var(--text-muted) !important; font-weight: 600 !important; }
 
         .card-out {
-            background: #d97706 !important;
-            border: 1px solid #b45309 !important;
-            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+            background: #ffffff !important;
+            border-color: #cbd5e1 !important;
         }
-        .card-out .absen-icon { background: rgba(0, 0, 0, 0.12); color: #fff; }
-        .card-out .absen-title { color: #fff !important; }
-        .card-out .info-jam-absen { color: #b45309 !important; font-weight: 800 !important; }
+        .card-out .absen-icon { background: #fef3c7; color: #d97706; }
+        .card-out .absen-title { color: var(--text-main) !important; font-weight: 700; }
+        .card-out .info-jam-absen { color: var(--text-muted) !important; font-weight: 600 !important; }
 
         .card-off-wrapper {
             width: 100%;
             display: flex;
-            justify-content: center;
         }
 
         .card-off {
             flex-direction: row;
-            justify-content: center;
-            gap: 6px;
-            padding: 8px 14px;
-            background: #ef4444 !important;
-            border: 1px solid #dc2626 !important;
-            width: auto !important;
-            max-width: 200px;
-            margin: 0 auto;
-            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: #ffffff !important;
+            border-color: #cbd5e1 !important;
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0;
+            box-shadow: var(--shadow-sm);
         }
-        .card-off .absen-icon { background: rgba(255, 255, 255, 0.25); color: #ffffff; width: 24px; height: 24px; }
-        .card-off .absen-title { color: #ffffff !important; }
-        .card-off .info-jam-absen { color: #ffffff !important; font-weight: 800 !important; background: transparent; width: auto; padding: 0; }
+        .card-off .absen-icon { background: #fee2e2; color: var(--danger); width: 28px; height: 28px; }
+        .card-off .absen-title { color: var(--text-main) !important; font-weight: 700; }
+        .card-off .info-jam-absen { color: var(--text-muted) !important; font-weight: 600 !important; background: transparent; width: auto; padding: 0; }
 
         .absen-title {
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 13px;
         }
 
         .info-jam-absen {
-            font-size: 10px;
-            font-weight: 600;
-            color: var(--text-muted);
-            min-height: 12px;
+            font-size: 11px;
+            min-height: auto;
             display: block;
-            text-align: center;
-            background: #ffffff;
-            padding: 2px 6px;
-            border-radius: 4px;
+            text-align: left;
             width: 100%;
         }
 
         button { 
             width: 100%; 
-            padding: 12px; 
+            padding: 11px 16px; 
             border-radius: var(--radius-md); 
-            font-size: 12px; 
-            font-weight: 700; 
+            font-size: 13px; 
+            font-weight: 600; 
             cursor: pointer; 
-            border: none;
+            border: 1px solid transparent;
             transition: all 0.2s ease;
             display: inline-flex;
             justify-content: center;
@@ -442,13 +430,13 @@
         }
 
         button:active {
-            transform: scale(0.97);
+            transform: scale(0.98);
         }
 
         .btn-primary {
             background: var(--primary);
             color: white;
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+            border-color: var(--primary);
         }
 
         .btn-primary:hover {
@@ -456,50 +444,42 @@
         }
 
         .btn-theme-in {
-            background: #4f46e5 !important;
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
-        }
-        .btn-theme-in:hover {
-            background: #4338ca !important;
+            background: var(--primary) !important;
+            border-color: var(--primary) !important;
+            color: white !important;
         }
 
         .btn-theme-out {
             background: #d97706 !important;
-            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3) !important;
-        }
-        .btn-theme-out:hover {
-            background: #b45309 !important;
+            border-color: #d97706 !important;
+            color: white !important;
         }
 
         .btn-absen-kirim { 
             background: var(--primary); 
             color: white;
-            font-size: 13px;
-            margin-top: 12px;
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+            margin-top: 16px;
         }
 
         .btn-logout { 
-            background: #059669 !important; 
-            color: #ffffff !important; 
-            border: 1px solid #047857 !important;
-            font-size: 11px; 
-            padding: 10px; 
-            margin-top: 8px;
-            box-shadow: 0 4px 10px rgba(5, 150, 105, 0.2) !important;
+            background: #ffffff !important; 
+            color: var(--danger) !important; 
+            border: 1px solid #fecaca !important;
+            margin-top: 12px;
+            box-shadow: none !important;
         }
 
         .btn-logout:hover {
-            background: #047857 !important;
+            background: #fef2f2 !important;
         }
 
         .btn-kembali {
             background: #f8fafc;
             color: var(--text-muted);
             border: 1px solid var(--border-color);
-            font-size: 11px;
+            font-size: 12px;
             padding: 10px;
-            margin-top: 6px;
+            margin-top: 8px;
             box-shadow: none;
         }
 
@@ -510,7 +490,7 @@
             border-radius: var(--radius-md); 
             background: #0f172a; 
             border: 1px solid var(--border-color);
-            max-height: 340px;
+            max-height: 320px;
         }
 
         .table-container {
@@ -518,41 +498,42 @@
             overflow-x: auto;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
-            margin-top: 12px;
+            margin-top: 16px;
             background: white;
-            box-shadow: var(--shadow-sm);
+            box-shadow: none;
         }
 
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th, td { padding: 12px 14px; font-size: 12px; }
-        th { background: #f8fafc; color: var(--text-muted); font-weight: 700; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-color); }
-        td { border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+        th, td { padding: 12px 16px; font-size: 13px; }
+        th { background: #f8fafc; color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-color); }
+        td { border-bottom: 1px solid var(--border-color); vertical-align: middle; color: var(--text-main); }
         tr:last-child td { border-bottom: none; }
         
         .badge {
             display: inline-block;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
         }
-        .badge-in { background: #dcfce7; color: #15803d; }
-        .badge-out { background: #fef3c7; color: #b45309; }
-        .badge-off { background: #ffe4e6; color: #be123c; }
+        .badge-in { background: #d1fae5; color: #065f46; }
+        .badge-out { background: #fef3c7; color: #92400e; }
+        .badge-off { background: #fee2e2; color: #991b1b; }
 
         .btn-lihat {
             display: inline-block;
             background: var(--primary-light);
             color: var(--primary);
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
-            font-size: 10px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 600;
             text-decoration: none;
+            border: 1px solid #bfdbfe;
         }
 
         .spinner {
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             border-top: 2px solid #ffffff;
             width: 16px;
@@ -568,39 +549,40 @@
 
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.5); 
-            backdrop-filter: blur(2px);
+            background: rgba(15, 23, 42, 0.4); 
+            backdrop-filter: blur(4px);
             display: flex; justify-content: center;
             align-items: center; z-index: 1000;
             padding: 16px;
         }
         .modal-box {
-            background: white; padding: 20px; border-radius: var(--radius-lg);
-            width: 100%; max-width: 300px; text-align: center;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            background: white; padding: 24px; border-radius: var(--radius-lg);
+            width: 100%; max-width: 340px; text-align: left;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
         }
 
         .btn-disabled {
-            background-color: #e2e8f0 !important;
-            border-color: #cbd5e1 !important;
+            background-color: #f1f5f9 !important;
+            border-color: #e2e8f0 !important;
             color: #94a3b8 !important;
             box-shadow: none !important;
             cursor: not-allowed !important;
             pointer-events: none;
-            opacity: 0.9;
+            opacity: 1;
         }
         
         .btn-disabled .absen-icon {
-            background-color: #cbd5e1 !important;
-            color: #94a3b8 !important;
+            background-color: #e2e8f0 !important;
+            color: #cbd5e1 !important;
         }
 
         .btn-disabled .absen-title {
-            color: #64748b !important;
+            color: #94a3b8 !important;
         }
 
         .btn-disabled .info-jam-absen {
-            color: #94a3b8 !important;
+            color: #cbd5e1 !important;
         }
     </style>
 </head>
@@ -611,28 +593,28 @@
         <div class="corporate-brand">
             <img src="logo.png" class="corporate-logo" alt="Logo">
             <div>
-                <div class="corporate-title-text">UFO KEBONSARI MALANG</div>
-                <div class="corporate-subtitle">Sistem Absensi Karyawan</div>
+                <div class="corporate-title-text">Toko Maju Jaya</div>
+                <div class="corporate-subtitle">Human Resources Portal</div>
             </div>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 4px 10px; border-radius: 6px;">
-            PORTAL RESMI
+        <div style="font-size: 11px; font-weight: 600; color: var(--primary); background: var(--primary-light); padding: 5px 12px; border-radius: 6px; border: 1px solid #bfdbfe;">
+            Enterprise System
         </div>
     </header>
 
-    <!-- KONTEN UTAMA APLIKASI (DIBUNGKUS APPCONTAINER UNTUK PROTEKSI LISENSI) -->
+    <!-- KONTEN UTAMA APLIKASI -->
     <div id="appContainer" style="display: none;">
 
             <!-- VIEW LOGIN -->
             <div id="view-login" class="box">
                 <div class="logo-container">
-                    <img src="logo.png" class="logo-toko" alt="Logo UFO">
+                    <img src="logo.png" class="logo-toko" alt="Logo Toko">
                 </div>
-                <h2>Toko Maju Jaya</h2>
-                <div class="sub-title">Sistem Absensi Digital Karyawan</div>
+                <h2>Masuk Portal</h2>
+                <div class="sub-title">Silakan masukkan kredensial akun karyawan Anda</div>
                  
                 <div class="input-group">
-                    <label for="user">Username</label>
+                    <label for="user">Username / NIK</label>
                     <input type="text" id="user" placeholder="Masukkan username">
                 </div>
                  
@@ -641,19 +623,23 @@
                     <input type="password" id="pass" placeholder="••••••••">
                 </div>
                  
-                <button class="btn-primary" id="btn-login" onclick="prosesLogin()">
-                    <span id="text-login">Login</span>
+                <button class="btn-primary" id="btn-login" onclick="prosesLogin()" style="margin-top: 8px;">
+                    <span id="text-login">Masuk Sistem</span>
                     <div class="spinner" id="login-spinner"></div>
                 </button>
             </div>
 
             <!-- VIEW DASHBOARD -->
             <div id="view-dashboard" class="box" style="display:none;">
-                <div class="logo-container">
-                    <img src="logo.png" class="logo-toko" alt="Logo UFO">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                    <div class="logo-container" style="margin-bottom: 0; width: 48px; height: 48px;">
+                        <img src="logo.png" class="logo-toko" alt="Logo Toko">
+                    </div>
+                    <div>
+                        <h2 style="font-size: 16px;">Halo, <span id="nama-user" style="color: var(--primary);"></span></h2>
+                        <div style="font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 2px;">Dashboard Kehadiran Karyawan</div>
+                    </div>
                 </div>
-                <h2>Halo, <span id="nama-user" style="color: var(--primary);"></span>!</h2>
-                <div class="sub-title">Selamat Bekerja & Tetap Semangat</div>
 
                 <div class="time-wrapper">
                     <div class="jam-digital" id="live-jam">00:00:00</div>
@@ -686,18 +672,22 @@
                 <div class="btn-grid">
                     <div class="absen-card-group">
                         <button class="absen-card card-in" id="btn-checkin" onclick="bukaPetaFullscreen('Check In')">
-                            <div class="absen-icon">
-                                <svg viewBox="0 0 24 24"><path d="M15 15l-3 3m0 0l-3-3m3 3V10M4 17v1a3 3 0 003 3h10a3 3 0 003-3v-1M4 7v-1a3 3 0 013-3h10a3 3 0 013 3v1"/></svg>
+                            <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+                                <span class="absen-title">Check In</span>
+                                <div class="absen-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M15 15l-3 3m0 0l-3-3m3 3V10M4 17v1a3 3 0 003 3h10a3 3 0 003-3v-1M4 7v-1a3 3 0 013-3h10a3 3 0 013 3v1"/></svg>
+                                </div>
                             </div>
-                            <span class="absen-title">Check In</span>
                             <span id="time-checkin" class="info-jam-absen">--:--</span>
                         </button>
 
                         <button class="absen-card card-out" id="btn-checkout" onclick="bukaPetaFullscreen('Check Out')">
-                            <div class="absen-icon">
-                                <svg viewBox="0 0 24 24"><path d="M9 11l3-3m0 0l3 3m-3-3v8M4 17v1a3 3 0 003 3h10a3 3 0 003-3v-1M4 7v-1a3 3 0 013-3h10a3 3 0 013 3v1"/></svg>
+                            <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+                                <span class="absen-title">Check Out</span>
+                                <div class="absen-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M9 11l3-3m0 0l3 3m-3-3v8M4 17v1a3 3 0 003 3h10a3 3 0 003-3v-1M4 7v-1a3 3 0 013-3h10a3 3 0 013 3v1"/></svg>
+                                </div>
                             </div>
-                            <span class="absen-title">Check Out</span>
                             <span id="time-checkout" class="info-jam-absen">--:--</span>
                         </button>
                     </div>
@@ -707,29 +697,31 @@
                             <div class="absen-icon">
                                 <svg viewBox="0 0 24 24"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             </div>
-                            <span class="absen-title" id="text-off">Ambil Hari OFF</span>
-                            <span id="time-off" class="info-jam-absen"></span>
-                            <div class="spinner" id="off-spinner" style="margin-left: 4px;"></div>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; text-align: left;">
+                                <span class="absen-title" id="text-off">Ambil Hari OFF</span>
+                                <span id="time-off" class="info-jam-absen"></span>
+                            </div>
+                            <div class="spinner" id="off-spinner" style="margin-left: auto;"></div>
                         </button>
                     </div>
                 </div>
 
-                <button class="btn-logout" onclick="logout()">Logout</button>
+                <button class="btn-logout" onclick="logout()">Keluar Akun</button>
             </div>
 
             <!-- VIEW MAP FULLSCREEN -->
             <div id="view-map-fullscreen">
                 <div class="map-header">
-                    <button onclick="tutupPetaFullscreen()" style="width: auto; padding: 6px 10px; background: #f8fafc; color: var(--text-muted); border-radius: 6px; box-shadow: none;">← Kembali</button>
+                    <button onclick="tutupPetaFullscreen()" style="width: auto; padding: 6px 12px; background: #f8fafc; color: var(--text-muted); border-radius: 6px; box-shadow: none; border: 1px solid var(--border-color);">← Kembali</button>
                     <h3 id="judul-map-fullscreen">Verifikasi Lokasi</h3>
-                    <div style="width: 50px;"></div>
+                    <div style="width: 70px;"></div>
                 </div>
                 
                 <div id="info-jarak-peta">
-                    <div style="background: #e2e8f0; color: #475569; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">⏳</div>
+                    <div style="background: #f1f5f9; color: #475569; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">⏳</div>
                     <div>
-                        <div style="color: var(--text-main); font-size: 12px; font-weight: 800;">Memeriksa lokasi GPS...</div>
-                        <div style="color: var(--text-muted); font-size: 10px; font-weight: 600; margin-top: 1px;">Menghitung jarak ke titik toko.</div>
+                        <div style="color: var(--text-main); font-size: 13px; font-weight: 700;">Memeriksa lokasi GPS...</div>
+                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 1px;">Menghitung jarak ke titik toko.</div>
                     </div>
                 </div>
 
@@ -742,18 +734,18 @@
             <!-- VIEW KAMERA -->
             <div id="view-kamera" class="box" style="display:none;">
                 <div class="logo-container">
-                    <img src="logo.png" class="logo-toko" alt="Logo UFO">
+                    <img src="logo.png" class="logo-toko" alt="Logo Toko">
                 </div>
                 <h2 id="judul-kamera">Verifikasi Wajah</h2>
-                <div class="sub-title">Pastikan wajah Anda berada di dalam bingkai</div>
+                <div class="sub-title">Pastikan wajah Anda berada di dalam bingkai kamera</div>
                  
                 <video id="kamera" autoplay playsinline></video>
                  
-                <button class="btn-kembali" id="btnGantiKamera" onclick="gantiKamera()" style="margin-top: 10px;">
-                    🔄 Putar Kamera (Depan/Belakang)
+                <button class="btn-kembali" id="btnGantiKamera" onclick="gantiKamera()" style="margin-top: 12px;">
+                    🔄 Putar Kamera (Depan / Belakang)
                 </button>
                  
-                <button class="btn-absen-kirim" id="btnAbsen" onclick="prosesAbsen()">
+                <button class="btn-primary btn-absen-kirim" id="btnAbsen" onclick="prosesAbsen()">
                     <span id="text-absen-kirim">Kirim Absensi Sekarang</span>
                     <div class="spinner" id="absen-spinner"></div>
                 </button>
@@ -761,49 +753,49 @@
 
             <!-- VIEW ADMIN -->
             <div id="view-admin" class="box box-admin" style="display:none;">
-                <div class="admin-header" style="display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 16px; text-align: left;">
-                    <div style="width: 100%;">
-                        <h2 style="text-align: left; font-size: 18px; color: var(--primary);">UFO KEBONSARI MALANG</h2>
-                        <div style="color: var(--text-muted); font-size: 12px; margin-top: 2px;">Panel Rekapitulasi Absensi Karyawan</div>
+                <div class="admin-header" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 20px; text-align: left;">
+                    <div>
+                        <h2 style="font-size: 18px; color: var(--primary);">Panel Administrator HRIS</h2>
+                        <div style="color: var(--text-muted); font-size: 12px; margin-top: 2px;">Rekapitulasi Kehadiran & Laporan Karyawan</div>
                     </div>
-                    <div style="display: flex; gap: 8px; width: 100%;">
-                        <button onclick="downloadCSV()" style="width: auto; background: #10b981; color: white; padding: 8px 14px; font-size: 11px; border-radius: 6px;">
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="downloadCSV()" style="width: auto; background: var(--success); color: white; padding: 8px 14px; font-size: 12px; border-radius: 6px; border-color: var(--success);">
                             📥 Unduh Laporan (CSV)
                         </button>
-                        <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; padding: 8px 14px;">
-                            KELUAR DARI SISTEM
+                        <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; padding: 8px 14px; font-size: 12px;">
+                            Keluar Sistem
                         </button>
                     </div>
                 </div>
 
-                <div style="background: #f8fafc; padding: 14px; border-radius: var(--radius-md); margin-bottom: 16px; border: 1px solid var(--border-color); text-align: left;">
-                    <label style="font-weight: 700; display: block; margin-bottom: 6px; font-size: 10px; color: var(--text-muted); text-transform: uppercase;">
-                        🔍 Filter Karyawan:
+                <div style="background: #f8fafc; padding: 16px; border-radius: var(--radius-md); margin-bottom: 20px; border: 1px solid var(--border-color); text-align: left;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 6px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">
+                        Filter Karyawan:
                     </label>
-                    <select id="filter-nama-admin" onchange="filterLaporanAdmin()" style="width: 100%; max-width: 300px;">
+                    <select id="filter-nama-admin" onchange="filterLaporanAdmin()" style="width: 100%; max-width: 320px;">
                         <option value="SEMUA">-- Tampilkan Semua Karyawan --</option>
                     </select>
                     
-                    <div id="periode-admin-text" style="display: none; margin-top: 10px; font-size: 11px; color: var(--primary); font-weight: 700; background: var(--primary-light); padding: 5px 10px; border-radius: 6px; display: inline-block;">
+                    <div id="periode-admin-text" style="display: none; margin-top: 12px; font-size: 12px; color: var(--primary); font-weight: 600; background: var(--primary-light); padding: 6px 12px; border-radius: 6px; display: inline-block; border: 1px solid #bfdbfe;">
                         Periode: -
                     </div>
                     
-                    <div id="stat-karyawan-admin" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px;">
-                        <div style="background: white; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 10px; font-weight: 600; color: var(--text-muted);">Hadir</div>
-                            <strong id="admin-stat-masuk" style="font-size: 16px; font-weight: 800; color: #10b981;">0</strong>
+                    <div id="stat-karyawan-admin" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px;">
+                        <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 11px; font-weight: 500; color: var(--text-muted);">Hadir</div>
+                            <strong id="admin-stat-masuk" style="font-size: 18px; font-weight: 700; color: var(--success);">0</strong>
                         </div>
-                        <div style="background: white; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 10px; font-weight: 600; color: var(--text-muted);">Terlambat</div>
-                            <strong id="admin-stat-terlambat" style="font-size: 16px; font-weight: 800; color: #ef4444;">0</strong>
+                        <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 11px; font-weight: 500; color: var(--text-muted);">Terlambat</div>
+                            <strong id="admin-stat-terlambat" style="font-size: 18px; font-weight: 700; color: var(--danger);">0</strong>
                         </div>
-                        <div style="background: white; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 10px; font-weight: 600; color: var(--text-muted);">OFF</div>
-                            <strong id="admin-stat-off" style="font-size: 16px; font-weight: 800; color: #dc2626;">0</strong>
+                        <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 11px; font-weight: 500; color: var(--text-muted);">OFF</div>
+                            <strong id="admin-stat-off" style="font-size: 18px; font-weight: 700; color: var(--danger);">0</strong>
                         </div>
-                        <div style="background: white; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 10px; font-weight: 600; color: var(--text-muted);">PS</div>
-                            <strong id="admin-stat-ps" style="font-size: 16px; font-weight: 800; color: #f59e0b;">0</strong>
+                        <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 11px; font-weight: 500; color: var(--text-muted);">PS</div>
+                            <strong id="admin-stat-ps" style="font-size: 18px; font-weight: 700; color: var(--warning);">0</strong>
                         </div>
                     </div>
                 </div>
@@ -813,15 +805,15 @@
                         <thead>
                             <tr>
                                 <th>Waktu</th>
-                                <th>Nama</th>
+                                <th>Nama Karyawan</th>
                                 <th style="text-align: center;">Status</th>
                                 <th>Koordinat (GPS)</th>
-                                <th style="text-align: center;">Foto Selfie</th>
+                                <th style="text-align: center;">Foto Bukti</th>
                             </tr>
                         </thead>
                         <tbody id="isi-tabel">
                             <tr>
-                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 24px; font-style: italic;">Sedang memuat data laporan...</td>
+                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 32px; font-style: italic;">Sedang memuat data laporan...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -831,18 +823,18 @@
     </div>
 
     <!-- LAYAR PESAN JIKA LISENSI TIDAK AKTIF -->
-    <div id="errorContainer" style="display: none; min-height: 100vh; align-items: center; justify-content: center; text-align: center; font-family: sans-serif; background: #020617; color: white; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
-        <div style="background: #0f172a; border: 2px solid #334155; padding: 24px; border-radius: 16px; max-width: 380px; width: 100%; margin: auto;">
+    <div id="errorContainer" style="display: none; min-height: 100vh; align-items: center; justify-content: center; text-align: center; font-family: sans-serif; background: #0f172a; color: white; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
+        <div style="background: #1e293b; border: 1px solid #334155; padding: 28px; border-radius: 12px; max-width: 400px; width: 100%; margin: auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);">
             <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #ef4444;">Akses Tidak Aktif</h2>
-            <p style="font-size: 13px; color: #cbd5e1;">Layanan absen untuk toko ini sedang ditangguhkan atau masa aktifnya habis. Silakan hubungi Administrator.</p>
+            <p style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Layanan absen untuk toko ini sedang ditangguhkan atau masa aktifnya habis. Silakan hubungi Administrator IT.</p>
         </div>
     </div>
 
     <!-- MODAL NOTIFIKASI -->
     <div id="modal-notif" class="modal-overlay" style="display:none;">
         <div class="modal-box" id="modal-box">
-            <h3 id="modal-title" style="margin-top:0; font-size: 16px; color: var(--primary);">INFO</h3>
-            <div id="modal-pesan" style="font-size: 13px; color: var(--text-main); margin: 10px 0;">Pesan di sini</div>
+            <h3 id="modal-title" style="margin-top:0; font-size: 16px; font-weight: 700; color: var(--text-main);">INFORMASI</h3>
+            <div id="modal-pesan" style="font-size: 13px; color: var(--text-muted); margin: 12px 0 20px 0; line-height: 1.5;">Pesan di sini</div>
             <button class="btn-primary" id="btn-modal-tutup" onclick="tutupModal()">TUTUP</button>
         </div>
     </div> 
@@ -920,11 +912,11 @@
                     }).addTo(fsMapInstance);
 
                     fsMarkerToko = L.marker([TOKO_LAT, TOKO_LNG]).addTo(fsMapInstance)
-                        .bindPopup("<b>UFO Kebonsari</b><br>Lokasi Toko").openPopup();
+                        .bindPopup("<b>Toko Maju Jaya</b><br>Lokasi Kantor").openPopup();
 
                     fsCircleRadius = L.circle([TOKO_LAT, TOKO_LNG], {
-                        color: '#4f46e5',
-                        fillColor: '#4f46e5',
+                        color: '#2563eb',
+                        fillColor: '#2563eb',
                         fillOpacity: 0.15,
                         radius: RADIUS_MAKSIMAL
                     }).addTo(fsMapInstance);
@@ -966,10 +958,10 @@
                         if (infoJarak) {
                             infoJarak.style.borderColor = "#ef4444";
                             infoJarak.innerHTML = `
-                                <div style="background: #fee2e2; color: #b91c1c; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✕</div>
+                                <div style="background: #fee2e2; color: #b91c1c; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✕</div>
                                 <div>
-                                    <div style="color: #b91c1c; font-size: 12px; font-weight: 800;">GPS Gagal Dibaca</div>
-                                    <div style="color: var(--text-muted); font-size: 10px; font-weight: 600; margin-top: 1px;">Aktifkan izin lokasi pada perangkat Anda.</div>
+                                    <div style="color: #b91c1c; font-size: 13px; font-weight: 700;">GPS Gagal Dibaca</div>
+                                    <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 1px;">Aktifkan izin lokasi pada perangkat Anda.</div>
                                 </div>
                             `;
                         }
@@ -988,7 +980,7 @@
                 fsMarkerUser = L.marker([userLat, userLng], {
                     icon: L.divIcon({
                         className: 'user-marker',
-                        html: '<div style="background: #4f46e5; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 6px rgba(0,0,0,0.4);"></div>'
+                        html: '<div style="background: #2563eb; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 6px rgba(0,0,0,0.3);"></div>'
                     })
                 }).addTo(fsMapInstance).bindPopup("Lokasi Anda Saat Ini");
             } else {
@@ -1003,12 +995,12 @@
 
             if (jarak <= RADIUS_MAKSIMAL) {
                 isGpsValid = true;
-                infoJarak.style.borderColor = "#10b981";
+                infoJarak.style.borderColor = "#059669";
                 infoJarak.innerHTML = `
-                    <div style="background: #dcfce7; color: #15803d; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✓</div>
+                    <div style="background: #d1fae5; color: #065f46; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✓</div>
                     <div>
-                        <div style="color: #15803d; font-size: 12px; font-weight: 800;">Anda berada dalam radius pekerjaan</div>
-                        <div style="color: var(--text-muted); font-size: 10px; font-weight: 600; margin-top: 1px;">Jarak ${jarak} meter dari titik toko.</div>
+                        <div style="color: #065f46; font-size: 13px; font-weight: 700;">Dalam Radius Kantor</div>
+                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 1px;">Jarak ${jarak} meter dari titik kantor.</div>
                     </div>
                 `;
                 btnLanjut.disabled = false;
@@ -1017,10 +1009,10 @@
                 isGpsValid = false;
                 infoJarak.style.borderColor = "#ef4444";
                 infoJarak.innerHTML = `
-                    <div style="background: #fee2e2; color: #b91c1c; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✕</div>
+                    <div style="background: #fee2e2; color: #b91c1c; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✕</div>
                     <div>
-                        <div style="color: #b91c1c; font-size: 12px; font-weight: 800;">Di luar area pekerjaan</div>
-                        <div style="color: var(--text-muted); font-size: 10px; font-weight: 600; margin-top: 1px;">Terlalu jauh (+${jarak}m). Mendekatlah!</div>
+                        <div style="color: #b91c1c; font-size: 13px; font-weight: 700;">Di Luar Area Kantor</div>
+                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 1px;">Terlalu jauh (+${jarak}m). Mendekatlah!</div>
                     </div>
                 `;
                 btnLanjut.disabled = true;
@@ -1076,8 +1068,8 @@
                 }
                  
                 labelPeriodeKaryawan.innerHTML = `
-                    <span style="color: #64748b; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px;">Periode Absensi</span>
-                    <strong style="color: var(--primary); font-size: 12px; font-weight: 800; display: block;">26 ${blnMulai} ${thnMulai} - 25 ${blnSelesai} ${thnSelesai}</strong>
+                    <span style="color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px;">Periode Absensi</span>
+                    <strong style="color: var(--primary); font-size: 13px; font-weight: 700; display: block;">26 ${blnMulai} ${thnMulai} - 25 ${blnSelesai} ${thnSelesai}</strong>
                 `;
             }
         }
@@ -1196,7 +1188,7 @@
                     btn.classList.remove('btn-disabled');
                 }
                 if(spinner) spinner.style.display = 'none';
-                if(textLogin) textLogin.innerText = "Login";
+                if(textLogin) textLogin.innerText = "Masuk Sistem";
                     
                 if(data.status === "sukses") {
                     namaLogin = data.nama;
@@ -1232,7 +1224,7 @@
                     btn.classList.remove('btn-disabled');
                 }
                 if(spinner) spinner.style.display = 'none';
-                if(textLogin) textLogin.innerText = "Login";
+                if(textLogin) textLogin.innerText = "Masuk Sistem";
                 tampilkanPesan("Gagal terhubung ke server. Pastikan koneksi internet aktif.", "info");
                 console.error("Error Fetch:", err);
             });
@@ -1360,7 +1352,7 @@
             const tabelBody = document.getElementById('isi-tabel');
             if(!tabelBody) return;
              
-            tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 24px;'>Memuat data laporan...</td></tr>";
+            tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 32px;'>Memuat data laporan...</td></tr>";
                  
             fetch(SCRIPT_URL, { method: 'POST', redirect: 'follow', body: JSON.stringify({ aksi: "get_laporan" }) })
             .then(res => res.json())
@@ -1385,7 +1377,7 @@
                 renderTabelAdmin("SEMUA");
             })
             .catch(err => {
-                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 24px; color: var(--danger);'>Gagal memuat data. Periksa koneksi internet Anda.</td></tr>";
+                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 32px; color: var(--danger);'>Gagal memuat data. Periksa koneksi internet Anda.</td></tr>";
                 console.error(err);
             });
         }
@@ -1402,7 +1394,7 @@
             tabelBody.innerHTML = "";
              
             if (!dataLaporanGlobal || dataLaporanGlobal.length <= 1) {
-                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 24px;'>Belum ada data absensi.</td></tr>";
+                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 32px;'>Belum ada data absensi.</td></tr>";
                 return;
             }
 
@@ -1457,12 +1449,12 @@
                     let koordinat = (row[3] && row[4]) ? `${parseFloat(row[3]).toFixed(5)}, ${parseFloat(row[4]).toFixed(5)}` : '-';
 
                     tr.innerHTML = `
-                        <td style="padding: 10px 12px; font-weight: 500; font-size: 12px; white-space: nowrap;">${kolomWaktu || '-'}</td>
-                        <td style="padding: 10px 12px; font-weight: bold; font-size: 12px;">${kolomNama || '-'}</td>
-                        <td style="padding: 10px 12px; text-align: center;"><span class="badge ${statusBadgeClass}">${kolomStatus || '-'}</span></td>
-                        <td style="padding: 10px 12px; font-family: monospace; font-size: 11px; color: var(--text-muted);">${koordinat}</td>
-                        <td style="padding: 10px 12px; text-align: center;">
-                            ${row[5] && row[5] !== '-' ? `<a href="${row[5]}" target="_blank" class="btn-lihat">Lihat Foto</a>` : '<span style="color: #cbd5e1; font-size: 11px;">Tanpa Foto</span>'}
+                        <td style="padding: 12px 16px; font-weight: 500; font-size: 13px; white-space: nowrap;">${kolomWaktu || '-'}</td>
+                        <td style="padding: 12px 16px; font-weight: 600; font-size: 13px;">${kolomNama || '-'}</td>
+                        <td style="padding: 12px 16px; text-align: center;"><span class="badge ${statusBadgeClass}">${kolomStatus || '-'}</span></td>
+                        <td style="padding: 12px 16px; font-family: monospace; font-size: 12px; color: var(--text-muted);">${koordinat}</td>
+                        <td style="padding: 12px 16px; text-align: center;">
+                            ${row[5] && row[5] !== '-' ? `<a href="${row[5]}" target="_blank" class="btn-lihat">Lihat Foto</a>` : '<span style="color: #cbd5e1; font-size: 12px;">Tanpa Foto</span>'}
                         </td>
                     `;
                     tabelBody.appendChild(tr);
@@ -1646,10 +1638,10 @@
         function prosesAbsenOff() {
             document.getElementById('modal-title').innerText = 'Konfirmasi Libur';
             document.getElementById('modal-pesan').innerHTML = `
-                <p style="margin-bottom: 10px; font-weight: 500;">Apakah Anda yakin ingin mengambil hari OFF (Libur) hari ini?</p>
-                <div style="display: flex; gap: 8px; margin-top: 12px;">
-                    <button onclick="eksekusiAbsenOff()" style="background: var(--danger); color: white; border: none; padding: 10px; border-radius: 8px; flex: 1; font-weight: bold; cursor: pointer;">YA, LIBUR</button>
-                    <button onclick="tutupModal()" style="background: #e2e8f0; color: #334155; border: none; padding: 10px; border-radius: 8px; flex: 1; font-weight: bold; cursor: pointer;">BATAL</button>
+                <p style="margin-bottom: 12px; font-weight: 500;">Apakah Anda yakin ingin mengambil hari OFF (Libur) hari ini?</p>
+                <div style="display: flex; gap: 10px; margin-top: 16px;">
+                    <button onclick="eksekusiAbsenOff()" style="background: var(--danger); color: white; border: none; padding: 10px; border-radius: 6px; flex: 1; font-weight: 600; cursor: pointer;">YA, LIBUR</button>
+                    <button onclick="tutupModal()" style="background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-color); padding: 10px; border-radius: 6px; flex: 1; font-weight: 600; cursor: pointer;">BATAL</button>
                 </div>
             `;
              
@@ -1932,7 +1924,7 @@
              
             const tgl = new Date();
             const formatTanggal = `${tgl.getFullYear()}${(tgl.getMonth()+1).toString().padStart(2,'0')}${tgl.getDate().toString().padStart(2,'0')}`;
-            const namaFile = `Rekap_Absen_UFO_${formatTanggal}.csv`;
+            const namaFile = `Rekap_Absen_TokoMajuJaya_${formatTanggal}.csv`;
              
             link.setAttribute("href", url);
             link.setAttribute("download", namaFile);
