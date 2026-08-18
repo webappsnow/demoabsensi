@@ -532,7 +532,7 @@
             margin-top: 10px;
         }
 
-        /* --- PERBAIKAN TAMPILAN KAMERA MENJADI FULL & LUAS --- */
+        /* --- TAMPILAN KAMERA FULL & LUAS --- */
         #kamera { 
             width: 100% !important; 
             height: 460px !important; 
@@ -1188,7 +1188,7 @@
             const btnLanjut = document.getElementById('btn-lanjut-kamera');
 
             // --- JIKA MODE DEMO (RADIUS OFF / DIMATIKAN) ---
-            if (typeof isRadiusEnforced !== 'undefined' && !isRadiusEnforced) {
+            if (!isRadiusEnforced) {
                 isGpsValid = true;
                 infoJarak.style.borderColor = "#0284c7";
                 infoJarak.innerHTML = `
@@ -1242,7 +1242,7 @@
         }
 
         function lanjutKeKamera() {
-            if (!isGpsValid) {
+            if (isRadiusEnforced && !isGpsValid) {
                 tampilkanPesan("Anda masih di luar radius toko, tidak bisa melanjutkan.", "info");
                 return;
             }
@@ -2023,13 +2023,12 @@
         }
 
        function prosesAbsen() {
-            if(lat === 0 && lng === 0) { 
-                tampilkanPesan("Lokasi GPS belum terbaca...", "info"); 
-                return;
-            }
-
-            // --- VALIDASI JARAK GPS BERDASARKAN STATUS TOMBOL ON/OFF RADIUS ---
-            if (typeof isRadiusEnforced === 'undefined' || isRadiusEnforced) {
+            // Jika mode radius aktif, pastikan GPS sudah terbaca & di dalam radius
+            if (isRadiusEnforced) {
+                if(lat === 0 && lng === 0) { 
+                    tampilkanPesan("Lokasi GPS belum terbaca...", "info"); 
+                    return;
+                }
                 var jarak = hitungJarak(lat, lng, TOKO_LAT, TOKO_LNG);
                 if (jarak > RADIUS_MAKSIMAL) {
                     tampilkanPesan("Anda berada di luar radius toko.", "info");
