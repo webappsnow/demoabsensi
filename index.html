@@ -290,7 +290,7 @@
             text-transform: none;
         }
 
-        /* --- STATUS BAR FLEKSIBEL AMAN DARI POTONGAN --- */
+        /* --- STATUS BAR AMAN ANTI-POTONG --- */
         #status-log {
             font-size: 13px !important;
             color: var(--text-main) !important;
@@ -405,7 +405,7 @@
             gap: 12px;
         }
 
-        /* --- KARTU ABSENSI AMAN ANTI-KEPOTONG --- */
+        /* --- KARTU ABSENSI AMAN ANTI-POTONG --- */
         .absen-card {
             border-radius: var(--radius-md);
             padding: 14px 16px;
@@ -669,6 +669,30 @@
             }
             .absen-card {
                 padding: 12px 14px;
+                flex-direction: column;
+                align-items: flex-start;
+                height: auto;
+                gap: 6px;
+            }
+            .absen-card > div {
+                width: 100%;
+            }
+            .info-jam-absen {
+                margin-left: 38px !important;
+                font-size: 11px;
+            }
+            /* Tombol OFF khusus HP menjadi vertikal rapi ke bawah */
+            #btn-off {
+                flex-direction: column;
+                align-items: flex-start;
+                height: auto;
+                gap: 6px;
+            }
+            #btn-off > div {
+                width: 100%;
+            }
+            #btn-off .info-jam-absen {
+                margin-left: 38px !important;
             }
         }
     </style>
