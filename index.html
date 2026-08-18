@@ -532,14 +532,14 @@
             margin-top: 10px;
         }
 
+        /* --- PERBAIKAN TAMPILAN KAMERA MENJADI FULL & LUAS --- */
         #kamera { 
-            width: 100%; 
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
+            width: 100% !important; 
+            height: 460px !important; 
+            object-fit: cover !important;
             border-radius: var(--radius-md); 
             background: #0f172a; 
             border: 1px solid var(--border-color);
-            max-height: 380px;
         }
 
         .table-container {
@@ -674,6 +674,7 @@
             #appContainer { padding: 20px 16px; max-width: 100% !important; margin: 0 auto !important; }
             .stat-box { grid-template-columns: repeat(2, 1fr); }
             .absen-card-group { grid-template-columns: 1fr; }
+            #kamera { height: 380px !important; }
         }
     </style>
 </head>
@@ -841,7 +842,7 @@
                 </div>
 
                 <!-- VIEW KAMERA -->
-                <div id="view-kamera" class="box" style="max-width: 540px; margin: auto; display:none;">
+                <div id="view-kamera" class="box" style="max-width: 580px; margin: auto; display:none;">
                     <div class="logo-container">
                         <img src="logo.png" class="logo-toko" alt="Logo Toko">
                     </div>
