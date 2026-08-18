@@ -28,11 +28,12 @@
             --sidebar-bg: #0f172a;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --border-color: #e2e8f0;
+            --border-color: #cbd5e1;
             --radius-lg: 16px;
             --radius-md: 10px;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.08);
+            --shadow-elevated: 0 10px 15px -3px rgba(15, 23, 42, 0.06), 0 4px 6px -4px rgba(15, 23, 42, 0.06);
         }
 
         * {
@@ -175,7 +176,7 @@
             background: var(--card-bg); 
             padding: 36px; 
             border-radius: var(--radius-lg); 
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-elevated);
             border: 1px solid var(--border-color);
             text-align: left;
         }
@@ -290,6 +291,7 @@
             text-transform: none;
         }
 
+        /* --- STATUS BAR MENARIK (GAYA CHIP ELEGAN) --- */
         #status-log {
             font-size: 13px !important;
             color: var(--text-main) !important;
@@ -298,12 +300,12 @@
             padding: 16px 20px !important;
             border-radius: var(--radius-md) !important;
             margin-bottom: 20px !important;
-            font-weight: 500 !important;
+            font-weight: 600 !important;
             text-align: left !important;
-            line-height: 1.6 !important;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-sm);
         }
 
         #view-map-fullscreen {
@@ -401,7 +403,7 @@
             gap: 12px;
         }
 
-        /* --- UKURAN & BENTUK TOMBOL KONSISTEN (SAMA DENGAN KELUAR SISTEM) --- */
+        /* --- TOMBOL KOKOH & MENONJOL (EFEK ELEVASI & SHADOW) --- */
         .absen-card {
             border-radius: var(--radius-md);
             padding: 14px 20px;
@@ -411,21 +413,23 @@
             justify-content: space-between;
             gap: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: var(--shadow-sm);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
             width: 100%;
             border: 1px solid var(--border-color);
             background: #ffffff;
-            height: 50px;
+            height: 52px;
         }
 
         .absen-card:hover {
             border-color: var(--text-main);
-            background: #f8fafc;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 12px -2px rgba(15, 23, 42, 0.12);
         }
 
         .absen-card:active {
-            transform: scale(0.98);
+            transform: translateY(1px);
+            box-shadow: var(--shadow-sm);
         }
 
         .absen-icon {
@@ -443,7 +447,7 @@
         .absen-icon svg {
             width: 16px;
             height: 16px;
-            stroke-width: 2;
+            stroke-width: 2.2;
             fill: none;
             stroke: currentColor;
             stroke-linecap: round;
@@ -470,23 +474,24 @@
 
         button { 
             width: 100%; 
-            height: 50px;
+            height: 52px;
             padding: 0 20px; 
             border-radius: var(--radius-md); 
             font-size: 13px; 
             font-weight: 700; 
             cursor: pointer; 
             border: 1px solid transparent;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
         }
 
         button:active {
-            transform: scale(0.98);
+            transform: translateY(1px);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-primary {
@@ -497,18 +502,21 @@
 
         .btn-primary:hover {
             background: var(--primary-hover);
+            box-shadow: 0 6px 12px -2px rgba(15, 23, 42, 0.2);
         }
 
+        /* --- TOMBOL KELUAR SISTEM DIBUAT KOKOH & MENONJOL --- */
         .btn-logout { 
             background: #ffffff !important; 
             color: var(--danger) !important; 
             border: 1px solid var(--border-color) !important;
-            box-shadow: var(--shadow-sm) !important;
+            box-shadow: var(--shadow-md) !important;
         }
 
         .btn-logout:hover {
-            background: #f8fafc !important;
-            border-color: #cbd5e1 !important;
+            background: #fef2f2 !important;
+            border-color: #fecaca !important;
+            box-shadow: 0 6px 12px -2px rgba(220, 38, 38, 0.1) !important;
         }
 
         .btn-kembali {
@@ -726,7 +734,10 @@
                         </div>
                     </div>
 
-                    <div id="status-log">⏳ Sinkronisasi data absensi...</div>
+                    <div id="status-log">
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #059669; display: inline-block; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);"></div>
+                        <span id="status-log-text">Sinkronisasi data absensi...</span>
+                    </div>
                  
                     <div class="btn-grid">
                         <div class="absen-card-group">
@@ -944,6 +955,11 @@
         let fsMarkerToko = null;
         let fsMarkerUser = null;
         let fsCircleRadius = null;
+
+        function setStatusLogText(htmlText) {
+            const statusLogText = document.getElementById('status-log-text');
+            if (statusLogText) statusLogText.innerHTML = htmlText;
+        }
 
         function bukaPetaFullscreen(tipe) {
             tipeAbsen = tipe;
@@ -1261,8 +1277,7 @@
                         isDataLoaded = false;
                         if (typeof kunciTombolKerja === "function") kunciTombolKerja(true);
                         
-                        let statusLog = document.getElementById('status-log');
-                        if (statusLog) statusLog.innerHTML = "⏳ Menghubungkan & sinkronisasi data server...";
+                        setStatusLogText("Menghubungkan & sinkronisasi data server...");
 
                         if (typeof sinkronisasiFullServer === "function") sinkronisasiFullServer();
                         if (typeof sinkronisasiWaktuServer === "function") sinkronisasiWaktuServer();
@@ -1628,9 +1643,9 @@
                 btnOff.disabled = true; btnOff.classList.add('btn-disabled');
 
                 if (sudahOff) {
-                    document.getElementById('status-log').innerText = "Status hari ini: OFF (Libur).";
+                    setStatusLogText("Status hari ini: OFF (Libur).");
                 } else {
-                    document.getElementById('status-log').innerText = "Anda sudah selesai bekerja hari ini. Terima kasih!";
+                    setStatusLogText("Anda sudah selesai bekerja hari ini. Terima kasih!");
                 }
                 return;
             }
@@ -1639,7 +1654,7 @@
                 btnCheckIn.disabled = true; btnCheckIn.classList.add('btn-disabled');
                 btnOff.disabled = true; btnOff.classList.add('btn-disabled');
                 btnCheckOut.disabled = false; btnCheckOut.classList.remove('btn-disabled');
-                document.getElementById('status-log').innerHTML = "Status: Sedang bekerja. Klik <b>Check Out</b> saat pulang.";
+                setStatusLogText("Status: Sedang bekerja. Klik <b>Check Out</b> saat pulang.");
                 return;
             }
 
@@ -1647,7 +1662,7 @@
                 btnCheckIn.disabled = false; btnCheckIn.classList.remove('btn-disabled');
                 btnOff.disabled = false; btnOff.classList.remove('btn-disabled');
                 btnCheckOut.disabled = true; btnCheckOut.classList.add('btn-disabled');
-                document.getElementById('status-log').innerHTML = "🟢 Silakan klik <b>Check In</b> atau ambil <b>OFF</b>.";
+                setStatusLogText("Silakan lakukan <b>Check In</b> atau ambil <b>OFF</b>.");
             }
         }
 
