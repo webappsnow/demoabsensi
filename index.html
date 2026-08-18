@@ -861,38 +861,43 @@
                 </div>
 
                 <!-- VIEW ADMIN YANG DI-UPGRADE DAN DIRAPIKAN -->
-                <div id="view-admin" class="box box-admin" style="display:none;">
+              <div id="view-admin" class="box box-admin" style="display:none;">
                     <div class="admin-header" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 24px; text-align: left; flex-wrap: wrap; gap: 16px;">
                         <div>
                             <h2 style="font-size: 20px; color: var(--text-main);">Panel Administrator HRIS</h2>
                             <div style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Kelola Kehadiran & Akun Pengguna Terpusat</div>
                         </div>
-                        <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; height: 40px; padding: 0 16px; font-size: 12px; font-weight: 700;">
+                        <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; height: 42px; padding: 0 16px; font-size: 12px; font-weight: 700;">
                             Keluar Sistem
                         </button>
                     </div>
 
-                    <!-- NAVIGASI TAB ADMIN -->
                     <div class="admin-nav">
-                        <button class="admin-tab-btn active" onclick="gantiTabAdmin('laporan', this)">📊 Laporan Kehadiran</button>
-                        <button class="admin-tab-btn" onclick="gantiTabAdmin('users', this)">👥 Kelola Akun User</button>
+                        <button class="admin-tab-btn active" onclick="gantiTabAdmin('laporan', this)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            Laporan Kehadiran
+                        </button>
+                        <button class="admin-tab-btn" onclick="gantiTabAdmin('users', this)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            Kelola Akun User
+                        </button>
                     </div>
 
-                    <!-- TAB 1: LAPORAN KEHADIRAN -->
                     <div id="admin-sec-laporan" class="admin-section active">
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
-                            <div>
-                                <label style="font-weight: 700; display: block; margin-bottom: 6px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Filter Karyawan:</label>
-                                <select id="filter-nama-admin" onchange="filterLaporanAdmin()" style="width: 280px;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+                            <div style="flex-grow: 1; max-width: 320px;">
+                                <label style="font-weight: 700; display: block; margin-bottom: 8px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Filter Karyawan:</label>
+                                <select id="filter-nama-admin" onchange="filterLaporanAdmin()" style="width: 100%;">
                                     <option value="SEMUA">-- Tampilkan Semua Karyawan --</option>
                                 </select>
                             </div>
-                            <button onclick="downloadCSV()" style="width: auto; height: 42px; background: var(--success); color: white; padding: 0 16px; font-size: 12px; border-radius: 8px; border-color: var(--success); font-weight: 700; margin-top: auto;">
-                                📥 Unduh Laporan (CSV)
+                            <button onclick="downloadCSV()" style="width: auto; height: 44px; background: var(--success); color: white; padding: 0 18px; font-size: 12px; border-radius: 8px; border-color: var(--success); font-weight: 700; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--shadow-sm);">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                Unduh Laporan (CSV)
                             </button>
                         </div>
                         
-                        <div id="periode-admin-text" style="display: none; margin-bottom: 16px; font-size: 12px; color: var(--text-main); font-weight: 700; background: #f1f5f9; padding: 8px 14px; border-radius: 6px; border: 1px solid var(--border-color);">
+                        <div id="periode-admin-text" style="display: none; margin-bottom: 16px; font-size: 12px; color: var(--text-main); font-weight: 700; background: #f1f5f9; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border-color);">
                             Periode: -
                         </div>
                         
@@ -935,20 +940,34 @@
                         </div>
                     </div>
 
-                    <!-- TAB 2: KELOLA AKUN USER -->
                     <div id="admin-sec-users" class="admin-section">
-                        <div style="background: #f8fafc; padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 20px;">
-                            <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 14px;">➕ Tambah User Baru</h3>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 12px;">
-                                <input type="text" id="input-new-user" placeholder="Username / NIK">
-                                <input type="text" id="input-new-pass" placeholder="Password">
-                                <input type="text" id="input-new-nama" placeholder="Nama Lengkap Karyawan">
-                                <select id="input-new-role">
-                                    <option value="user">Role: Karyawan (User)</option>
-                                    <option value="admin">Role: Administrator</option>
-                                </select>
+                        <div style="background: #f8fafc; padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 24px;">
+                            <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                                Tambah Akun Pengguna Baru
+                            </h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 16px;">
+                                <div>
+                                    <label style="display:block; font-size:11px; font-weight:600; color:var(--text-muted); margin-bottom:6px;">USERNAME / NIK</label>
+                                    <input type="text" id="input-new-user" placeholder="Contoh: 10234">
+                                </div>
+                                <div>
+                                    <label style="display:block; font-size:11px; font-weight:600; color:var(--text-muted); margin-bottom:6px;">PASSWORD</label>
+                                    <input type="text" id="input-new-pass" placeholder="Password akun">
+                                </div>
+                                <div>
+                                    <label style="display:block; font-size:11px; font-weight:600; color:var(--text-muted); margin-bottom:6px;">NAMA LENGKAP</label>
+                                    <input type="text" id="input-new-nama" placeholder="Nama Karyawan">
+                                </div>
+                                <div>
+                                    <label style="display:block; font-size:11px; font-weight:600; color:var(--text-muted); margin-bottom:6px;">ROLE HAK AKSES</label>
+                                    <select id="input-new-role">
+                                        <option value="user">Karyawan (User)</option>
+                                        <option value="admin">Administrator</option>
+                                    </select>
+                                </div>
                             </div>
-                            <button class="btn-primary" onclick="tambahUserBaru()" style="width: auto; height: 40px; padding: 0 20px; font-size: 12px;">Simpan User ke Database</button>
+                            <button class="btn-primary" onclick="tambahUserBaru()" style="width: auto; height: 42px; padding: 0 24px; font-size: 13px;">Simpan Akun ke Database</button>
                         </div>
 
                         <div class="table-container">
@@ -972,11 +991,6 @@
                     </div>
 
                 </div>
-
-            </div>
-        </div>
-    </div>
-
     <!-- LAYAR PESAN JIKA LISENSI TIDAK AKTIF -->
     <div id="errorContainer" style="display: none; min-height: 100vh; align-items: center; justify-content: center; text-align: center; background: #0f172a; color: white; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
         <div style="background: #1e293b; border: 1px solid #334155; padding: 32px; border-radius: 16px; max-width: 420px; width: 100%; margin: auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);">
