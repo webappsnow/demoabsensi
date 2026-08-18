@@ -33,7 +33,6 @@
             --radius-md: 10px;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
         }
 
         * {
@@ -41,6 +40,7 @@
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
             margin: 0;
             padding: 0;
+            letter-spacing: -0.1px;
         }
 
         body { 
@@ -74,7 +74,6 @@
             bottom: 0;
             left: 0;
             z-index: 101;
-            transition: all 0.3s ease;
         }
 
         .sidebar-brand {
@@ -96,12 +95,12 @@
             font-size: 14px;
             font-weight: 700;
             color: #ffffff;
-            letter-spacing: -0.2px;
         }
 
         .sidebar-subtitle {
             font-size: 11px;
             color: #94a3b8;
+            font-weight: 500;
         }
 
         .sidebar-menu {
@@ -122,12 +121,10 @@
             font-weight: 600;
             color: #94a3b8;
             background: transparent;
-            transition: all 0.2s;
-            text-align: left;
-            box-shadow: none;
             border: none;
             cursor: pointer;
             width: 100%;
+            text-align: left;
         }
 
         .sidebar-item:hover, .sidebar-item.active {
@@ -206,10 +203,9 @@
         }
 
         h2 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--text-main);
-            letter-spacing: -0.4px;
         }
 
         .sub-title {
@@ -217,7 +213,7 @@
             font-size: 13px;
             margin-top: 4px;
             margin-bottom: 24px;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .time-wrapper {
@@ -234,7 +230,6 @@
             font-weight: 800;
             color: var(--primary);
             font-variant-numeric: tabular-nums;
-            letter-spacing: -0.5px;
             line-height: 1;
         }
 
@@ -246,6 +241,7 @@
             text-transform: capitalize;
         }
 
+        /* PERBAIKAN: Periode Karyawan diletakkan Center Sempurna */
         #periode-karyawan-text {
             background: var(--primary-light) !important;
             border: 1px solid #c7d2fe !important;
@@ -254,6 +250,7 @@
             padding: 14px 18px !important;
             margin-bottom: 20px !important;
             box-shadow: none !important;
+            text-align: center !important;
         }
 
         .stat-box {
@@ -279,6 +276,7 @@
             padding: 12px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
+            text-align: center;
         }
 
         .stat-item span:last-child {
@@ -408,6 +406,7 @@
             box-shadow: var(--shadow-sm);
             width: 100%;
             border: 1px solid var(--border-color);
+            background: #ffffff;
         }
 
         .absen-card:active {
@@ -433,21 +432,13 @@
             stroke-linejoin: round;
         }
 
-        .card-in {
-            background: #ffffff !important;
-            border-color: #cbd5e1 !important;
-        }
         .card-in .absen-icon { background: var(--primary-light); color: var(--primary); }
-        .card-in .absen-title { color: var(--text-main) !important; font-weight: 700; }
-        .card-in .info-jam-absen { color: var(--text-muted) !important; font-weight: 600 !important; }
+        .card-in .absen-title { color: var(--text-main); font-weight: 700; font-size: 13px; }
+        .card-in .info-jam-absen { color: var(--text-muted); font-weight: 600; font-size: 11px; }
 
-        .card-out {
-            background: #ffffff !important;
-            border-color: #cbd5e1 !important;
-        }
         .card-out .absen-icon { background: #fef3c7; color: #d97706; }
-        .card-out .absen-title { color: var(--text-main) !important; font-weight: 700; }
-        .card-out .info-jam-absen { color: var(--text-muted) !important; font-weight: 600 !important; }
+        .card-out .absen-title { color: var(--text-main); font-weight: 700; font-size: 13px; }
+        .card-out .info-jam-absen { color: var(--text-muted); font-weight: 600; font-size: 11px; }
 
         .card-off-wrapper {
             width: 100%;
@@ -460,28 +451,12 @@
             align-items: center;
             gap: 14px;
             padding: 14px 18px;
-            background: #ffffff !important;
-            border-color: #cbd5e1 !important;
             width: 100% !important;
-            max-width: none !important;
             margin: 0;
-            box-shadow: var(--shadow-sm);
         }
         .card-off .absen-icon { background: #fee2e2; color: var(--danger); width: 36px; height: 36px; }
-        .card-off .absen-title { color: var(--text-main) !important; font-weight: 700; }
-        .card-off .info-jam-absen { color: var(--text-muted) !important; font-weight: 600 !important; background: transparent; width: auto; padding: 0; }
-
-        .absen-title {
-            font-size: 13px;
-        }
-
-        .info-jam-absen {
-            font-size: 11px;
-            min-height: auto;
-            display: block;
-            text-align: left;
-            width: 100%;
-        }
+        .card-off .absen-title { color: var(--text-main); font-weight: 700; font-size: 13px; }
+        .card-off .info-jam-absen { color: var(--text-muted); font-weight: 600; font-size: 11px; background: transparent; width: auto; padding: 0; }
 
         button { 
             width: 100%; 
@@ -665,7 +640,7 @@
 <body>
 
     <div class="app-layout">
-        <!-- SIDEBAR KIRI (DESAIN KANTORAN PROFESIONAL) -->
+        <!-- SIDEBAR KIRI -->
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <img src="logo.png" class="sidebar-logo" alt="Logo">
@@ -685,19 +660,15 @@
             </div>
         </aside>
 
-        <!-- KONTEN UTAMA -->
+        <!-- MAIN CONTENT -->
         <div class="main-content">
-            <!-- TOP BAR -->
             <header class="corporate-header">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="font-size: 14px; font-weight: 700; color: var(--text-main);">Human Resources Portal</div>
-                </div>
+                <div style="font-size: 14px; font-weight: 700; color: var(--text-main);">Human Resources Portal</div>
                 <div style="font-size: 11px; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 6px 14px; border-radius: 6px; border: 1px solid #c7d2fe;">
                     Active System
                 </div>
             </header>
 
-            <!-- KONTEN APLIKASI -->
             <div id="appContainer" style="display: none;">
 
                 <!-- VIEW LOGIN -->
@@ -803,7 +774,8 @@
                         </div>
                     </div>
 
-                    <button class="btn-logout" onclick="logout()">Keluar Akun</button>
+                    <!-- Diubah menjadi Keluar Sistem sesuai permintaan -->
+                    <button class="btn-logout" onclick="logout()">Keluar Sistem</button>
                 </div>
 
                 <!-- VIEW MAP FULLSCREEN -->
