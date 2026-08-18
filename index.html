@@ -6,11 +6,6 @@
     <title>Sistem Absensi Karyawan</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
-    
-    <!-- Google Fonts: Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Leaflet CSS untuk Peta -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -38,10 +33,11 @@
 
         * {
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
             margin: 0;
             padding: 0;
             letter-spacing: -0.2px;
+            -webkit-font-smoothing: antialiased;
         }
 
         body { 
@@ -648,7 +644,16 @@
             color: #cbd5e1 !important;
         }
 
-        /* --- PENGATURAN KHUSUS HP (MOBILE VIEW) AGAR LANGSUNG CENTER --- */
+        /* --- PENGATURAN RESPONSIF (PC vs HP) --- */
+        @media(min-width: 769px) {
+            .sidebar { 
+                display: flex !important; 
+            }
+            .main-content { 
+                margin-left: 260px !important; 
+            }
+        }
+
         @media(max-width: 768px) {
             .sidebar { 
                 display: none !important; 
@@ -663,6 +668,7 @@
             #appContainer {
                 padding: 20px 16px;
                 max-width: 100% !important;
+                margin: 0 auto !important;
             }
             .stat-box { 
                 grid-template-columns: repeat(2, 1fr); 
@@ -676,7 +682,7 @@
 <body>
 
     <div class="app-layout">
-        <!-- SIDEBAR KIRI (Hanya muncul di PC) -->
+        <!-- SIDEBAR KHUSUS PC -->
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <img src="logo.png" class="sidebar-logo" alt="Logo">
@@ -930,7 +936,7 @@
     </div>
 
     <!-- LAYAR PESAN JIKA LISENSI TIDAK AKTIF -->
-    <div id="errorContainer" style="display: none; min-height: 100vh; align-items: center; justify-content: center; text-align: center; font-family: sans-serif; background: #0f172a; color: white; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
+    <div id="errorContainer" style="display: none; min-height: 100vh; align-items: center; justify-content: center; text-align: center; background: #0f172a; color: white; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
         <div style="background: #1e293b; border: 1px solid #334155; padding: 32px; border-radius: 16px; max-width: 420px; width: 100%; margin: auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);">
             <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #ef4444; white-space: nowrap;">Akses Tidak Aktif</h2>
             <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;">Layanan absen untuk toko ini sedang ditangguhkan atau masa aktifnya habis. Silakan hubungi Administrator IT.</p>
@@ -968,7 +974,7 @@
                     }
                 })
                 .catch(() => {
-                    document.body.innerHTML = "<h2 style='text-align:center; color:red; margin-top:20%; font-family:sans-serif;'>Gagal terhubung ke server pusat.</h2>";
+                    document.body.innerHTML = "<h2 style='text-align:center; color:red; margin-top:20%;'>Gagal terhubung ke server pusat.</h2>";
                 });
         });
         // ------------------------------------
