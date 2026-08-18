@@ -1621,22 +1621,32 @@
             });
         }
 
-        function hapusUser(username) {
-            if (confirm(`Yakin ingin menghapus user ${username}?`)) {
-                fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    redirect: 'follow',
-                    body: JSON.stringify({ aksi: "hapus_user", username: username })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    tampilkanPesan(data.pesan, "sukses");
-                    muatDataUserAdmin();
-                })
-                .catch(err => {
-                    tampilkanPesan("Gagal menghapus user.", "info");
-                });
-            }
+       function hapusUser(username) {
+            document.getElementById('modal-title').innerText = 'Konfirmasi Hapus';
+            document.getElementById('modal-pesan').innerHTML = `
+                <p style="margin-bottom: 12px; font-weight: 500;">Yakin ingin menghapus akun <b>${username}</b>?</p>
+                <div style="display: flex; gap: 12px; margin-top: 18px;">
+                    <button onclick="eksekusiHapusUser('${username}')" style="background: var(--danger); color: white; border: none; padding: 12px; border-radius: 8px; flex: 1; font-weight: 700; cursor: pointer;">YA, HAPUS</button>
+                    <button onclick="tutupModal()" style="background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; flex: 1; font-weight: 700; cursor: pointer;">BATAL</button>
+                </div>
+            `;
+            const tombolTutup = document.getElementById('btn-modal-tutup');
+            if (tombolTutup) tombolTutup.style.display = 'none';
+            document.getElementById('modal-notif').style.display = 'flex';
+        }
+
+        function eksekusiHapusUser(username) {
+            tutupModal();
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                redirect: 'follow',
+                body: JSON.stringify({ aksi: "hapus_user", username: username })
+            })
+            .then(res => res.json())
+            .then(data => {
+                tampilkanPesan(data.pesan, "sukses");
+                muatDataUserAdmin();
+            });
         }
 
         function filterLaporanAdmin() {
