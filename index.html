@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sistem Absensi Karyawan</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#4f46e5">
     
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
     <!-- Leaflet CSS untuk Peta -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 
-   <style>
+    <style>
         :root {
             --primary: #4f46e5;
             --primary-hover: #4338ca;
@@ -23,16 +23,15 @@
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --background: #f8fafc;
+            --background: #f1f5f9;
             --card-bg: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
-            --radius-lg: 20px;
-            --radius-md: 14px;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
-            --shadow-md: 0 10px 30px -5px rgba(79, 70, 229, 0.08);
-            --shadow-card: 0 1px 3px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.03);
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
 
         * {
@@ -46,30 +45,70 @@
             background: var(--background); 
             color: var(--text-main);
             width: 100vw;
-            height: 100vh;
-            height: 100dvh;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             overflow-x: hidden;
             margin: 0;
-            padding: 16px;
+        }
+
+        /* --- HEADER KANTORAN (TOP BAR) --- */
+        .corporate-header {
+            width: 100%;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .corporate-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .corporate-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .corporate-title-text {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.2px;
+        }
+
+        .corporate-subtitle {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
         }
 
         #appContainer {
             width: 100%;
-            max-width: 410px;
+            max-width: 460px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: auto;
+            padding: 20px 16px;
         }
 
         .box { 
             width: 100%;
-            max-width: 410px; 
+            max-width: 460px; 
             background: var(--card-bg); 
-            padding: 28px 20px; 
+            padding: 24px; 
             border-radius: var(--radius-lg); 
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
@@ -77,19 +116,19 @@
         }
 
         .box-admin { 
-            max-width: 1000px !important; 
-            padding: 28px 24px; 
+            max-width: 1100px !important; 
+            padding: 24px; 
         }
 
         .logo-container {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 14px auto;
-            border-radius: 50%;
-            padding: 4px;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 12px auto;
+            border-radius: 14px;
+            padding: 2px;
             background: #ffffff;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-            border: 2px solid var(--primary-light);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -99,11 +138,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 12px;
         }
 
         h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: var(--text-main);
             letter-spacing: -0.3px;
@@ -111,9 +150,9 @@
 
         .sub-title {
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 12px;
             margin-top: 2px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             font-weight: 500;
         }
 
@@ -121,12 +160,12 @@
             background: #f8fafc;
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
-            padding: 14px;
-            margin-bottom: 16px;
+            padding: 12px;
+            margin-bottom: 14px;
         }
 
         .jam-digital {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 800;
             color: var(--primary);
             font-variant-numeric: tabular-nums;
@@ -135,9 +174,9 @@
         }
 
         .tanggal-digital {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
-            margin-top: 6px;
+            margin-top: 4px;
             font-weight: 600;
             text-transform: capitalize;
         }
@@ -145,10 +184,10 @@
         #periode-karyawan-text {
             background: #ffffff !important;
             border: 1px solid var(--border-color) !important;
-            border-left: 4px solid var(--primary) !important;
+            border-left: 3px solid var(--primary) !important;
             border-radius: var(--radius-md) !important;
-            padding: 12px !important;
-            margin-bottom: 14px !important;
+            padding: 10px 12px !important;
+            margin-bottom: 12px !important;
             box-shadow: var(--shadow-sm) !important;
             text-align: center;
         }
@@ -157,19 +196,19 @@
             background: #ffffff !important;
             border: 1px solid var(--border-color) !important;
             border-radius: var(--radius-md) !important;
-            padding: 16px !important;
-            margin-bottom: 16px !important;
+            padding: 14px !important;
+            margin-bottom: 14px !important;
             box-shadow: var(--shadow-sm) !important;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .stat-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-muted);
             font-weight: 500;
         }
@@ -180,16 +219,16 @@
         }
 
         #status-log {
-            font-size: 12px !important;
+            font-size: 11px !important;
             color: var(--text-main) !important;
             background: #f8fafc !important;
             border: 1px dashed var(--border-color) !important;
-            padding: 12px !important;
+            padding: 10px !important;
             border-radius: var(--radius-md) !important;
-            margin-bottom: 16px !important;
+            margin-bottom: 14px !important;
             font-weight: 600 !important;
             text-align: center !important;
-            line-height: 1.5 !important;
+            line-height: 1.4 !important;
         }
 
         #view-map-fullscreen {
@@ -210,30 +249,29 @@
         }
 
         .map-header h3 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             color: var(--text-main);
         }
 
         #info-jarak-peta {
             position: absolute;
-            top: 75px;
-            left: 24px;
-            right: 24px;
+            top: 70px;
+            left: 20px;
+            right: 20px;
             z-index: 1000;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
-            padding: 14px 16px;
+            padding: 12px 14px;
             border-radius: var(--radius-md);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             text-align: left;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
+            gap: 10px;
         }
 
         #fullscreen-map {
@@ -247,7 +285,7 @@
 
         .input-group {
             text-align: left;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .input-group label {
@@ -262,11 +300,11 @@
 
         input, select { 
             width: 100%; 
-            padding: 12px 16px; 
+            padding: 11px 14px; 
             border-radius: var(--radius-md); 
             border: 1px solid var(--border-color);
             background: #f8fafc;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--text-main);
             transition: all 0.2s ease;
@@ -276,33 +314,33 @@
             outline: none;
             border-color: var(--primary);
             background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
         }
 
         .btn-grid {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 16px;
         }
 
         .absen-card-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
         .absen-card {
             border-radius: var(--radius-md);
-            padding: 12px 8px;
+            padding: 10px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 3px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-sm);
             width: 100%;
         }
 
@@ -311,17 +349,17 @@
         }
 
         .absen-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .absen-icon svg {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             stroke-width: 2.2;
             fill: none;
             stroke: currentColor;
@@ -332,7 +370,7 @@
         .card-in {
             background: #4f46e5 !important;
             border: 1px solid #4338ca !important;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
         }
         .card-in .absen-icon { background: rgba(255, 255, 255, 0.25); color: #ffffff; }
         .card-in .absen-title { color: #ffffff !important; }
@@ -341,7 +379,7 @@
         .card-out {
             background: #d97706 !important;
             border: 1px solid #b45309 !important;
-            box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
         }
         .card-out .absen-icon { background: rgba(0, 0, 0, 0.12); color: #fff; }
         .card-out .absen-title { color: #fff !important; }
@@ -356,46 +394,46 @@
         .card-off {
             flex-direction: row;
             justify-content: center;
-            gap: 8px;
-            padding: 10px 16px;
+            gap: 6px;
+            padding: 8px 14px;
             background: #ef4444 !important;
             border: 1px solid #dc2626 !important;
             width: auto !important;
-            max-width: 220px;
+            max-width: 200px;
             margin: 0 auto;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
         }
-        .card-off .absen-icon { background: rgba(255, 255, 255, 0.25); color: #ffffff; width: 28px; height: 28px; }
+        .card-off .absen-icon { background: rgba(255, 255, 255, 0.25); color: #ffffff; width: 24px; height: 24px; }
         .card-off .absen-title { color: #ffffff !important; }
         .card-off .info-jam-absen { color: #ffffff !important; font-weight: 800 !important; background: transparent; width: auto; padding: 0; }
 
         .absen-title {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
         }
 
         .info-jam-absen {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             color: var(--text-muted);
-            min-height: 14px;
+            min-height: 12px;
             display: block;
             text-align: center;
             background: #ffffff;
             padding: 2px 6px;
-            border-radius: 6px;
+            border-radius: 4px;
             width: 100%;
         }
 
         button { 
             width: 100%; 
-            padding: 14px; 
+            padding: 12px; 
             border-radius: var(--radius-md); 
-            font-size: 13px; 
+            font-size: 12px; 
             font-weight: 700; 
             cursor: pointer; 
             border: none;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
             display: inline-flex;
             justify-content: center;
             align-items: center;
@@ -410,7 +448,7 @@
         .btn-primary {
             background: var(--primary);
             color: white;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
         }
 
         .btn-primary:hover {
@@ -419,7 +457,7 @@
 
         .btn-theme-in {
             background: #4f46e5 !important;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35) !important;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
         }
         .btn-theme-in:hover {
             background: #4338ca !important;
@@ -427,7 +465,7 @@
 
         .btn-theme-out {
             background: #d97706 !important;
-            box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35) !important;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3) !important;
         }
         .btn-theme-out:hover {
             background: #b45309 !important;
@@ -436,19 +474,19 @@
         .btn-absen-kirim { 
             background: var(--primary); 
             color: white;
-            font-size: 14px;
-            margin-top: 14px;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+            font-size: 13px;
+            margin-top: 12px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
         }
 
         .btn-logout { 
             background: #059669 !important; 
             color: #ffffff !important; 
             border: 1px solid #047857 !important;
-            font-size: 12px; 
-            padding: 12px; 
-            margin-top: 10px;
-            box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3) !important;
+            font-size: 11px; 
+            padding: 10px; 
+            margin-top: 8px;
+            box-shadow: 0 4px 10px rgba(5, 150, 105, 0.2) !important;
         }
 
         .btn-logout:hover {
@@ -459,9 +497,9 @@
             background: #f8fafc;
             color: var(--text-muted);
             border: 1px solid var(--border-color);
-            font-size: 12px;
-            padding: 12px;
-            margin-top: 8px;
+            font-size: 11px;
+            padding: 10px;
+            margin-top: 6px;
             box-shadow: none;
         }
 
@@ -471,8 +509,8 @@
             object-fit: cover;
             border-radius: var(--radius-md); 
             background: #0f172a; 
-            border: 2px solid var(--border-color);
-            max-height: 380px;
+            border: 1px solid var(--border-color);
+            max-height: 340px;
         }
 
         .table-container {
@@ -480,22 +518,22 @@
             overflow-x: auto;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
-            margin-top: 15px;
+            margin-top: 12px;
             background: white;
             box-shadow: var(--shadow-sm);
         }
 
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th, td { padding: 14px 16px; font-size: 13px; }
-        th { background: #f8fafc; color: var(--text-muted); font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-color); }
+        th, td { padding: 12px 14px; font-size: 12px; }
+        th { background: #f8fafc; color: var(--text-muted); font-weight: 700; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-color); }
         td { border-bottom: 1px solid var(--border-color); vertical-align: middle; }
         tr:last-child td { border-bottom: none; }
         
         .badge {
             display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 10px;
             font-weight: 700;
         }
         .badge-in { background: #dcfce7; color: #15803d; }
@@ -506,19 +544,19 @@
             display: inline-block;
             background: var(--primary-light);
             color: var(--primary);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 11px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 10px;
             font-weight: 700;
             text-decoration: none;
         }
 
         .spinner {
-            border: 3px solid rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 50%;
-            border-top: 3px solid #ffffff;
-            width: 18px;
-            height: 18px;
+            border-top: 2px solid #ffffff;
+            width: 16px;
+            height: 16px;
             animation: spin 0.6s linear infinite;
             display: none;
         }
@@ -530,15 +568,15 @@
 
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.6); 
-            backdrop-filter: blur(4px);
+            background: rgba(15, 23, 42, 0.5); 
+            backdrop-filter: blur(2px);
             display: flex; justify-content: center;
             align-items: center; z-index: 1000;
             padding: 16px;
         }
         .modal-box {
-            background: white; padding: 24px; border-radius: var(--radius-lg);
-            width: 100%; max-width: 320px; text-align: center;
+            background: white; padding: 20px; border-radius: var(--radius-lg);
+            width: 100%; max-width: 300px; text-align: center;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
@@ -567,6 +605,20 @@
     </style>
 </head>
 <body>
+
+    <!-- TOP BAR KANTORAN -->
+    <header class="corporate-header">
+        <div class="corporate-brand">
+            <img src="logo.png" class="corporate-logo" alt="Logo">
+            <div>
+                <div class="corporate-title-text">UFO KEBONSARI MALANG</div>
+                <div class="corporate-subtitle">Sistem Absensi Karyawan</div>
+            </div>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 4px 10px; border-radius: 6px;">
+            PORTAL RESMI
+        </div>
+    </header>
 
     <!-- KONTEN UTAMA APLIKASI (DIBUNGKUS APPCONTAINER UNTUK PROTEKSI LISENSI) -->
     <div id="appContainer" style="display: none;">
@@ -657,7 +709,7 @@
                             </div>
                             <span class="absen-title" id="text-off">Ambil Hari OFF</span>
                             <span id="time-off" class="info-jam-absen"></span>
-                            <div class="spinner" id="off-spinner" style="margin-left: 6px;"></div>
+                            <div class="spinner" id="off-spinner" style="margin-left: 4px;"></div>
                         </button>
                     </div>
                 </div>
@@ -668,21 +720,21 @@
             <!-- VIEW MAP FULLSCREEN -->
             <div id="view-map-fullscreen">
                 <div class="map-header">
-                    <button onclick="tutupPetaFullscreen()" style="width: auto; padding: 8px 12px; background: #fff8f5; color: var(--text-muted); border-radius: 8px; box-shadow: none;">← Kembali</button>
+                    <button onclick="tutupPetaFullscreen()" style="width: auto; padding: 6px 10px; background: #f8fafc; color: var(--text-muted); border-radius: 6px; box-shadow: none;">← Kembali</button>
                     <h3 id="judul-map-fullscreen">Verifikasi Lokasi</h3>
-                    <div style="width: 60px;"></div>
+                    <div style="width: 50px;"></div>
                 </div>
                 
                 <div id="info-jarak-peta">
-                    <div style="background: #fed7aa; color: #c2410c; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px;">⏳</div>
+                    <div style="background: #e2e8f0; color: #475569; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">⏳</div>
                     <div>
-                        <div style="color: var(--text-main); font-size: 13px; font-weight: 800;">Memeriksa lokasi GPS...</div>
-                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 600; margin-top: 2px;">Menghitung jarak ke titik toko.</div>
+                        <div style="color: var(--text-main); font-size: 12px; font-weight: 800;">Memeriksa lokasi GPS...</div>
+                        <div style="color: var(--text-muted); font-size: 10px; font-weight: 600; margin-top: 1px;">Menghitung jarak ke titik toko.</div>
                     </div>
                 </div>
 
                 <div id="fullscreen-map"></div>
-                <button class="btn-primary" id="btn-lanjut-kamera" onclick="lanjutKeKamera()" style="margin-top: 10px;">
+                <button class="btn-primary" id="btn-lanjut-kamera" onclick="lanjutKeKamera()" style="margin-top: 8px;">
                     CHECK IN
                 </button>
             </div>
@@ -697,7 +749,7 @@
                  
                 <video id="kamera" autoplay playsinline></video>
                  
-                <button class="btn-kembali" id="btnGantiKamera" onclick="gantiKamera()" style="margin-top: 12px;">
+                <button class="btn-kembali" id="btnGantiKamera" onclick="gantiKamera()" style="margin-top: 10px;">
                     🔄 Putar Kamera (Depan/Belakang)
                 </button>
                  
@@ -709,49 +761,49 @@
 
             <!-- VIEW ADMIN -->
             <div id="view-admin" class="box box-admin" style="display:none;">
-                <div class="admin-header" style="display: flex; flex-direction: column; gap: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px; text-align: left;">
+                <div class="admin-header" style="display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 16px; text-align: left;">
                     <div style="width: 100%;">
-                        <h2 style="text-align: left; font-size: 20px; color: var(--primary);">UFO KEBONSARI MALANG</h2>
-                        <div style="color: var(--text-muted); font-size: 13px; margin-top: 2px;">Panel Rekapitulasi Absensi Karyawan</div>
+                        <h2 style="text-align: left; font-size: 18px; color: var(--primary);">UFO KEBONSARI MALANG</h2>
+                        <div style="color: var(--text-muted); font-size: 12px; margin-top: 2px;">Panel Rekapitulasi Absensi Karyawan</div>
                     </div>
-                    <div style="display: flex; gap: 10px; width: 100%;">
-                        <button onclick="downloadCSV()" style="width: auto; background: #10b981; color: white; padding: 10px 16px; font-size: 12px; border-radius: 8px;">
+                    <div style="display: flex; gap: 8px; width: 100%;">
+                        <button onclick="downloadCSV()" style="width: auto; background: #10b981; color: white; padding: 8px 14px; font-size: 11px; border-radius: 6px;">
                             📥 Unduh Laporan (CSV)
                         </button>
-                        <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; padding: 10px 16px;">
+                        <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; padding: 8px 14px;">
                             KELUAR DARI SISTEM
                         </button>
                     </div>
                 </div>
 
-                <div style="background: #fff8f5; padding: 16px; border-radius: var(--radius-md); margin-bottom: 20px; border: 1px solid var(--border-color); text-align: left;">
-                    <label style="font-weight: 700; display: block; margin-bottom: 8px; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">
+                <div style="background: #f8fafc; padding: 14px; border-radius: var(--radius-md); margin-bottom: 16px; border: 1px solid var(--border-color); text-align: left;">
+                    <label style="font-weight: 700; display: block; margin-bottom: 6px; font-size: 10px; color: var(--text-muted); text-transform: uppercase;">
                         🔍 Filter Karyawan:
                     </label>
-                    <select id="filter-nama-admin" onchange="filterLaporanAdmin()" style="width: 100%; max-width: 320px;">
+                    <select id="filter-nama-admin" onchange="filterLaporanAdmin()" style="width: 100%; max-width: 300px;">
                         <option value="SEMUA">-- Tampilkan Semua Karyawan --</option>
                     </select>
                     
-                    <div id="periode-admin-text" style="display: none; margin-top: 12px; font-size: 12px; color: var(--primary); font-weight: 700; background: var(--primary-light); padding: 6px 12px; border-radius: 6px; display: inline-block;">
+                    <div id="periode-admin-text" style="display: none; margin-top: 10px; font-size: 11px; color: var(--primary); font-weight: 700; background: var(--primary-light); padding: 5px 10px; border-radius: 6px; display: inline-block;">
                         Periode: -
                     </div>
                     
-                    <div id="stat-karyawan-admin" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px;">
-                        <div style="background: white; padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Hadir</div>
-                            <strong id="admin-stat-masuk" style="font-size: 20px; font-weight: 800; color: #10b981;">0</strong>
+                    <div id="stat-karyawan-admin" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px;">
+                        <div style="background: white; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 10px; font-weight: 600; color: var(--text-muted);">Hadir</div>
+                            <strong id="admin-stat-masuk" style="font-size: 16px; font-weight: 800; color: #10b981;">0</strong>
                         </div>
-                        <div style="background: white; padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Terlambat</div>
-                            <strong id="admin-stat-terlambat" style="font-size: 20px; font-weight: 800; color: #ef4444;">0</strong>
+                        <div style="background: white; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 10px; font-weight: 600; color: var(--text-muted);">Terlambat</div>
+                            <strong id="admin-stat-terlambat" style="font-size: 16px; font-weight: 800; color: #ef4444;">0</strong>
                         </div>
-                        <div style="background: white; padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">OFF</div>
-                            <strong id="admin-stat-off" style="font-size: 20px; font-weight: 800; color: #dc2626;">0</strong>
+                        <div style="background: white; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 10px; font-weight: 600; color: var(--text-muted);">OFF</div>
+                            <strong id="admin-stat-off" style="font-size: 16px; font-weight: 800; color: #dc2626;">0</strong>
                         </div>
-                        <div style="background: white; padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">PS</div>
-                            <strong id="admin-stat-ps" style="font-size: 20px; font-weight: 800; color: #f59e0b;">0</strong>
+                        <div style="background: white; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 10px; font-weight: 600; color: var(--text-muted);">PS</div>
+                            <strong id="admin-stat-ps" style="font-size: 16px; font-weight: 800; color: #f59e0b;">0</strong>
                         </div>
                     </div>
                 </div>
@@ -769,7 +821,7 @@
                         </thead>
                         <tbody id="isi-tabel">
                             <tr>
-                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px; font-style: italic;">Sedang memuat data laporan...</td>
+                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 24px; font-style: italic;">Sedang memuat data laporan...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -780,17 +832,17 @@
 
     <!-- LAYAR PESAN JIKA LISENSI TIDAK AKTIF -->
     <div id="errorContainer" style="display: none; min-height: 100vh; align-items: center; justify-content: center; text-align: center; font-family: sans-serif; background: #020617; color: white; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
-        <div style="background: #0f172a; border: 2px solid #334155; padding: 30px; border-radius: 20px; max-width: 400px; width: 100%; margin: auto;">
-            <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 10px; color: #ef4444;">Akses Tidak Aktif</h2>
-            <p style="font-size: 14px; color: #cbd5e1;">Layanan absen untuk toko ini sedang ditangguhkan atau masa aktifnya habis. Silakan hubungi Administrator.</p>
+        <div style="background: #0f172a; border: 2px solid #334155; padding: 24px; border-radius: 16px; max-width: 380px; width: 100%; margin: auto;">
+            <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #ef4444;">Akses Tidak Aktif</h2>
+            <p style="font-size: 13px; color: #cbd5e1;">Layanan absen untuk toko ini sedang ditangguhkan atau masa aktifnya habis. Silakan hubungi Administrator.</p>
         </div>
     </div>
 
     <!-- MODAL NOTIFIKASI -->
     <div id="modal-notif" class="modal-overlay" style="display:none;">
         <div class="modal-box" id="modal-box">
-            <h3 id="modal-title" style="margin-top:0; font-size: 18px; color: var(--primary);">INFO</h3>
-            <div id="modal-pesan" style="font-size: 14px; color: var(--text-main); margin: 12px 0;">Pesan di sini</div>
+            <h3 id="modal-title" style="margin-top:0; font-size: 16px; color: var(--primary);">INFO</h3>
+            <div id="modal-pesan" style="font-size: 13px; color: var(--text-main); margin: 10px 0;">Pesan di sini</div>
             <button class="btn-primary" id="btn-modal-tutup" onclick="tutupModal()">TUTUP</button>
         </div>
     </div> 
@@ -871,9 +923,9 @@
                         .bindPopup("<b>UFO Kebonsari</b><br>Lokasi Toko").openPopup();
 
                     fsCircleRadius = L.circle([TOKO_LAT, TOKO_LNG], {
-                        color: 'red',
-                        fillColor: '#f03',
-                        fillOpacity: 0.2,
+                        color: '#4f46e5',
+                        fillColor: '#4f46e5',
+                        fillOpacity: 0.15,
                         radius: RADIUS_MAKSIMAL
                     }).addTo(fsMapInstance);
                 } else {
@@ -914,10 +966,10 @@
                         if (infoJarak) {
                             infoJarak.style.borderColor = "#ef4444";
                             infoJarak.innerHTML = `
-                                <div style="background: #fee2e2; color: #b91c1c; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px;">✕</div>
+                                <div style="background: #fee2e2; color: #b91c1c; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✕</div>
                                 <div>
-                                    <div style="color: #b91c1c; font-size: 13px; font-weight: 800;">GPS Gagal Dibaca</div>
-                                    <div style="color: var(--text-muted); font-size: 11px; font-weight: 600; margin-top: 2px;">Aktifkan izin lokasi pada perangkat Anda.</div>
+                                    <div style="color: #b91c1c; font-size: 12px; font-weight: 800;">GPS Gagal Dibaca</div>
+                                    <div style="color: var(--text-muted); font-size: 10px; font-weight: 600; margin-top: 1px;">Aktifkan izin lokasi pada perangkat Anda.</div>
                                 </div>
                             `;
                         }
@@ -936,13 +988,13 @@
                 fsMarkerUser = L.marker([userLat, userLng], {
                     icon: L.divIcon({
                         className: 'user-marker',
-                        html: '<div style="background: #2563eb; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 8px rgba(0,0,0,0.5);"></div>'
+                        html: '<div style="background: #4f46e5; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 6px rgba(0,0,0,0.4);"></div>'
                     })
                 }).addTo(fsMapInstance).bindPopup("Lokasi Anda Saat Ini");
             } else {
                 fsMarkerUser.setLatLng([userLat, userLng]);
             }
-            
+             
             fsMapInstance.setView([userLat, userLng], 17);
 
             var jarak = Math.round(hitungJarak(userLat, userLng, TOKO_LAT, TOKO_LNG));
@@ -953,10 +1005,10 @@
                 isGpsValid = true;
                 infoJarak.style.borderColor = "#10b981";
                 infoJarak.innerHTML = `
-                    <div style="background: #dcfce7; color: #15803d; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px;">✓</div>
+                    <div style="background: #dcfce7; color: #15803d; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✓</div>
                     <div>
-                        <div style="color: #15803d; font-size: 13px; font-weight: 800;">Anda berada dalam radius pekerjaan</div>
-                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 600; margin-top: 2px;">Jarak ${jarak} meter dari titik toko.</div>
+                        <div style="color: #15803d; font-size: 12px; font-weight: 800;">Anda berada dalam radius pekerjaan</div>
+                        <div style="color: var(--text-muted); font-size: 10px; font-weight: 600; margin-top: 1px;">Jarak ${jarak} meter dari titik toko.</div>
                     </div>
                 `;
                 btnLanjut.disabled = false;
@@ -965,10 +1017,10 @@
                 isGpsValid = false;
                 infoJarak.style.borderColor = "#ef4444";
                 infoJarak.innerHTML = `
-                    <div style="background: #fee2e2; color: #b91c1c; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px;">✕</div>
+                    <div style="background: #fee2e2; color: #b91c1c; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✕</div>
                     <div>
-                        <div style="color: #b91c1c; font-size: 13px; font-weight: 800;">Di luar area pekerjaan</div>
-                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 600; margin-top: 2px;">Terlalu jauh (+${jarak}m). Mendekatlah!</div>
+                        <div style="color: #b91c1c; font-size: 12px; font-weight: 800;">Di luar area pekerjaan</div>
+                        <div style="color: var(--text-muted); font-size: 10px; font-weight: 600; margin-top: 1px;">Terlalu jauh (+${jarak}m). Mendekatlah!</div>
                     </div>
                 `;
                 btnLanjut.disabled = true;
@@ -1008,7 +1060,7 @@
                 let sekarang = new Date();
                 const namaBulanFull = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
                 let blnMulai, thnMulai, blnSelesai, thnSelesai;
-                
+                 
                 if (sekarang.getDate() >= 26) {
                     blnMulai = namaBulanFull[sekarang.getMonth()];
                     thnMulai = sekarang.getFullYear();
@@ -1022,10 +1074,10 @@
                     blnSelesai = namaBulanFull[sekarang.getMonth()];
                     thnSelesai = sekarang.getFullYear();
                 }
-                
+                 
                 labelPeriodeKaryawan.innerHTML = `
                     <span style="color: #64748b; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px;">Periode Absensi</span>
-                    <strong style="color: var(--primary); font-size: 13px; font-weight: 800; display: block;">26 ${blnMulai} ${thnMulai} - 25 ${blnSelesai} ${thnSelesai}</strong>
+                    <strong style="color: var(--primary); font-size: 12px; font-weight: 800; display: block;">26 ${blnMulai} ${thnMulai} - 25 ${blnSelesai} ${thnSelesai}</strong>
                 `;
             }
         }
@@ -1098,7 +1150,7 @@
             document.getElementById('total-masuk').innerText = totalHadir + " hari";
             document.getElementById('total-off').innerText = totalOff + " hari";
             document.getElementById('total-ps').innerText = totalPs + " hari";
-            
+             
             const elTerlambat = document.getElementById('total-terlambat');
             if (elTerlambat) elTerlambat.innerText = totalTerlambat + " hari";
         }
@@ -1106,10 +1158,10 @@
         function tampilkanPesan(pesan, status) {
             document.getElementById('modal-title').innerText = status === 'sukses' ? 'Berhasil' : 'Info';
             document.getElementById('modal-pesan').innerHTML = `<p>${pesan}</p>`;
-            
+             
             const tombolTutup = document.getElementById('btn-modal-tutup');
             if (tombolTutup) tombolTutup.style.display = 'block';
-            
+             
             document.getElementById('modal-notif').style.display = 'flex';
         }
 
@@ -1185,6 +1237,7 @@
                 console.error("Error Fetch:", err);
             });
         }
+
         function sinkronisasiFullServer() {
             fetch(SCRIPT_URL, { 
                 method: 'POST', 
@@ -1211,7 +1264,7 @@
 
                 let hitungHadir = 0, hitungOff = 0, hitungPs = 0, hitungTerlambat = 0;
                 let logPerTanggal = {};
-                
+                 
                 let tglSekarangFormatted = Utilities_formatTanggalHariIni();
                 let statusHariIni = [];
                 let detailWaktuHariIni = {};
@@ -1234,7 +1287,7 @@
 
                         try {
                             let tglAbsen = new Date(parseInt(dateParts[2]), parseInt(dateParts[1]) - 1, parseInt(dateParts[0]), parseInt(timeParts[0]), parseInt(timeParts[1]), parseInt(timeParts[2] || 0));
-                            
+                             
                             let pBulan = tglAbsen.getMonth();
                             let pTahun = tglAbsen.getFullYear();
 
@@ -1307,7 +1360,7 @@
             const tabelBody = document.getElementById('isi-tabel');
             if(!tabelBody) return;
              
-            tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 30px;'>Memuat data laporan...</td></tr>";
+            tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 24px;'>Memuat data laporan...</td></tr>";
                  
             fetch(SCRIPT_URL, { method: 'POST', redirect: 'follow', body: JSON.stringify({ aksi: "get_laporan" }) })
             .then(res => res.json())
@@ -1332,7 +1385,7 @@
                 renderTabelAdmin("SEMUA");
             })
             .catch(err => {
-                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 30px; color: var(--danger);'>Gagal memuat data. Periksa koneksi internet Anda.</td></tr>";
+                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 24px; color: var(--danger);'>Gagal memuat data. Periksa koneksi internet Anda.</td></tr>";
                 console.error(err);
             });
         }
@@ -1345,18 +1398,18 @@
         function renderTabelAdmin(namaTarget) {
             const tabelBody = document.getElementById('isi-tabel');
             if (!tabelBody) return;
-            
+             
             tabelBody.innerHTML = "";
-            
+             
             if (!dataLaporanGlobal || dataLaporanGlobal.length <= 1) {
-                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 30px;'>Belum ada data absensi.</td></tr>";
+                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 24px;'>Belum ada data absensi.</td></tr>";
                 return;
             }
 
             let sekarang = new Date();
             let targetBulan = sekarang.getMonth();
             let targetTahun = sekarang.getFullYear();
-            
+             
             if (sekarang.getDate() >= 26) {
                 targetBulan += 1;
                 if (targetBulan > 11) { targetBulan = 0; targetTahun += 1; }
@@ -1367,7 +1420,7 @@
                 labelPeriode.style.display = 'inline-block';
                 const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
                 let blnMulai, thnMulai, blnSelesai, thnSelesai;
-                
+                 
                 if (sekarang.getDate() >= 26) {
                     blnMulai = namaBulan[sekarang.getMonth()];
                     thnMulai = sekarang.getFullYear();
@@ -1400,16 +1453,16 @@
                     let statusBadgeClass = 'badge-off';
                     if (kolomStatus === 'Check In') statusBadgeClass = 'badge-in';
                     if (kolomStatus === 'Check Out') statusBadgeClass = 'badge-out';
-                    
+                     
                     let koordinat = (row[3] && row[4]) ? `${parseFloat(row[3]).toFixed(5)}, ${parseFloat(row[4]).toFixed(5)}` : '-';
 
                     tr.innerHTML = `
-                        <td style="padding: 12px; font-weight: 500; font-size: 13px; white-space: nowrap;">${kolomWaktu || '-'}</td>
-                        <td style="padding: 12px; font-weight: bold; font-size: 13px;">${kolomNama || '-'}</td>
-                        <td style="padding: 12px; text-align: center;"><span class="badge ${statusBadgeClass}">${kolomStatus || '-'}</span></td>
-                        <td style="padding: 12px; font-family: monospace; font-size: 12px; color: var(--text-muted);">${koordinat}</td>
-                        <td style="padding: 12px; text-align: center;">
-                            ${row[5] && row[5] !== '-' ? `<a href="${row[5]}" target="_blank" class="btn-lihat">Lihat Foto</a>` : '<span style="color: #cbd5e1; font-size: 12px;">Tanpa Foto</span>'}
+                        <td style="padding: 10px 12px; font-weight: 500; font-size: 12px; white-space: nowrap;">${kolomWaktu || '-'}</td>
+                        <td style="padding: 10px 12px; font-weight: bold; font-size: 12px;">${kolomNama || '-'}</td>
+                        <td style="padding: 10px 12px; text-align: center;"><span class="badge ${statusBadgeClass}">${kolomStatus || '-'}</span></td>
+                        <td style="padding: 10px 12px; font-family: monospace; font-size: 11px; color: var(--text-muted);">${koordinat}</td>
+                        <td style="padding: 10px 12px; text-align: center;">
+                            ${row[5] && row[5] !== '-' ? `<a href="${row[5]}" target="_blank" class="btn-lihat">Lihat Foto</a>` : '<span style="color: #cbd5e1; font-size: 11px;">Tanpa Foto</span>'}
                         </td>
                     `;
                     tabelBody.appendChild(tr);
@@ -1421,16 +1474,16 @@
                             let parts = kolomWaktu.split(" ");
                             let dateParts = parts[0].split("-");
                             let timeParts = parts[1].split(":");
-                            
+                             
                             let day = parseInt(dateParts[0], 10);
                             let month = parseInt(dateParts[1], 10) - 1;
                             let year = parseInt(dateParts[2], 10);
 
                             let tglAbsen = new Date(year, month, day, parseInt(timeParts[0], 10), parseInt(timeParts[1], 10));
-                            
+                             
                             let pBulan = tglAbsen.getMonth();
                             let pTahun = tglAbsen.getFullYear();
-                            
+                             
                             if (tglAbsen.getDate() >= 26) {
                                 pBulan += 1;
                                 if (pBulan > 11) { pBulan = 0; pTahun += 1; }
@@ -1478,7 +1531,7 @@
                         if (lastOut === 17 || lastOut === 18) totalPs++;
                     }
                 }
-                
+                 
                 if (document.getElementById('admin-stat-masuk')) document.getElementById('admin-stat-masuk').innerText = totalMasuk;
                 if (document.getElementById('admin-stat-terlambat')) document.getElementById('admin-stat-terlambat').innerText = totalTerlambatAdmin;
                 if (document.getElementById('admin-stat-off')) document.getElementById('admin-stat-off').innerText = totalOff;
@@ -1488,7 +1541,7 @@
 
         function cekValidasiHarian() {
             tampilkanStatistik(); 
-            
+             
             if (!isDataLoaded) {
                 kunciTombolKerja(true);
                 return;
@@ -1510,7 +1563,7 @@
 
             const currentLog = JSON.parse(localStorage.getItem(`absen_${namaLogin}`)) || { status: [] };
             const status = currentLog.status || [];
-            
+             
             const detailWaktu = JSON.parse(localStorage.getItem(`detailWaktu_${namaLogin}`)) || {};
             document.getElementById('time-checkin').innerText = detailWaktu['Check In'] ? "IN: " + detailWaktu['Check In'] : "--:--";
             document.getElementById('time-checkout').innerText = detailWaktu['Check Out'] ? "OUT: " + detailWaktu['Check Out'] : "--:--";
@@ -1564,7 +1617,7 @@
             .then(stream => {
                 streamKamera = stream;
                 elKamera.srcObject = stream;
-                
+                 
                 var playPromise = elKamera.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(error => {
@@ -1593,16 +1646,16 @@
         function prosesAbsenOff() {
             document.getElementById('modal-title').innerText = 'Konfirmasi Libur';
             document.getElementById('modal-pesan').innerHTML = `
-                <p style="margin-bottom: 12px; font-weight: 500;">Apakah Anda yakin ingin mengambil hari OFF (Libur) hari ini?</p>
-                <div style="display: flex; gap: 10px; margin-top: 15px;">
-                    <button onclick="eksekusiAbsenOff()" style="background: var(--danger); color: white; border: none; padding: 12px; border-radius: 10px; flex: 1; font-weight: bold; cursor: pointer;">YA, LIBUR</button>
-                    <button onclick="tutupModal()" style="background: #e2e8f0; color: #334155; border: none; padding: 12px; border-radius: 10px; flex: 1; font-weight: bold; cursor: pointer;">BATAL</button>
+                <p style="margin-bottom: 10px; font-weight: 500;">Apakah Anda yakin ingin mengambil hari OFF (Libur) hari ini?</p>
+                <div style="display: flex; gap: 8px; margin-top: 12px;">
+                    <button onclick="eksekusiAbsenOff()" style="background: var(--danger); color: white; border: none; padding: 10px; border-radius: 8px; flex: 1; font-weight: bold; cursor: pointer;">YA, LIBUR</button>
+                    <button onclick="tutupModal()" style="background: #e2e8f0; color: #334155; border: none; padding: 10px; border-radius: 8px; flex: 1; font-weight: bold; cursor: pointer;">BATAL</button>
                 </div>
             `;
-            
+             
             const tombolTutup = document.getElementById('btn-modal-tutup');
             if (tombolTutup) tombolTutup.style.display = 'none';
-            
+             
             document.getElementById('modal-notif').style.display = 'flex';
         }
 
@@ -1636,7 +1689,7 @@
             .then(res => res.json())
             .then(data => {
                 isEksekusiOffRunning = false;
-                
+                 
                 if (spinner) spinner.style.display = 'none';
                 if (textBtn) textBtn.innerText = "Ambil Hari OFF"; 
 
@@ -1656,7 +1709,7 @@
                     totalOff++;
                     localStorage.setItem(`totalOff_${namaLogin}`, totalOff);
                     tampilkanStatistik();
-                    
+                     
                     cekValidasiHarian();
                     tampilkanPesan("Berhasil mengambil hari OFF dan tercatat di server!", "sukses");
                 } else {
@@ -1666,7 +1719,7 @@
             })
             .catch(err => {
                 isEksekusiOffRunning = false;
-                
+                 
                 if (spinner) spinner.style.display = 'none';
                 if (textBtn) textBtn.innerText = "Ambil Hari OFF";
                 if (btn) {
@@ -1697,7 +1750,7 @@
 
             if (tipeAbsen === 'Check Out' && (jamSekarang === 17 || jamSekarang === 18)) {
                 const waktuCheckInLokal = localStorage.getItem(`waktuCheckIn_${namaLogin}`);
-                
+                 
                 if (waktuCheckInLokal) {
                     const selisihMilidetik = waktuMilidetikSekarang - parseInt(waktuCheckInLokal);
                     const selisihJam = selisihMilidetik / (1000 * 60 * 60);
@@ -1715,22 +1768,22 @@
             canvas.width = video.videoWidth; 
             canvas.height = video.videoHeight;
             const ctx = canvas.getContext('2d');
-            
+             
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
+             
             const latText = lat ? lat.toFixed(6) : "0.000000";
             const lngText = lng ? lng.toFixed(6) : "0.000000";
             const formatWaktu = serverDate.toLocaleDateString('id-ID') + ' ' + waktuSekarang + ' WIB';
             const gpsString = `GPS: ${latText}, ${lngText}`;
-            
+             
             const boxHeight = Math.round(canvas.height * 0.12);
             ctx.fillStyle = "rgba(0, 0, 0, 0.6)"; 
             ctx.fillRect(0, canvas.height - boxHeight, canvas.width, boxHeight);
-            
+             
             ctx.fillStyle = "#ffffff"; 
             ctx.font = `bold ${Math.round(canvas.height * 0.035)}px Arial`;
             ctx.fillText(formatWaktu, Math.round(canvas.width * 0.05), canvas.height - Math.round(boxHeight * 0.6));
-            
+             
             ctx.fillStyle = "#facc15"; 
             ctx.font = `${Math.round(canvas.height * 0.03)}px Arial`;
             ctx.fillText(gpsString, Math.round(canvas.width * 0.05), canvas.height - Math.round(boxHeight * 0.25));
@@ -1740,14 +1793,14 @@
             const btn = document.getElementById('btnAbsen');
             const spinner = document.getElementById('absen-spinner');
             const textKirim = document.getElementById('text-absen-kirim');
-             
+              
             if(btn) {
                 btn.disabled = true;
                 btn.classList.add('btn-disabled');
             }
             if(spinner) spinner.style.display = 'inline-block';
             if(textKirim) textKirim.innerText = "Memproses...";
-             
+              
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 redirect: 'follow',
@@ -1763,7 +1816,7 @@
                     btn.disabled = false;
                     btn.classList.remove('btn-disabled');
                 }
-                 
+               
                 if(data.pesan && data.pesan.includes("berhasil")) {
                     const logAbsenHariIni = JSON.parse(localStorage.getItem(`absen_${namaLogin}`)) || { status: [] };
                     if(!logAbsenHariIni.status.includes(tipeAbsen)) {
@@ -1803,7 +1856,7 @@
                         }
                         localStorage.removeItem(`waktuCheckIn_${namaLogin}`);
                     }
-                 
+               
                     tampilkanStatistik();
                     tampilkanPesan("Absen " + tipeAbsen + " berhasil pada pukul " + waktuSekarang + "!" + infoDurasi, 'sukses');
                 } else {
