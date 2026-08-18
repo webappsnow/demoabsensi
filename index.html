@@ -55,14 +55,14 @@
             margin: 0;
         }
 
-        /* --- LAYOUT UTAMA ENTERPRISE --- */
+        /* --- LAYOUT UTAMA RESPONSIF --- */
         .app-layout {
             display: flex;
             width: 100%;
             min-height: 100vh;
         }
 
-        /* SIDEBAR KIRI */
+        /* SIDEBAR KHUSUS PC */
         .sidebar {
             width: 260px;
             background: var(--sidebar-bg);
@@ -137,7 +137,7 @@
             color: #ffffff;
         }
 
-        /* MAIN CONTENT AREA */
+        /* MAIN CONTENT AREA (PC DEFAULT) */
         .main-content {
             margin-left: 260px;
             flex-grow: 1;
@@ -648,18 +648,35 @@
             color: #cbd5e1 !important;
         }
 
+        /* --- PENGATURAN KHUSUS HP (MOBILE VIEW) AGAR LANGSUNG CENTER --- */
         @media(max-width: 768px) {
-            .sidebar { display: none; }
-            .main-content { margin-left: 0; }
-            .stat-box { grid-template-columns: repeat(2, 1fr); }
-            .absen-card-group { grid-template-columns: 1fr; }
+            .sidebar { 
+                display: none !important; 
+            }
+            .main-content { 
+                margin-left: 0 !important; 
+                width: 100% !important;
+            }
+            .corporate-header {
+                padding: 16px 20px;
+            }
+            #appContainer {
+                padding: 20px 16px;
+                max-width: 100% !important;
+            }
+            .stat-box { 
+                grid-template-columns: repeat(2, 1fr); 
+            }
+            .absen-card-group { 
+                grid-template-columns: 1fr; 
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="app-layout">
-        <!-- SIDEBAR KIRI -->
+        <!-- SIDEBAR KIRI (Hanya muncul di PC) -->
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <img src="logo.png" class="sidebar-logo" alt="Logo">
