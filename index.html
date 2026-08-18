@@ -158,7 +158,7 @@
 
         #appContainer {
             width: 100%;
-            max-width: 860px;
+            max-width: 960px;
             margin: 0 auto;
             padding: 40px 24px;
             display: flex;
@@ -180,7 +180,7 @@
 
         .box-admin { 
             max-width: 100% !important; 
-            padding: 36px; 
+            padding: 32px; 
         }
 
         .logo-container {
@@ -553,7 +553,7 @@
         }
 
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th, td { padding: 16px 20px; font-size: 13px; }
+        th, td { padding: 14px 18px; font-size: 13px; }
         th { background: #f8fafc; color: var(--text-muted); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-color); }
         td { border-bottom: 1px solid var(--border-color); vertical-align: middle; color: var(--text-main); }
         tr:last-child td { border-bottom: none; }
@@ -568,6 +568,8 @@
         .badge-in { background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-color); }
         .badge-out { background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-color); }
         .badge-off { background: #fee2e2; color: #991b1b; }
+        .badge-admin { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+        .badge-user { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
 
         .btn-lihat {
             display: inline-block;
@@ -579,6 +581,44 @@
             font-weight: 700;
             text-decoration: none;
             border: 1px solid var(--border-color);
+        }
+
+        /* --- STYLING TAB ADMIN RAPI --- */
+        .admin-nav {
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+        }
+
+        .admin-tab-btn {
+            background: #f8fafc;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 8px;
+            height: auto;
+            width: auto;
+            cursor: pointer;
+            box-shadow: none;
+            transition: all 0.2s;
+        }
+
+        .admin-tab-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
         }
 
         .spinner {
@@ -621,50 +661,19 @@
             pointer-events: none;
             opacity: 1;
         }
-        
-        .btn-disabled .absen-icon {
-            background-color: #f1f5f9 !important;
-            color: #cbd5e1 !important;
-        }
 
-        .btn-disabled .absen-title,
-        .btn-disabled .info-jam-absen {
-            color: #cbd5e1 !important;
-        }
-
-        /* --- PENGATURAN RESPONSIF KHUSUS HP --- */
         @media(min-width: 769px) {
-            .sidebar { 
-                display: flex !important; 
-            }
-            .main-content { 
-                margin-left: 260px !important; 
-                width: calc(100% - 260px) !important;
-            }
+            .sidebar { display: flex !important; }
+            .main-content { margin-left: 260px !important; width: calc(100% - 260px) !important; }
         }
 
         @media(max-width: 768px) {
-            .sidebar { 
-                display: none !important; 
-            }
-            .main-content { 
-                margin-left: 0 !important; 
-                width: 100% !important;
-            }
-            .corporate-header {
-                padding: 16px 20px;
-            }
-            #appContainer {
-                padding: 20px 16px;
-                max-width: 100% !important;
-                margin: 0 auto !important;
-            }
-            .stat-box { 
-                grid-template-columns: repeat(2, 1fr); 
-            }
-            .absen-card-group { 
-                grid-template-columns: 1fr; 
-            }
+            .sidebar { display: none !important; }
+            .main-content { margin-left: 0 !important; width: 100% !important; }
+            .corporate-header { padding: 16px 20px; }
+            #appContainer { padding: 20px 16px; max-width: 100% !important; margin: 0 auto !important; }
+            .stat-box { grid-template-columns: repeat(2, 1fr); }
+            .absen-card-group { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -851,73 +860,117 @@
                     </button>
                 </div>
 
-                <!-- VIEW ADMIN -->
+                <!-- VIEW ADMIN YANG DI-UPGRADE DAN DIRAPIKAN -->
                 <div id="view-admin" class="box box-admin" style="display:none;">
                     <div class="admin-header" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 24px; text-align: left; flex-wrap: wrap; gap: 16px;">
                         <div>
                             <h2 style="font-size: 20px; color: var(--text-main);">Panel Administrator HRIS</h2>
-                            <div style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Rekapitulasi Kehadiran & Laporan Karyawan</div>
+                            <div style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Kelola Kehadiran & Akun Pengguna Terpusat</div>
                         </div>
-                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                            <button onclick="downloadCSV()" style="width: auto; height: 44px; background: var(--success); color: white; padding: 0 16px; font-size: 12px; border-radius: 6px; border-color: var(--success); font-weight: 700;">
-                                📥 Unduh Laporan (CSV)
-                            </button>
-                            <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; height: 44px; padding: 0 16px; font-size: 12px; font-weight: 700;">
-                                Keluar Sistem
-                            </button>
-                        </div>
+                        <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; height: 40px; padding: 0 16px; font-size: 12px; font-weight: 700;">
+                            Keluar Sistem
+                        </button>
                     </div>
 
-                    <div style="background: #f8fafc; padding: 24px; border-radius: var(--radius-md); margin-bottom: 24px; border: 1px solid var(--border-color); text-align: left;">
-                        <label style="font-weight: 700; display: block; margin-bottom: 8px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">
-                            Filter Karyawan:
-                        </label>
-                        <select id="filter-nama-admin" onchange="filterLaporanAdmin()" style="width: 100%; max-width: 360px;">
-                            <option value="SEMUA">-- Tampilkan Semua Karyawan --</option>
-                        </select>
+                    <!-- NAVIGASI TAB ADMIN -->
+                    <div class="admin-nav">
+                        <button class="admin-tab-btn active" onclick="gantiTabAdmin('laporan', this)">📊 Laporan Kehadiran</button>
+                        <button class="admin-tab-btn" onclick="gantiTabAdmin('users', this)">👥 Kelola Akun User</button>
+                    </div>
+
+                    <!-- TAB 1: LAPORAN KEHADIRAN -->
+                    <div id="admin-sec-laporan" class="admin-section active">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                            <div>
+                                <label style="font-weight: 700; display: block; margin-bottom: 6px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Filter Karyawan:</label>
+                                <select id="filter-nama-admin" onchange="filterLaporanAdmin()" style="width: 280px;">
+                                    <option value="SEMUA">-- Tampilkan Semua Karyawan --</option>
+                                </select>
+                            </div>
+                            <button onclick="downloadCSV()" style="width: auto; height: 42px; background: var(--success); color: white; padding: 0 16px; font-size: 12px; border-radius: 8px; border-color: var(--success); font-weight: 700; margin-top: auto;">
+                                📥 Unduh Laporan (CSV)
+                            </button>
+                        </div>
                         
-                        <div id="periode-admin-text" style="display: none; margin-top: 14px; font-size: 12px; color: var(--text-main); font-weight: 700; background: #f1f5f9; padding: 8px 14px; border-radius: 6px; display: inline-block; border: 1px solid var(--border-color);">
+                        <div id="periode-admin-text" style="display: none; margin-bottom: 16px; font-size: 12px; color: var(--text-main); font-weight: 700; background: #f1f5f9; padding: 8px 14px; border-radius: 6px; border: 1px solid var(--border-color);">
                             Periode: -
                         </div>
                         
-                        <div id="stat-karyawan-admin" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 18px;">
-                            <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                        <div id="stat-karyawan-admin" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px;">
+                            <div style="background: white; padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
                                 <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Hadir</div>
-                                <strong id="admin-stat-masuk" style="font-size: 20px; font-weight: 800; color: var(--success);">0</strong>
+                                <strong id="admin-stat-masuk" style="font-size: 18px; font-weight: 800; color: var(--success);">0</strong>
                             </div>
-                            <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="background: white; padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
                                 <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Terlambat</div>
-                                <strong id="admin-stat-terlambat" style="font-size: 20px; font-weight: 800; color: var(--danger);">0</strong>
+                                <strong id="admin-stat-terlambat" style="font-size: 18px; font-weight: 800; color: var(--danger);">0</strong>
                             </div>
-                            <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="background: white; padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
                                 <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">OFF</div>
-                                <strong id="admin-stat-off" style="font-size: 20px; font-weight: 800; color: var(--danger);">0</strong>
+                                <strong id="admin-stat-off" style="font-size: 18px; font-weight: 800; color: var(--danger);">0</strong>
                             </div>
-                            <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="background: white; padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
                                 <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">PS</div>
-                                <strong id="admin-stat-ps" style="font-size: 20px; font-weight: 800; color: var(--warning);">0</strong>
+                                <strong id="admin-stat-ps" style="font-size: 18px; font-weight: 800; color: var(--warning);">0</strong>
                             </div>
                         </div>
+                         
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Waktu</th>
+                                        <th>Nama Karyawan</th>
+                                        <th style="text-align: center;">Status</th>
+                                        <th>Koordinat (GPS)</th>
+                                        <th style="text-align: center;">Foto Bukti</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="isi-tabel">
+                                    <tr>
+                                        <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 40px; font-style: italic;">Sedang memuat data laporan...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                     
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Waktu</th>
-                                    <th>Nama Karyawan</th>
-                                    <th style="text-align: center;">Status</th>
-                                    <th>Koordinat (GPS)</th>
-                                    <th style="text-align: center;">Foto Bukti</th>
-                                </tr>
-                            </thead>
-                            <tbody id="isi-tabel">
-                                <tr>
-                                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 40px; font-style: italic;">Sedang memuat data laporan...</td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                    <!-- TAB 2: KELOLA AKUN USER -->
+                    <div id="admin-sec-users" class="admin-section">
+                        <div style="background: #f8fafc; padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 20px;">
+                            <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 14px;">➕ Tambah User Baru</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 12px;">
+                                <input type="text" id="input-new-user" placeholder="Username / NIK">
+                                <input type="text" id="input-new-pass" placeholder="Password">
+                                <input type="text" id="input-new-nama" placeholder="Nama Lengkap Karyawan">
+                                <select id="input-new-role">
+                                    <option value="user">Role: Karyawan (User)</option>
+                                    <option value="admin">Role: Administrator</option>
+                                </select>
+                            </div>
+                            <button class="btn-primary" onclick="tambahUserBaru()" style="width: auto; height: 40px; padding: 0 20px; font-size: 12px;">Simpan User ke Database</button>
+                        </div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Password</th>
+                                        <th>Nama Lengkap</th>
+                                        <th style="text-align: center;">Role</th>
+                                        <th style="text-align: center;">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="isi-tabel-user">
+                                    <tr>
+                                        <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">Memuat data akun...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
 
             </div>
@@ -991,6 +1044,18 @@
         function setStatusLogText(htmlText) {
             const statusLogText = document.getElementById('status-log-text');
             if (statusLogText) statusLogText.innerHTML = htmlText;
+        }
+
+        function gantiTabAdmin(tabName, btnElement) {
+            document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(`admin-sec-${tabName}`).classList.add('active');
+            btnElement.classList.add('active');
+
+            if (tabName === 'users') {
+                muatDataUserAdmin();
+            }
         }
 
         function bukaPetaFullscreen(tipe) {
@@ -1480,6 +1545,85 @@
                 tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 40px; color: var(--danger);'>Gagal memuat data. Periksa koneksi internet Anda.</td></tr>";
                 console.error(err);
             });
+        }
+
+        function muatDataUserAdmin() {
+            const tbody = document.getElementById('isi-tabel-user');
+            if(!tbody) return;
+            tbody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 30px;'>Memuat data akun...</td></tr>";
+            
+            fetch(SCRIPT_URL, { method: 'POST', redirect: 'follow', body: JSON.stringify({ aksi: "get_users" }) })
+            .then(res => res.json())
+            .then(users => {
+                tbody.innerHTML = "";
+                if (!users || users.length === 0) {
+                    tbody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 30px;'>Belum ada data user.</td></tr>";
+                    return;
+                }
+                users.forEach(u => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td style="font-weight: 600;">${u.username}</td>
+                            <td>••••••••</td>
+                            <td>${u.nama}</td>
+                            <td style="text-align: center;"><span class="badge ${u.role === 'admin' ? 'badge-admin' : 'badge-user'}">${u.role.toUpperCase()}</span></td>
+                            <td style="text-align: center;">
+                                <button onclick="hapusUser('${u.username}')" style="width: auto; height: 32px; padding: 0 10px; background: #fee2e2; color: var(--danger); font-size: 11px; border-radius: 6px; border: 1px solid #fecaca; box-shadow: none;">Hapus</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            })
+            .catch(err => {
+                tbody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 30px; color: var(--danger);'>Gagal memuat data user.</td></tr>";
+            });
+        }
+
+        function tambahUserBaru() {
+            const u = document.getElementById('input-new-user').value.trim();
+            const p = document.getElementById('input-new-pass').value.trim();
+            const n = document.getElementById('input-new-nama').value.trim();
+            const r = document.getElementById('input-new-role').value;
+
+            if (!u || !p || !n) {
+                tampilkanPesan("Semua kolom form user harus diisi!", "info");
+                return;
+            }
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                redirect: 'follow',
+                body: JSON.stringify({ aksi: "tambah_user", username: u, password: p, nama: n, role: r })
+            })
+            .then(res => res.json())
+            .then(data => {
+                tampilkanPesan(data.pesan, "sukses");
+                document.getElementById('input-new-user').value = "";
+                document.getElementById('input-new-pass').value = "";
+                document.getElementById('input-new-nama').value = "";
+                muatDataUserAdmin();
+            })
+            .catch(err => {
+                tampilkanPesan("Gagal menambahkan user baru.", "info");
+            });
+        }
+
+        function hapusUser(username) {
+            if (confirm(`Yakin ingin menghapus user ${username}?`)) {
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    redirect: 'follow',
+                    body: JSON.stringify({ aksi: "hapus_user", username: username })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    tampilkanPesan(data.pesan, "sukses");
+                    muatDataUserAdmin();
+                })
+                .catch(err => {
+                    tampilkanPesan("Gagal menghapus user.", "info");
+                });
+            }
         }
 
         function filterLaporanAdmin() {
