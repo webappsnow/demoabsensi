@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sistem Absensi Karyawan</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#09090b">
+    <meta name="theme-color" content="#0f172a">
     
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,22 +17,21 @@
 
     <style>
         :root {
-            --primary: #0284c7;
-            --primary-hover: #0369a1;
-            --primary-light: #f0f9ff;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #e0e7ff;
             --success: #10b981;
             --warning: #f59e0b;
-            --danger: #f43f5e;
-            --background: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #09090b;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --radius-lg: 16px;
-            --radius-md: 10px;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0_0 / 0.05);
-            --shadow-md: 0 10px 15px -3px rgb(0 0_0 / 0.05), 0 4px 6px -4px rgb(0 0_0 / 0.05);
-            --shadow-lg: 0 20px 25px -5px rgb(0 0_0 / 0.05), 0 8px 10px -6px rgb(0 0_0 / 0.05);
+            --danger: #ef4444;
+            --background: #090d16;
+            --card-bg: #111827;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --border-color: #1f2937;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow-glow: 0 0 25px rgba(79, 70, 229, 0.15);
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
         * {
@@ -49,18 +48,22 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            align-items: center;
             overflow-x: hidden;
             margin: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
         }
 
-        /* --- TOP BAR KORPORAT MODERN --- */
+        /* --- TOP BAR EKSEKUTIF --- */
         .corporate-header {
             width: 100%;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
-            padding: 14px 28px;
+            padding: 16px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -72,22 +75,22 @@
         .corporate-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .corporate-logo {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             object-fit: cover;
-            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .corporate-title-text {
             font-size: 15px;
             font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: -0.3px;
+            color: #ffffff;
+            letter-spacing: -0.2px;
         }
 
         .corporate-subtitle {
@@ -106,30 +109,31 @@
             padding: 24px 16px;
         }
 
-        /* --- KARTU UTAMA --- */
+        /* --- KARTU UTAMA PREMIUM --- */
         .box { 
             width: 100%;
             background: var(--card-bg); 
-            padding: 28px; 
+            padding: 32px; 
             border-radius: var(--radius-lg); 
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-card), var(--shadow-glow);
             border: 1px solid var(--border-color);
             text-align: left;
+            position: relative;
         }
 
         .box-admin { 
-            max-width: 1240px !important; 
-            padding: 32px; 
+            max-width: 1280px !important; 
+            padding: 36px; 
         }
 
         .logo-container {
-            width: 52px;
-            height: 52px;
-            margin-bottom: 16px;
-            border-radius: 12px;
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            border-radius: 14px;
             padding: 2px;
-            background: var(--primary-light);
-            border: 1px solid #bae6fd;
+            background: rgba(79, 70, 229, 0.1);
+            border: 1px solid rgba(79, 70, 229, 0.3);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -139,70 +143,72 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 12px;
         }
 
         h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: -0.4px;
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
         }
 
         .sub-title {
             color: var(--text-muted);
             font-size: 13px;
             margin-top: 4px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             font-weight: 400;
         }
 
         .time-wrapper {
-            background: #f8fafc;
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
-            padding: 16px;
-            margin-bottom: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
         .jam-digital {
-            font-size: 38px;
+            font-size: 42px;
             font-weight: 800;
-            color: var(--primary);
+            color: #818cf8;
             font-variant-numeric: tabular-nums;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
             line-height: 1;
+            text-shadow: 0 0 20px rgba(129, 140, 248, 0.3);
         }
 
         .tanggal-digital {
             font-size: 12px;
             color: var(--text-muted);
-            margin-top: 6px;
+            margin-top: 8px;
             font-weight: 600;
             text-transform: capitalize;
+            letter-spacing: 0.3px;
         }
 
         #periode-karyawan-text {
-            background: var(--primary-light) !important;
-            border: 1px solid #bae6fd !important;
+            background: rgba(79, 70, 229, 0.1) !important;
+            border: 1px solid rgba(79, 70, 229, 0.3) !important;
             border-left: 4px solid var(--primary) !important;
             border-radius: var(--radius-md) !important;
-            padding: 12px 16px !important;
-            margin-bottom: 16px !important;
+            padding: 14px 18px !important;
+            margin-bottom: 20px !important;
             box-shadow: none !important;
         }
 
         .stat-box {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.02) !important;
             border: 1px solid var(--border-color) !important;
             border-radius: var(--radius-md) !important;
-            padding: 16px !important;
-            margin-bottom: 16px !important;
-            box-shadow: var(--shadow-sm) !important;
+            padding: 18px !important;
+            margin-bottom: 20px !important;
+            box-shadow: none !important;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .stat-item {
@@ -216,63 +222,63 @@
 
         .stat-item span:last-child {
             font-weight: 700;
-            color: var(--text-main);
+            color: #ffffff;
         }
 
         #status-log {
             font-size: 12px !important;
-            color: var(--text-main) !important;
-            background: #f8fafc !important;
+            color: #e5e7eb !important;
+            background: rgba(255, 255, 255, 0.03) !important;
             border: 1px solid var(--border-color) !important;
-            padding: 12px 16px !important;
+            padding: 14px 18px !important;
             border-radius: var(--radius-md) !important;
-            margin-bottom: 16px !important;
+            margin-bottom: 20px !important;
             font-weight: 500 !important;
             text-align: left !important;
-            line-height: 1.5 !important;
+            line-height: 1.6 !important;
         }
 
         #view-map-fullscreen {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #ffffff;
+            background: var(--background);
             z-index: 999;
             flex-direction: column;
-            padding: 16px;
+            padding: 20px;
         }
 
         .map-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .map-header h3 {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
-            color: var(--text-main);
+            color: #ffffff;
         }
 
         #info-jarak-peta {
             position: absolute;
-            top: 74px;
-            left: 20px;
-            right: 20px;
+            top: 84px;
+            left: 24px;
+            right: 24px;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(17, 24, 39, 0.9);
             backdrop-filter: blur(12px);
-            padding: 12px 16px;
+            padding: 14px 18px;
             border-radius: var(--radius-md);
             font-size: 12px;
             font-weight: 600;
             text-align: left;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-card);
             border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         #fullscreen-map {
@@ -280,67 +286,72 @@
             flex-grow: 1;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             position: relative;
         }
 
         .input-group {
             text-align: left;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .input-group label {
             display: block;
             font-size: 12px;
             font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--text-main);
+            margin-bottom: 8px;
+            color: #d1d5db;
         }
 
         input, select { 
             width: 100%; 
-            padding: 11px 14px; 
+            padding: 13px 16px; 
             border-radius: var(--radius-md); 
             border: 1px solid var(--border-color);
-            background: #f8fafc;
-            font-size: 13px;
-            color: var(--text-main);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.03);
+            font-size: 14px;
+            color: #ffffff;
+            transition: all 0.2s ease;
         }
 
         input:focus, select:focus {
             outline: none;
             border-color: var(--primary);
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
         }
 
         .btn-grid {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-bottom: 16px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
         .absen-card-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
         }
 
         .absen-card {
             border-radius: var(--radius-md);
-            padding: 14px 12px;
+            padding: 16px 14px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             justify-content: space-between;
-            gap: 10px;
+            gap: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: var(--shadow-sm);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-card);
             width: 100%;
             border: 1px solid var(--border-color);
+        }
+
+        .absen-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .absen-card:active {
@@ -348,17 +359,17 @@
         }
 
         .absen-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .absen-icon svg {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             stroke-width: 2.2;
             fill: none;
             stroke: currentColor;
@@ -367,19 +378,19 @@
         }
 
         .card-in {
-            background: #ffffff !important;
-            border-color: #cbd5e1 !important;
+            background: rgba(255, 255, 255, 0.02) !important;
+            border-color: var(--border-color) !important;
         }
-        .card-in .absen-icon { background: var(--primary-light); color: var(--primary); }
-        .card-in .absen-title { color: var(--text-main) !important; font-weight: 700; }
+        .card-in .absen-icon { background: rgba(79, 70, 229, 0.15); color: #818cf8; }
+        .card-in .absen-title { color: #ffffff !important; font-weight: 700; }
         .card-in .info-jam-absen { color: var(--text-muted) !important; font-weight: 600 !important; }
 
         .card-out {
-            background: #ffffff !important;
-            border-color: #cbd5e1 !important;
+            background: rgba(255, 255, 255, 0.02) !important;
+            border-color: var(--border-color) !important;
         }
-        .card-out .absen-icon { background: #fef3c7; color: #d97706; }
-        .card-out .absen-title { color: var(--text-main) !important; font-weight: 700; }
+        .card-out .absen-icon { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .card-out .absen-title { color: #ffffff !important; font-weight: 700; }
         .card-out .info-jam-absen { color: var(--text-muted) !important; font-weight: 600 !important; }
 
         .card-off-wrapper {
@@ -391,17 +402,17 @@
             flex-direction: row;
             justify-content: flex-start;
             align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: #ffffff !important;
-            border-color: #cbd5e1 !important;
+            gap: 14px;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.02) !important;
+            border-color: var(--border-color) !important;
             width: 100% !important;
             max-width: none !important;
             margin: 0;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-card);
         }
-        .card-off .absen-icon { background: #fee2e2; color: var(--danger); width: 32px; height: 32px; }
-        .card-off .absen-title { color: var(--text-main) !important; font-weight: 700; }
+        .card-off .absen-icon { background: rgba(239, 68, 68, 0.15); color: #f87171; width: 36px; height: 36px; }
+        .card-off .absen-title { color: #ffffff !important; font-weight: 700; }
         .card-off .info-jam-absen { color: var(--text-muted) !important; font-weight: 600 !important; background: transparent; width: auto; padding: 0; }
 
         .absen-title {
@@ -418,18 +429,18 @@
 
         button { 
             width: 100%; 
-            padding: 12px 16px; 
+            padding: 14px 20px; 
             border-radius: var(--radius-md); 
             font-size: 13px; 
-            font-weight: 600; 
+            font-weight: 700; 
             cursor: pointer; 
             border: 1px solid transparent;
             transition: all 0.2s ease;
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
-            box-shadow: var(--shadow-sm);
+            gap: 10px;
+            box-shadow: var(--shadow-card);
         }
 
         button:active {
@@ -439,7 +450,7 @@
         .btn-primary {
             background: var(--primary);
             color: white;
-            border-color: var(--primary);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .btn-primary:hover {
@@ -448,41 +459,39 @@
 
         .btn-theme-in {
             background: var(--primary) !important;
-            border-color: var(--primary) !important;
             color: white !important;
         }
 
         .btn-theme-out {
             background: #d97706 !important;
-            border-color: #d97706 !important;
             color: white !important;
         }
 
         .btn-absen-kirim { 
             background: var(--primary); 
             color: white;
-            margin-top: 16px;
+            margin-top: 20px;
         }
 
         .btn-logout { 
-            background: #ffffff !important; 
-            color: var(--danger) !important; 
-            border: 1px solid #fecaca !important;
-            margin-top: 12px;
+            background: rgba(239, 68, 68, 0.1) !important; 
+            color: #f87171 !important; 
+            border: 1px solid rgba(239, 68, 68, 0.2) !important;
+            margin-top: 14px;
             box-shadow: none !important;
         }
 
         .btn-logout:hover {
-            background: #fff1f2 !important;
+            background: rgba(239, 68, 68, 0.2) !important;
         }
 
         .btn-kembali {
-            background: #f8fafc;
+            background: rgba(255, 255, 255, 0.05);
             color: var(--text-muted);
             border: 1px solid var(--border-color);
             font-size: 12px;
-            padding: 10px;
-            margin-top: 8px;
+            padding: 12px;
+            margin-top: 10px;
             box-shadow: none;
         }
 
@@ -491,9 +500,9 @@
             aspect-ratio: 3 / 4;
             object-fit: cover;
             border-radius: var(--radius-md); 
-            background: #0f172a; 
+            background: #000000; 
             border: 1px solid var(--border-color);
-            max-height: 320px;
+            max-height: 340px;
         }
 
         .table-container {
@@ -501,42 +510,42 @@
             overflow-x: auto;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
-            margin-top: 16px;
-            background: white;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.01);
             box-shadow: none;
         }
 
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th, td { padding: 14px 18px; font-size: 13px; }
-        th { background: #f8fafc; color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-color); }
-        td { border-bottom: 1px solid var(--border-color); vertical-align: middle; color: var(--text-main); }
+        th, td { padding: 16px 20px; font-size: 13px; }
+        th { background: rgba(255, 255, 255, 0.03); color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid var(--border-color); }
+        td { border-bottom: 1px solid var(--border-color); vertical-align: middle; color: #e5e7eb; }
         tr:last-child td { border-bottom: none; }
         
         .badge {
             display: inline-block;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
         }
-        .badge-in { background: #d1fae5; color: #065f46; }
-        .badge-out { background: #fef3c7; color: #92400e; }
-        .badge-off { background: #fee2e2; color: #991b1b; }
+        .badge-in { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-out { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-off { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
 
         .btn-lihat {
             display: inline-block;
-            background: var(--primary-light);
-            color: var(--primary);
-            padding: 6px 12px;
+            background: rgba(79, 70, 229, 0.15);
+            color: #818cf8;
+            padding: 6px 14px;
             border-radius: 6px;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
-            border: 1px solid #bae6fd;
+            border: 1px solid rgba(79, 70, 229, 0.3);
         }
 
         .spinner {
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             border-top: 2px solid #ffffff;
             width: 16px;
@@ -552,40 +561,40 @@
 
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.5); 
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.7); 
+            backdrop-filter: blur(6px);
             display: flex; justify-content: center;
             align-items: center; z-index: 1000;
-            padding: 16px;
+            padding: 20px;
         }
         .modal-box {
-            background: white; padding: 28px; border-radius: var(--radius-lg);
-            width: 100%; max-width: 360px; text-align: left;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            background: var(--card-bg); padding: 32px; border-radius: var(--radius-lg);
+            width: 100%; max-width: 380px; text-align: left;
+            box-shadow: var(--shadow-card), var(--shadow-glow);
             border: 1px solid var(--border-color);
         }
 
         .btn-disabled {
-            background-color: #f1f5f9 !important;
-            border-color: #e2e8f0 !important;
-            color: #94a3b8 !important;
+            background-color: rgba(255, 255, 255, 0.02) !important;
+            border-color: var(--border-color) !important;
+            color: #4b5563 !important;
             box-shadow: none !important;
             cursor: not-allowed !important;
             pointer-events: none;
-            opacity: 1;
+            opacity: 0.6;
         }
         
         .btn-disabled .absen-icon {
-            background-color: #f1f5f9 !important;
-            color: #cbd5e1 !important;
+            background-color: rgba(255, 255, 255, 0.02) !important;
+            color: #4b5563 !important;
         }
 
         .btn-disabled .absen-title {
-            color: #94a3b8 !important;
+            color: #4b5563 !important;
         }
 
         .btn-disabled .info-jam-absen {
-            color: #cbd5e1 !important;
+            color: #4b5563 !important;
         }
     </style>
 </head>
@@ -597,11 +606,11 @@
             <img src="logo.png" class="corporate-logo" alt="Logo">
             <div>
                 <div class="corporate-title-text">Toko Maju Jaya</div>
-                <div class="corporate-subtitle">Human Resources Portal</div>
+                <div class="corporate-subtitle">Enterprise Human Resources Portal</div>
             </div>
         </div>
-        <div style="font-size: 11px; font-weight: 600; color: var(--primary); background: var(--primary-light); padding: 5px 12px; border-radius: 6px; border: 1px solid #bae6fd;">
-            Enterprise System
+        <div style="font-size: 11px; font-weight: 700; color: #818cf8; background: rgba(79, 70, 229, 0.15); padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(79, 70, 229, 0.3);">
+            SECURE ENTERPRISE
         </div>
     </header>
 
@@ -626,7 +635,7 @@
                     <input type="password" id="pass" placeholder="••••••••">
                 </div>
                  
-                <button class="btn-primary" id="btn-login" onclick="prosesLogin()" style="margin-top: 8px;">
+                <button class="btn-primary" id="btn-login" onclick="prosesLogin()" style="margin-top: 10px;">
                     <span id="text-login">Masuk Sistem</span>
                     <div class="spinner" id="login-spinner"></div>
                 </button>
@@ -634,12 +643,12 @@
 
             <!-- VIEW DASHBOARD -->
             <div id="view-dashboard" class="box" style="display:none;">
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                    <div class="logo-container" style="margin-bottom: 0; width: 48px; height: 48px;">
+                <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+                    <div class="logo-container" style="margin-bottom: 0; width: 52px; height: 52px;">
                         <img src="logo.png" class="logo-toko" alt="Logo Toko">
                     </div>
                     <div>
-                        <h2 style="font-size: 17px;">Halo, <span id="nama-user" style="color: var(--primary);"></span></h2>
+                        <h2 style="font-size: 18px;">Halo, <span id="nama-user" style="color: #818cf8;"></span></h2>
                         <div style="font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 2px;">Dashboard Kehadiran Karyawan</div>
                     </div>
                 </div>
@@ -658,15 +667,15 @@
                     </div>
                     <div class="stat-item">
                         <span>Total OFF (Libur)</span>
-                        <span id="total-off" style="color: var(--danger) !important;">0 hari</span>
+                        <span id="total-off" style="color: #f87171 !important;">0 hari</span>
                     </div>
                     <div class="stat-item">
                         <span>Total PS</span>
-                        <span id="total-ps" style="color: var(--warning) !important;">0 hari</span>
+                        <span id="total-ps" style="color: #fbbf24 !important;">0 hari</span>
                     </div>
                     <div class="stat-item">
                         <span>Total Terlambat</span>
-                        <span id="total-terlambat" style="color: var(--danger) !important;">0 Hari</span>
+                        <span id="total-terlambat" style="color: #f87171 !important;">0 Hari</span>
                     </div>
                 </div>
 
@@ -715,21 +724,21 @@
             <!-- VIEW MAP FULLSCREEN -->
             <div id="view-map-fullscreen">
                 <div class="map-header">
-                    <button onclick="tutupPetaFullscreen()" style="width: auto; padding: 8px 14px; background: #f8fafc; color: var(--text-muted); border-radius: 6px; box-shadow: none; border: 1px solid var(--border-color); font-weight: 600;">← Kembali</button>
+                    <button onclick="tutupPetaFullscreen()" style="width: auto; padding: 10px 16px; background: rgba(255,255,255,0.05); color: #ffffff; border-radius: 8px; box-shadow: none; border: 1px solid var(--border-color); font-weight: 600;">← Kembali</button>
                     <h3 id="judul-map-fullscreen">Verifikasi Lokasi</h3>
-                    <div style="width: 80px;"></div>
+                    <div style="width: 90px;"></div>
                 </div>
                 
                 <div id="info-jarak-peta">
-                    <div style="background: #f1f5f9; color: #475569; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">⏳</div>
+                    <div style="background: rgba(255,255,255,0.05); color: #ffffff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">⏳</div>
                     <div>
-                        <div style="color: var(--text-main); font-size: 13px; font-weight: 700;">Memeriksa lokasi GPS...</div>
-                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 1px;">Menghitung jarak ke titik kantor.</div>
+                        <div style="color: #ffffff; font-size: 13px; font-weight: 700;">Memeriksa lokasi GPS...</div>
+                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 2px;">Menghitung jarak ke titik kantor.</div>
                     </div>
                 </div>
 
                 <div id="fullscreen-map"></div>
-                <button class="btn-primary" id="btn-lanjut-kamera" onclick="lanjutKeKamera()" style="margin-top: 8px;">
+                <button class="btn-primary" id="btn-lanjut-kamera" onclick="lanjutKeKamera()" style="margin-top: 12px;">
                     CHECK IN
                 </button>
             </div>
@@ -744,7 +753,7 @@
                  
                 <video id="kamera" autoplay playsinline></video>
                  
-                <button class="btn-kembali" id="btnGantiKamera" onclick="gantiKamera()" style="margin-top: 12px;">
+                <button class="btn-kembali" id="btnGantiKamera" onclick="gantiKamera()" style="margin-top: 14px;">
                     🔄 Putar Kamera (Depan / Belakang)
                 </button>
                  
@@ -756,49 +765,49 @@
 
             <!-- VIEW ADMIN -->
             <div id="view-admin" class="box box-admin" style="display:none;">
-                <div class="admin-header" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 24px; text-align: left;">
+                <div class="admin-header" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 24px; margin-bottom: 24px; text-align: left;">
                     <div>
-                        <h2 style="font-size: 20px; color: var(--primary);">Panel Administrator HRIS</h2>
-                        <div style="color: var(--text-muted); font-size: 12px; margin-top: 2px;">Rekapitulasi Kehadiran & Laporan Karyawan</div>
+                        <h2 style="font-size: 20px; color: #818cf8;">Panel Administrator HRIS</h2>
+                        <div style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Rekapitulasi Kehadiran & Laporan Karyawan</div>
                     </div>
-                    <div style="display: flex; gap: 10px;">
-                        <button onclick="downloadCSV()" style="width: auto; background: var(--success); color: white; padding: 10px 16px; font-size: 12px; border-radius: 6px; border-color: var(--success); font-weight: 600;">
+                    <div style="display: flex; gap: 12px;">
+                        <button onclick="downloadCSV()" style="width: auto; background: var(--success); color: white; padding: 10px 18px; font-size: 12px; border-radius: 8px; border-color: rgba(255,255,255,0.1); font-weight: 700;">
                             📥 Unduh Laporan (CSV)
                         </button>
-                        <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; padding: 10px 16px; font-size: 12px; font-weight: 600;">
+                        <button class="btn-logout" onclick="logout()" style="margin: 0; width: auto; padding: 10px 18px; font-size: 12px; font-weight: 700;">
                             Keluar Sistem
                         </button>
                     </div>
                 </div>
 
-                <div style="background: #f8fafc; padding: 20px; border-radius: var(--radius-md); margin-bottom: 24px; border: 1px solid var(--border-color); text-align: left;">
-                    <label style="font-weight: 600; display: block; margin-bottom: 8px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">
+                <div style="background: rgba(255, 255, 255, 0.02); padding: 24px; border-radius: var(--radius-md); margin-bottom: 24px; border: 1px solid var(--border-color); text-align: left;">
+                    <label style="font-weight: 700; display: block; margin-bottom: 10px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px;">
                         Filter Karyawan:
                     </label>
-                    <select id="filter-nama-admin" onchange="filterLaporanAdmin()" style="width: 100%; max-width: 340px;">
-                        <option value="SEMUA">-- Tampilkan Semua Karyawan --</option>
+                    <select id="filter-nama-admin" onchange="filterLaporanAdmin()" style="width: 100%; max-width: 360px;">
+                        <option value="SEMUA" style="background: #111827; color: white;">-- Tampilkan Semua Karyawan --</option>
                     </select>
                     
-                    <div id="periode-admin-text" style="display: none; margin-top: 14px; font-size: 12px; color: var(--primary); font-weight: 600; background: var(--primary-light); padding: 8px 14px; border-radius: 6px; display: inline-block; border: 1px solid #bae6fd;">
+                    <div id="periode-admin-text" style="display: none; margin-top: 16px; font-size: 12px; color: #818cf8; font-weight: 700; background: rgba(79, 70, 229, 0.15); padding: 8px 16px; border-radius: 8px; display: inline-block; border: 1px solid rgba(79, 70, 229, 0.3);">
                         Periode: -
                     </div>
                     
-                    <div id="stat-karyawan-admin" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px;">
-                        <div style="background: white; padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 11px; font-weight: 500; color: var(--text-muted);">Hadir</div>
-                            <strong id="admin-stat-masuk" style="font-size: 20px; font-weight: 700; color: var(--success);">0</strong>
+                    <div id="stat-karyawan-admin" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px;">
+                        <div style="background: rgba(255, 255, 255, 0.02); padding: 16px; border-radius: 10px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Hadir</div>
+                            <strong id="admin-stat-masuk" style="font-size: 22px; font-weight: 800; color: #34d399;">0</strong>
                         </div>
-                        <div style="background: white; padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 11px; font-weight: 500; color: var(--text-muted);">Terlambat</div>
-                            <strong id="admin-stat-terlambat" style="font-size: 20px; font-weight: 700; color: var(--danger);">0</strong>
+                        <div style="background: rgba(255, 255, 255, 0.02); padding: 16px; border-radius: 10px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Terlambat</div>
+                            <strong id="admin-stat-terlambat" style="font-size: 22px; font-weight: 800; color: #f87171;">0</strong>
                         </div>
-                        <div style="background: white; padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 11px; font-weight: 500; color: var(--text-muted);">OFF</div>
-                            <strong id="admin-stat-off" style="font-size: 20px; font-weight: 700; color: var(--danger);">0</strong>
+                        <div style="background: rgba(255, 255, 255, 0.02); padding: 16px; border-radius: 10px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">OFF</div>
+                            <strong id="admin-stat-off" style="font-size: 22px; font-weight: 800; color: #f87171;">0</strong>
                         </div>
-                        <div style="background: white; padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                            <div style="font-size: 11px; font-weight: 500; color: var(--text-muted);">PS</div>
-                            <strong id="admin-stat-ps" style="font-size: 20px; font-weight: 700; color: var(--warning);">0</strong>
+                        <div style="background: rgba(255, 255, 255, 0.02); padding: 16px; border-radius: 10px; border: 1px solid var(--border-color); text-align: center;">
+                            <div style="font-size: 11px; font-weight: 600; color: var(--text-muted);">PS</div>
+                            <strong id="admin-stat-ps" style="font-size: 22px; font-weight: 800; color: #fbbf24;">0</strong>
                         </div>
                     </div>
                 </div>
@@ -816,7 +825,7 @@
                         </thead>
                         <tbody id="isi-tabel">
                             <tr>
-                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 36px; font-style: italic;">Sedang memuat data laporan...</td>
+                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 40px; font-style: italic;">Sedang memuat data laporan...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -826,18 +835,18 @@
     </div>
 
     <!-- LAYAR PESAN JIKA LISENSI TIDAK AKTIF -->
-    <div id="errorContainer" style="display: none; min-height: 100vh; align-items: center; justify-content: center; text-align: center; font-family: sans-serif; background: #09090b; color: white; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
-        <div style="background: #18181b; border: 1px solid #27272a; padding: 32px; border-radius: 16px; max-width: 420px; width: 100%; margin: auto; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
-            <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #f43f5e;">Akses Tidak Aktif</h2>
-            <p style="font-size: 13px; color: #a1a1aa; line-height: 1.5;">Layanan absen untuk toko ini sedang ditangguhkan atau masa aktifnya habis. Silakan hubungi Administrator IT.</p>
+    <div id="errorContainer" style="display: none; min-height: 100vh; align-items: center; justify-content: center; text-align: center; font-family: sans-serif; background: #090d16; color: white; padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
+        <div style="background: #111827; border: 1px solid var(--border-color); padding: 36px; border-radius: 20px; max-width: 440px; width: 100%; margin: auto; box-shadow: var(--shadow-card);">
+            <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #f87171;">Akses Tidak Aktif</h2>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">Layanan absen untuk toko ini sedang ditangguhkan atau masa aktifnya habis. Silakan hubungi Administrator IT.</p>
         </div>
     </div>
 
     <!-- MODAL NOTIFIKASI -->
     <div id="modal-notif" class="modal-overlay" style="display:none;">
         <div class="modal-box" id="modal-box">
-            <h3 id="modal-title" style="margin-top:0; font-size: 16px; font-weight: 700; color: var(--text-main);">INFORMASI</h3>
-            <div id="modal-pesan" style="font-size: 13px; color: var(--text-muted); margin: 12px 0 24px 0; line-height: 1.5;">Pesan di sini</div>
+            <h3 id="modal-title" style="margin-top:0; font-size: 16px; font-weight: 800; color: #ffffff;">INFORMASI</h3>
+            <div id="modal-pesan" style="font-size: 13px; color: var(--text-muted); margin: 14px 0 24px 0; line-height: 1.6;">Pesan di sini</div>
             <button class="btn-primary" id="btn-modal-tutup" onclick="tutupModal()">TUTUP</button>
         </div>
     </div> 
@@ -918,9 +927,9 @@
                         .bindPopup("<b>Toko Maju Jaya</b><br>Lokasi Kantor").openPopup();
 
                     fsCircleRadius = L.circle([TOKO_LAT, TOKO_LNG], {
-                        color: '#0284c7',
-                        fillColor: '#0284c7',
-                        fillOpacity: 0.15,
+                        color: '#4f46e5',
+                        fillColor: '#4f46e5',
+                        fillOpacity: 0.2,
                         radius: RADIUS_MAKSIMAL
                     }).addTo(fsMapInstance);
                 } else {
@@ -959,12 +968,12 @@
                         isGpsValid = false;
                         const infoJarak = document.getElementById('info-jarak-peta');
                         if (infoJarak) {
-                            infoJarak.style.borderColor = "#f43f5e";
+                            infoJarak.style.borderColor = "#ef4444";
                             infoJarak.innerHTML = `
-                                <div style="background: #ffe4e6; color: #f43f5e; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✕</div>
+                                <div style="background: rgba(239,68,68,0.15); color: #f87171; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✕</div>
                                 <div>
-                                    <div style="color: #f43f5e; font-size: 13px; font-weight: 700;">GPS Gagal Dibaca</div>
-                                    <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 1px;">Aktifkan izin lokasi pada perangkat Anda.</div>
+                                    <div style="color: #f87171; font-size: 13px; font-weight: 700;">GPS Gagal Dibaca</div>
+                                    <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 2px;">Aktifkan izin lokasi pada perangkat Anda.</div>
                                 </div>
                             `;
                         }
@@ -983,7 +992,7 @@
                 fsMarkerUser = L.marker([userLat, userLng], {
                     icon: L.divIcon({
                         className: 'user-marker',
-                        html: '<div style="background: #0284c7; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 6px rgba(0,0,0,0.3);"></div>'
+                        html: '<div style="background: #4f46e5; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 10px rgba(79,70,229,0.8);"></div>'
                     })
                 }).addTo(fsMapInstance).bindPopup("Lokasi Anda Saat Ini");
             } else {
@@ -1000,22 +1009,22 @@
                 isGpsValid = true;
                 infoJarak.style.borderColor = "#10b981";
                 infoJarak.innerHTML = `
-                    <div style="background: #d1fae5; color: #065f46; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✓</div>
+                    <div style="background: rgba(16,185,129,0.15); color: #34d399; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✓</div>
                     <div>
-                        <div style="color: #065f46; font-size: 13px; font-weight: 700;">Dalam Radius Kantor</div>
-                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 1px;">Jarak ${jarak} meter dari titik kantor.</div>
+                        <div style="color: #34d399; font-size: 13px; font-weight: 700;">Dalam Radius Kantor</div>
+                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 2px;">Jarak ${jarak} meter dari titik kantor.</div>
                     </div>
                 `;
                 btnLanjut.disabled = false;
                 btnLanjut.classList.remove('btn-disabled');
             } else {
                 isGpsValid = false;
-                infoJarak.style.borderColor = "#f43f5e";
+                infoJarak.style.borderColor = "#ef4444";
                 infoJarak.innerHTML = `
-                    <div style="background: #ffe4e6; color: #f43f5e; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✕</div>
+                    <div style="background: rgba(239,68,68,0.15); color: #f87171; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px;">✕</div>
                     <div>
-                        <div style="color: #f43f5e; font-size: 13px; font-weight: 700;">Di Luar Area Kantor</div>
-                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 1px;">Terlalu jauh (+${jarak}m). Mendekatlah!</div>
+                        <div style="color: #f87171; font-size: 13px; font-weight: 700;">Di Luar Area Kantor</div>
+                        <div style="color: var(--text-muted); font-size: 11px; font-weight: 500; margin-top: 2px;">Terlalu jauh (+${jarak}m). Mendekatlah!</div>
                     </div>
                 `;
                 btnLanjut.disabled = true;
@@ -1071,8 +1080,8 @@
                 }
                  
                 labelPeriodeKaryawan.innerHTML = `
-                    <span style="color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px;">Periode Absensi</span>
-                    <strong style="color: var(--primary); font-size: 13px; font-weight: 700; display: block;">26 ${blnMulai} ${thnMulai} - 25 ${blnSelesai} ${thnSelesai}</strong>
+                    <span style="color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px;">Periode Absensi</span>
+                    <strong style="color: #818cf8; font-size: 13px; font-weight: 700; display: block;">26 ${blnMulai} ${thnMulai} - 25 ${blnSelesai} ${thnSelesai}</strong>
                 `;
             }
         }
@@ -1355,7 +1364,7 @@
             const tabelBody = document.getElementById('isi-tabel');
             if(!tabelBody) return;
              
-            tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 36px;'>Memuat data laporan...</td></tr>";
+            tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 40px;'>Memuat data laporan...</td></tr>";
                  
             fetch(SCRIPT_URL, { method: 'POST', redirect: 'follow', body: JSON.stringify({ aksi: "get_laporan" }) })
             .then(res => res.json())
@@ -1364,7 +1373,7 @@
                  
                 const dropdown = document.getElementById('filter-nama-admin');
                 if(dropdown) {
-                    dropdown.innerHTML = '<option value="SEMUA">-- Tampilkan Semua Karyawan --</option>';
+                    dropdown.innerHTML = '<option value="SEMUA" style="background: #111827; color: white;">-- Tampilkan Semua Karyawan --</option>';
                     let daftarNama = [];
                     for(let i = 1; i < data.length; i++) {
                         let nama = data[i][1];
@@ -1373,14 +1382,14 @@
                         }
                     }
                     daftarNama.sort().forEach(nama => {
-                        dropdown.innerHTML += `<option value="${nama}">${nama}</option>`;
+                        dropdown.innerHTML += `<option value="${nama}" style="background: #111827; color: white;">${nama}</option>`;
                     });
                 }
 
                 renderTabelAdmin("SEMUA");
             })
             .catch(err => {
-                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 36px; color: var(--danger);'>Gagal memuat data. Periksa koneksi internet Anda.</td></tr>";
+                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 40px; color: #f87171;'>Gagal memuat data. Periksa koneksi internet Anda.</td></tr>";
                 console.error(err);
             });
         }
@@ -1397,7 +1406,7 @@
             tabelBody.innerHTML = "";
              
             if (!dataLaporanGlobal || dataLaporanGlobal.length <= 1) {
-                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 36px;'>Belum ada data absensi.</td></tr>";
+                tabelBody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 40px;'>Belum ada data absensi.</td></tr>";
                 return;
             }
 
@@ -1452,12 +1461,12 @@
                     let koordinat = (row[3] && row[4]) ? `${parseFloat(row[3]).toFixed(5)}, ${parseFloat(row[4]).toFixed(5)}` : '-';
 
                     tr.innerHTML = `
-                        <td style="padding: 14px 18px; font-weight: 500; font-size: 13px; white-space: nowrap;">${kolomWaktu || '-'}</td>
-                        <td style="padding: 14px 18px; font-weight: 600; font-size: 13px;">${kolomNama || '-'}</td>
-                        <td style="padding: 14px 18px; text-align: center;"><span class="badge ${statusBadgeClass}">${kolomStatus || '-'}</span></td>
-                        <td style="padding: 14px 18px; font-family: monospace; font-size: 12px; color: var(--text-muted);">${koordinat}</td>
-                        <td style="padding: 14px 18px; text-align: center;">
-                            ${row[5] && row[5] !== '-' ? `<a href="${row[5]}" target="_blank" class="btn-lihat">Lihat Foto</a>` : '<span style="color: #cbd5e1; font-size: 12px;">Tanpa Foto</span>'}
+                        <td style="padding: 16px 20px; font-weight: 500; font-size: 13px; white-space: nowrap;">${kolomWaktu || '-'}</td>
+                        <td style="padding: 16px 20px; font-weight: 600; font-size: 13px;">${kolomNama || '-'}</td>
+                        <td style="padding: 16px 20px; text-align: center;"><span class="badge ${statusBadgeClass}">${kolomStatus || '-'}</span></td>
+                        <td style="padding: 16px 20px; font-family: monospace; font-size: 12px; color: var(--text-muted);">${koordinat}</td>
+                        <td style="padding: 16px 20px; text-align: center;">
+                            ${row[5] && row[5] !== '-' ? `<a href="${row[5]}" target="_blank" class="btn-lihat">Lihat Foto</a>` : '<span style="color: #4b5563; font-size: 12px;">Tanpa Foto</span>'}
                         </td>
                     `;
                     tabelBody.appendChild(tr);
@@ -1642,9 +1651,9 @@
             document.getElementById('modal-title').innerText = 'Konfirmasi Libur';
             document.getElementById('modal-pesan').innerHTML = `
                 <p style="margin-bottom: 12px; font-weight: 500;">Apakah Anda yakin ingin mengambil hari OFF (Libur) hari ini?</p>
-                <div style="display: flex; gap: 10px; margin-top: 16px;">
-                    <button onclick="eksekusiAbsenOff()" style="background: var(--danger); color: white; border: none; padding: 10px; border-radius: 6px; flex: 1; font-weight: 600; cursor: pointer;">YA, LIBUR</button>
-                    <button onclick="tutupModal()" style="background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-color); padding: 10px; border-radius: 6px; flex: 1; font-weight: 600; cursor: pointer;">BATAL</button>
+                <div style="display: flex; gap: 12px; margin-top: 18px;">
+                    <button onclick="eksekusiAbsenOff()" style="background: var(--danger); color: white; border: none; padding: 12px; border-radius: 8px; flex: 1; font-weight: 700; cursor: pointer;">YA, LIBUR</button>
+                    <button onclick="tutupModal()" style="background: rgba(255,255,255,0.05); color: #ffffff; border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; flex: 1; font-weight: 700; cursor: pointer;">BATAL</button>
                 </div>
             `;
              
