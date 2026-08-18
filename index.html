@@ -23,7 +23,7 @@
             --success: #059669;
             --warning: #d97706;
             --danger: #dc2626;
-            --background: #f1f5f9;
+            --background: #f8fafc;
             --card-bg: #ffffff;
             --sidebar-bg: #0f172a;
             --text-main: #0f172a;
@@ -95,6 +95,7 @@
             font-size: 14px;
             font-weight: 700;
             color: #ffffff;
+            white-space: nowrap;
         }
 
         .sidebar-subtitle {
@@ -126,6 +127,7 @@
             width: 100%;
             text-align: left;
             transition: all 0.2s;
+            white-space: nowrap;
         }
 
         .sidebar-item:hover, .sidebar-item.active {
@@ -207,6 +209,7 @@
             font-size: 22px;
             font-weight: 700;
             color: var(--text-main);
+            white-space: nowrap;
         }
 
         .sub-title {
@@ -298,6 +301,9 @@
             font-weight: 500 !important;
             text-align: left !important;
             line-height: 1.6 !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         #view-map-fullscreen {
@@ -426,9 +432,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
-        /* PERBAIKAN: Desain Ikon Modern SVG (Clean Rounded Stroke) */
         .absen-icon svg {
             width: 20px;
             height: 20px;
@@ -684,7 +690,7 @@
                         <img src="logo.png" class="logo-toko" alt="Logo Toko">
                     </div>
                     <h2>Masuk Portal</h2>
-                    <div class="sub-title">Silakan masukkan kredensial akun karyawan Anda</div>
+                    <div class="sub-title">Silakan masuk dengan kredensial akun Anda</div>
                      
                     <div class="input-group">
                         <label for="user">Username / NIK</label>
@@ -746,7 +752,6 @@
                  
                     <div class="btn-grid">
                         <div class="absen-card-group">
-                            <!-- Tombol Check In dengan Ikon Modern (Login / Arrow In) -->
                             <button class="absen-card card-in" id="btn-checkin" onclick="bukaPetaFullscreen('Check In')">
                                 <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
                                     <span class="absen-title">Check In</span>
@@ -757,7 +762,6 @@
                                 <span id="time-checkin" class="info-jam-absen">--:--</span>
                             </button>
 
-                            <!-- Tombol Check Out dengan Ikon Modern (Logout / Arrow Out) -->
                             <button class="absen-card card-out" id="btn-checkout" onclick="bukaPetaFullscreen('Check Out')">
                                 <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
                                     <span class="absen-title">Check Out</span>
@@ -770,7 +774,6 @@
                         </div>
 
                         <div class="card-off-wrapper">
-                            <!-- Tombol OFF dengan Ikon Modern (Calendar / Off Badge) -->
                             <button class="absen-card card-off" id="btn-off" onclick="prosesAbsenOff()">
                                 <div class="absen-icon">
                                     <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
@@ -1289,7 +1292,7 @@
                         if (typeof kunciTombolKerja === "function") kunciTombolKerja(true);
                         
                         let statusLog = document.getElementById('status-log');
-                        if (statusLog) statusLog.innerHTML = "⏳ Menghubungkan & sinkronisasi data dari server...";
+                        if (statusLog) statusLog.innerHTML = "⏳ Menghubungkan & sinkronisasi data server...";
 
                         if (typeof sinkronisasiFullServer === "function") sinkronisasiFullServer();
                         if (typeof sinkronisasiWaktuServer === "function") sinkronisasiWaktuServer();
@@ -1666,7 +1669,7 @@
                 btnCheckIn.disabled = true; btnCheckIn.classList.add('btn-disabled');
                 btnOff.disabled = true; btnOff.classList.add('btn-disabled');
                 btnCheckOut.disabled = false; btnCheckOut.classList.remove('btn-disabled');
-                document.getElementById('status-log').innerHTML = "Status : Sedang bekerja<br>Klik <b>Check Out</b> saat jam pulang.";
+                document.getElementById('status-log').innerHTML = "Status: Sedang bekerja. Klik <b>Check Out</b> saat pulang.";
                 return;
             }
 
